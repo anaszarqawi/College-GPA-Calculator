@@ -34,4 +34,5 @@
     </div>
 
     <?php include './options.php' ?>
+    <?php include './GPA.php' ?>
 </div>
