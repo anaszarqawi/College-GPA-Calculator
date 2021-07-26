@@ -9,7 +9,7 @@
 <div id="options-section">
     <div id="section">
         <p>Grade Format : </p>
-        <div id="format" oninput="getFormat()">
+        <div id="format" oninput="getFormat(this)">
             <form>
                 <label>
                     <input type="radio" name="format" id="Letter" checked />
