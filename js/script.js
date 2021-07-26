@@ -17,7 +17,7 @@ function getSemesterElement(Element) {
 }
 
 $(document).on('click', '.add-course', function () {
-    
+
     let SemesterDiv = $(this).parent().parent()
     let SemesterIndex = SemesterDiv.index(".semester")
     let location = $(`.semester:eq(${SemesterIndex})`)
@@ -76,23 +76,16 @@ $(document).on('click', '.add-course', function () {
             //console.log(numRow);
             rearrangeCourses(length, location)
             //getFormat()
+            getValues(this)
         }
     }
 });
 
 $(document).on("click", ".remove-icon-course", function () {
-    // let BtnDiv = $(this).parent();
-    // let RowsDiv = BtnDiv.parent()
-    // let tableDiv = RowsDiv.parent()
-    // let SemesterDiv = tableDiv.parent();
-
-    //     remove-icon => #row => .rows => .table => .semester => xD
-    let semesterDiv = $(this).parent().parent().parent().parent()
-
-    let SemesterIndex = semesterDiv.index(".semester")
+    //     remove-icon => #row => .rows => .table => .semester
+    let SemesterIndex = $(this).parent().parent().parent().parent().index(".semester")
     let location = $(`.semester:eq(${SemesterIndex})`)
     let length = location.find(".rows #row").length;
-
     if (length > 3) {
         
         $(this).parent().slideUp().promise().done(function() {
@@ -100,15 +93,15 @@ $(document).on("click", ".remove-icon-course", function () {
             length = location.find(".rows #row").length;
             //console.log(`num From remove func : ${length}`);
             rearrangeCourses(length, location)
+            getValues(location)
         });
 
     }
-        
 
 });
 
 function rearrangeCourses(numRow, location) {
-    console.log(`--------num From remove func : ${numRow}`);
+    //console.log(`--------num From remove func : ${numRow}`);
 
     for (let i = 1; i <= numRow; i++) {
         let row = location.find(`.rows #row:eq(${i-1})`)
@@ -154,16 +147,15 @@ function ResetColorsAndText(semester) {
 function getFormat(element) {
 
     let Semester = getSemesterElement(element)
-    console.log(Semester);
-    let numCourse = $(Semester).find("#row").length;
-    console.log(numCourse);
+    //console.log(Semester);
+    let numCourse = $(Semester).find(".rows #row").length;
+    //console.log(numCourse);
     format = $(Semester).find('input[name="format"]:checked').attr('id');
-    console.log(format);
-
+    //console.log(format);
     let formatElement = Semester.find(".format")
     let GradeElement = Semester.find(".grade")
-    console.log(formatElement);
-    console.log(GradeElement);
+    //console.log(formatElement);
+    //console.log(GradeElement);
 
     if (format == "Letter") {
         $(GradeElement).css("display", "block");
@@ -209,7 +201,7 @@ function getFormat(element) {
 function getValues(Element) {
 
     let Semester = getSemesterElement(Element)
-
+    console.log(Semester);
     format = $(Semester).find('input[name="format"]:checked').attr('id');
 
     switch(format) {
@@ -232,16 +224,16 @@ function getValues(Element) {
 }
 
 function getValuesByLetter(Semester) {
-
+    
     let numCourse = $(Semester).find(".rows #row").length;
-    console.log(`numCourse = ${numCourse}`);
+    //console.log(`numCourse = ${numCourse}`);
 
     // Get Grade and Credits Values
     for (let i = 0; i < numCourse; i++) {
         let grade = $(Semester).find(`.row_${i+1} .grade option:selected`).val();
         let credits = $(Semester).find(`.row_${i + 1} .credits`).val();
-        console.log(`grade = ${grade}`);
-        console.log(`credits = ${credits}`);
+        //console.log(`grade = ${grade}`);
+        //console.log(`credits = ${credits}`);
         array[0][i] = +grade;
         array[1][i] = +credits;
     }
@@ -249,19 +241,23 @@ function getValuesByLetter(Semester) {
     getGPA(Semester)
 }
 
-function getValuesByPointVal() {
-    for (let i = 0; i < numRow; i++) {
+function getValuesByPointVal(Semester) {
+    let numCourse = $(Semester).find(".rows #row").length;
+
+    for (let i = 0; i < numCourse; i++) {
         let grade = $(`.row_${i+1} .format`).val();
         let credits = $(`.row_${i+1} .credits`).val();
         array[0][i] = +grade;
         array[1][i] = +credits;
     }
 
-    getGPA()
+    getGPA(Semester)
 }
 
-function getValuesByPercentage() {
-    for (let i = 0; i < numRow; i++) {
+function getValuesByPercentage(Semester) {
+    let numCourse = $(Semester).find(".rows #row").length;
+
+    for (let i = 0; i < numCourse; i++) {
         let gradeInPercentage = $(`.row_${i+1} .format`).val();
         let grade = (gradeInPercentage * 4)/100
         let credits = $(`.row_${i+1} .credits`).val();
@@ -269,7 +265,7 @@ function getValuesByPercentage() {
         array[1][i] = +credits;
     }
 
-    getGPA()
+    getGPA(Semester)
 }
 
 function getGPA(semester) {

@@ -23,15 +23,17 @@
         </div>
         <button class="add-semester" title="Add another Semester">Add Semester</button>
         <div class="totalSemester">
+            <div class="Total_GPA">
+                <span>Total GPA</span>
+            </div>
             <?php include './GPA.php' ?>
-        </div>
 
-    </div>
-    <script>
-        <?php include '../js/jquery-3.6.0.min.js' ?>
-        <?php include '../js/shake-element-transform/shake.js' ?>
-        <?php include '../js/script.js' ?>
-    </script>
+        </div>
+        <script>
+            <?php include '../js/jquery-3.6.0.min.js' ?>
+            <?php include '../js/shake-element-transform/shake.js' ?>
+            <?php include '../js/script.js' ?>
+        </script>
 </body>
 
 </html>

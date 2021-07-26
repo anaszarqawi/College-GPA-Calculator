@@ -74,7 +74,23 @@ body{
         border-radius: 10px;
         transition: all 0.1s ease-out;
 
+        .Total_GPA{
+            background: $gradient-part1;
+            background: $gradient-part2;
+            background: $gradient-part3;
+            padding: 10px 20px;
+            margin-bottom: 5px;
+            border-radius: 10px 10px 0 0;
 
+            span{
+                //text-align: right;
+                font-size: 30px;
+                color: #fff;
+                font-weight: bold;
+                flex-grow: 4;
+                align-self: center;
+            }
+        }
     }
 
     .semesters{
