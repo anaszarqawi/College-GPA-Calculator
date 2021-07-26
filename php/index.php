@@ -29,9 +29,8 @@
     </div>
     <script>
         <?php include '../js/jquery-3.6.0.min.js' ?>
-        <?php include '../js/script.js' ?>
         <?php include '../js/shake-element-transform/shake.js' ?>
-        <?php include '../js/termvader-jquery-vibrate-v1.0.1-10-gd098494/jquery.vibrate.min.js' ?>
+        <?php include '../js/script.js' ?>
     </script>
 </body>
 
