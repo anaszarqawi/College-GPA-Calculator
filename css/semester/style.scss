@@ -1,0 +1,664 @@
+$body-Color: #f2f2f3;
+$nav-items-color:#757b85;
+$primary-color: #2F80ED;
+$secondary-color: #02679a;
+$primary-color-light: #028ed4;
+$red : #ee4539;
+$black : #1e1e1e;
+$gradient-part1 : #56CCF2;  /* fallback for old browsers */
+$gradient-part2 : -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
+$gradient-part3 : linear-gradient(to right, #2F80ED, #56CCF2);
+$font-1 : 'Comfortaa', cursive;
+$font-2 : 'Barlow Condensed', sans-serif;
+$border-radius1: 4px;
+$font-size: 22px;
+
+.dark{
+    background-color: #1D2025 !important;
+}
+
+.dark_container{
+    background-color: #152D49 !important;
+    color: $body-Color !important;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px !important;
+}
+
+#dark_table{
+    color: $body-Color !important;
+}
+
+
+*{
+    font-family: $font-2;
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+    border: 0;
+    text-align: center;
+    background-color: #ECE9E6;
+    transition: all 0.2s ease-out;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
+#container{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 20px;
+    width: fit-content;
+    border-radius: 10px;
+    //background-color: $body-Color;
+    transition: all 0.1s ease-out;
+
+    
+    //transform: scale(1.5);
+
+    .totalSemester{
+        box-sizing: border-box;
+        width: 100%;
+        box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
+        margin: 20px;
+        background-color: $body-Color;
+        padding: 0;
+        border-radius: 10px;
+        transition: all 0.1s ease-out;
+
+
+    }
+
+    .semesters{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .semester{
+        box-sizing: border-box;
+        padding: 0;
+        margin: 20px;
+        padding-bottom: 24px;
+        box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
+        //box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        border-radius: 10px;
+        transition: all 0.1s ease-out;
+        background-color: $body-Color;
+
+
+
+        /*table{
+            table-layout: auto;
+            width: 100%;
+            padding: 0 20px 0;
+            //padding-right: 10px;
+
+        
+            caption{
+                font-size: 18px;
+                caption-side: top;
+                //background-color: $primary-color;
+                background: $gradient-part1;
+                background: $gradient-part2;
+                background: $gradient-part3;
+                color: $body-Color;
+                padding: 10px;
+                margin-bottom: 5px;
+                border-radius: 10px 10px 0 0;
+                font-weight: bold;
+            }
+
+            tbody{
+
+                tr:nth-child(1){
+                    font-weight: bold;
+                    font-size: 16px;
+                    color: $black;
+
+                }
+
+                tr{
+                    display: flex;
+                    .num{
+                        background-color: $primary-color;
+                        border: 1px $primary-color solid;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: $body-Color;
+                        position: relative;
+                        top: 2.2px;
+                        height: 28px;
+                        padding: 0 5px;
+                        border-radius: 2px;
+                        width: 5px;
+
+
+                        span{
+                            margin: 0;
+                            font-size: 9px;
+                        }
+                    }
+                    td{
+                        //margin-inline: 75px;
+                        .course,
+                        .grade,
+                        .credits,
+                        .format{
+                            font-size: 16px;
+                            width: 120px;
+                            border: 0;
+                            height: 25.5;
+                            border: 1px #1b1f2326 solid;
+                            //box-shadow: #00000005 0px 1px 3px 0px, #1b1f2326 0px 0px 0px 1px;
+                            //box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+                            //box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+                            padding: 5px;
+                            text-align: center;
+                            transition: all 0.1s ease-out;
+                            outline: none;
+                            border-radius: 2px;
+                            margin: 1px;
+
+                            &:focus{
+                                border: 1px $primary-color solid;
+                                //box-shadow: #ffffff33 0px 0px 0px 1px , $primary-color 0px 0px 0px 1px;
+                            }
+
+                        }
+
+
+                        .course{
+                            padding-left: 25px;
+                            padding-right: 14px;
+                        }
+
+                        .grade,
+                        .credits,
+                        .format{
+                            width: 60px;
+                            margin-inline: 0;
+                        }
+                        
+                        .grade{
+                            cursor: pointer;
+                            height: 30.5px;
+                            padding: 3px;
+
+                        }
+                        
+                        
+                        
+                        .formatAndPercentageSign{
+
+                            display: flex;
+                            flex-direction: row;
+                            align-items: stretch;
+                            margin-right: 1.2px;
+
+
+                            .format{
+                                cursor: text;
+                                display: none;
+                                width: 50px;
+                                font-size: 16px;
+    
+                                &:out-of-range{
+                                    border-color:$red;
+                                }
+
+                                &:out-of-range + .percentageSign{
+                                    border-color:$red !important;
+                                }
+
+                                &:focus + .percentageSign{
+                                    border-color:$primary-color;
+                                }
+                            }
+
+                            .percentageSign{
+
+                                position: relative;
+                                right: 2.7px;
+                                border: 1px #1b1f2326 solid;
+                                border-left: 0;
+                                border-radius: 0 2px 2px 0;
+                                display: none;
+                                flex-direction: column;
+                                justify-content: center;
+                                background-color: #fff;
+                                transition: all 0.1s ease-out;
+                                margin-block: 1px;
+                                padding: 3px;
+                                padding-left: 2px;
+
+
+                                
+                                
+                            }
+                        }
+
+                        .format,
+                        .credits{
+
+                            &::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0;
+                            }
+                        }
+
+                        
+
+                    }
+
+                    .remove-icon{
+                        
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: $red;
+                        border: 1px $red solid;
+                        position: relative;
+                        // right: 18px;
+                        top: 1.5px;
+                        height: 27.5px;
+                        padding: 0 5px;
+                        border-radius: 2px;
+                        width: 5px;
+                        transition: all 0.1s ease-out;
+
+                        
+                        &:hover{
+                            background-color: $red;
+                            color: $body-Color;
+
+                        }
+
+                        &:hover > .x_remove{
+                            fill: $body-Color;
+
+                        }
+                        
+                        
+                        .x_remove{
+                            height: 5px;
+                            width: 5px;
+                            fill: $red;
+                            justify-content: center;
+                            align-items: center;
+                            text-align: center;
+                            transition: all 0.1s ease-out;
+                        }
+                    }
+                }
+            }
+
+
+
+        }*/
+
+        .title_semester{
+            background: $gradient-part1;
+            background: $gradient-part2;
+            background: $gradient-part3;
+            padding: 10px 20px;
+            margin-bottom: 5px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-content: center;
+            flex-direction: row;
+
+
+
+            span{
+                //text-align: right;
+                font-size: 30px;
+                color: #fff;
+                font-weight: bold;
+                flex-grow: 4;
+                align-self: center;
+            }
+
+            .remove-icon-semester{
+                cursor: pointer;
+                display: flex;
+                fill: $body-Color;
+                width: 10px;
+                height: 10px;
+                align-self: center;
+                transition: 0.2s;
+
+                
+                &:hover{
+                    //width: 20px;
+
+                }
+            }
+
+            
+        }
+
+
+        .table{
+            .titles{
+                display: flex;
+                align-items: flex-end;
+
+                margin-inline: 20px;
+                font-weight: 600;
+                font-size: 26px;
+                color: $black;
+
+                .title:nth-child(1){
+                width: 100%;
+                }
+
+                .title:nth-child(2){
+                width: 11%;
+                }
+
+                .title:nth-child(3){
+                width: 54%;
+                }
+            }
+
+            .rows{
+
+                margin-inline: 32px;
+                #row{
+                    
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: stretch;
+                    margin-block: 5px;
+
+
+                    .num{
+                        background-color: $primary-color;
+                        border: 1px $primary-color solid;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: $body-Color;
+                        padding: 0 5px;
+                        border-radius: $border-radius1;
+                        width: 5px;
+                        margin-inline: 2px;
+                        font-size: 18px;
+
+
+                    }
+
+                    .course,
+                    .grade,
+                    .credits,
+                    .format{
+                        font-size: $font-size;
+                        border: 0;
+                        border: 1px #1b1f2326 solid;
+                        padding: 5px;
+                        text-align: center;
+                        transition: all 0.1s ease-out;
+                        outline: none;
+                        border-radius: $border-radius1;
+                        margin-inline: 2px;
+
+                        &:focus{
+                            border: 1px $primary-color solid;
+                        }
+
+                    }
+
+                    .format{
+                        width: 100%;
+                    }
+
+                    .grade,
+                    .credits,
+                    .format{
+                        width: 70px;
+                    }
+
+                    .grade{
+                        //width: 20%;
+                        cursor: pointer;
+                        padding: 3px;
+
+                        option{
+                            color: $black;
+                        }
+
+                    }
+
+                    .format,
+                    .credits{
+
+                        &::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                    }
+
+                    .formatAndPercentageSign{
+
+                        display: none;
+                        flex-direction: row;
+                        align-items: stretch;
+                        width: 20%;
+                        margin-inline: 2px;
+
+
+                        .format{
+                            margin: 0;
+                            width: 100%;
+                            cursor: text;
+                            font-size: $font-size;
+                            border-width: 1px 0 1px 1px ;
+                            border-radius: 4px 0 0 4px;
+                            
+                            &:out-of-range{
+                                border-color:$red;
+                            }
+
+                            &:out-of-range + .percentageSign{
+                                border-color:$red !important;
+                            }
+
+                            &:focus + .percentageSign{
+                                border-color:$primary-color;
+                            }
+                        }
+
+                        .percentageSign{
+
+                            border: 1px #1b1f2326 solid;
+                            border-left: 0;
+                            border-radius: 0 4px 4px 0;
+                            display: none;
+                            flex-direction: column;
+                            justify-content: center;
+                            background-color: #fff;
+                            transition: all 0.1s ease-out;
+                            padding-right: 5px;
+
+                        }
+                    }
+
+                    .remove-icon-course{
+                        
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: $red;
+                        border: 1px $red solid;
+                        padding: 0 5px;
+                        border-radius: 2px;
+                        width: 5px;
+                        transition: all 0.1s ease-out;
+                        margin-inline: 2px;
+                        
+                        &:hover{
+                            background-color: $red;
+                            color: $body-Color;
+
+                        }
+
+                        &:hover > .x_remove{
+                            fill: $body-Color;
+
+                        }
+                        
+                        .x_remove{
+                            height: 5px;
+                            width: 5px;
+                            fill: $red;
+                            justify-content: center;
+                            align-items: center;
+                            text-align: center;
+                            transition: all 0.1s ease-out;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .add-semester{
+        //box-shadow: #00000005 0px 1px 3px 0px, #1b1f2326 0px 0px 0px 1px;
+        padding-block: 2px 4px;
+        font-size: $font-size;
+        text-align: center;
+        transition: all 0.1s ease-out;
+        outline: none;
+        border-radius: $border-radius1;
+        background-color: #fff;
+        color: $primary-color;
+        border: 1px $primary-color solid;
+        cursor: pointer;
+        margin-inline: 2px;
+        //margin-top: 10px;
+        
+    }
+
+    .add-semester{
+        border-radius: $border-radius1;
+        width: 50%;
+        transition: all 0.2s ease-out;
+        &:hover{
+            //box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+            background-color: $primary-color;
+            color: $body-Color;
+        }
+
+        &:active{
+            color: $body-Color;
+            background-color: #004a72;
+            border-color: #004a72;
+        }
+    }
+}
+
+#btns{
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    //align-content: center;
+    margin: 20px;
+
+    .add-course,
+    .clear,
+    .num_of_row_wanted{
+        //box-shadow: #00000005 0px 1px 3px 0px, #1b1f2326 0px 0px 0px 1px;
+        padding-block: 2px 4px;
+        font-size: $font-size;
+        text-align: center;
+        transition: all 0.1s ease-out;
+        outline: none;
+        border-radius: $border-radius1;
+        background-color: #fff;
+        color: $primary-color;
+        border: 1px $primary-color solid;
+        cursor: pointer;
+        margin-inline: 2px;
+        //margin-top: 10px;
+        
+    }
+
+    .add-course{
+        border-radius: $border-radius1;
+        width: 90%;
+        &:hover{
+            //box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+            background-color: $primary-color;
+            color: $body-Color;
+        }
+
+        &:active{
+            color: $body-Color;
+            background-color: #004a72;
+            border-color: #004a72;
+        }
+    }
+
+    
+    .clear{
+        width: 30%;
+        color: $red;
+        border: 1px $red solid;
+
+        &:hover{
+            background-color: $red;
+            
+            color: $body-Color;
+            border: 1px $red solid;
+
+        }
+
+        &:active{
+            background-color: #c7362c;
+            color: $body-Color;
+            border: 1px #c7362c solid;
+        }
+    }
+
+
+
+    .num_of_row_wanted{
+        width: 10%;
+        color: $primary-color;
+        border: 1px $primary-color solid;
+        padding: 0;
+        font-size: 16px;
+        text-align: center;
+        //height: 27.5px;
+        border-radius: $border-radius1;
+        cursor: text;
+
+        &:focus{
+            background-color: $primary-color;
+            border-color: $primary-color;
+            color: $body-Color;
+        }
+
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+}

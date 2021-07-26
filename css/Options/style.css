@@ -1,0 +1,179 @@
+/* fallback for old browsers */
+* {
+  font-family: "Comfortaa", cursive;
+}
+
+#options-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-inline: 22px;
+  color: #f2f2f3;
+  padding: 9px 15px;
+  z-index: 1;
+  overflow: auto;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+  background: #56CCF2;
+  background: -webkit-gradient(linear, left top, right top, from(#2F80ED), to(#56CCF2));
+  background: linear-gradient(to right, #2F80ED, #56CCF2);
+}
+
+#options-title span {
+  -webkit-box-flex: 4;
+      -ms-flex-positive: 4;
+          flex-grow: 4;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 22px;
+}
+
+#options-title .slide {
+  fill: #f2f2f3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 16px;
+  height: 16px;
+  -ms-flex-item-align: center;
+      align-self: center;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+#options-title .slide svg {
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+#options-title .slide .slide_icon {
+  -webkit-transform: rotate(0.5turn);
+          transform: rotate(0.5turn);
+}
+
+.options-title-open {
+  border-radius: 5px 5px 0 0 !important;
+}
+
+#options-section {
+  border: 0;
+  border-width: 0 1px 1px 1px;
+  border-color: #1b1f2326;
+  border-style: solid;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0 22px;
+  margin-top: 0;
+  border-radius: 0 0 4px 4px;
+  display: none;
+}
+
+#options-section #section {
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#options-section #section p {
+  font-weight: 600;
+  font-size: 22px;
+  text-align: left;
+  margin: 0;
+  margin-top: 6px;
+}
+
+#options-section #section form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 15px;
+}
+
+#options-section #section label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+}
+
+#options-section #section label input {
+  position: absolute;
+  left: -9999px;
+}
+
+#options-section #section label input:checked + span {
+  background-color: #deebfc;
+}
+
+#options-section #section label input:checked + span:before {
+  -webkit-box-shadow: inset 0 0 0 0.4375em #2F80ED;
+          box-shadow: inset 0 0 0 0.4375em #2F80ED;
+}
+
+#options-section #section label span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em;
+  -webkit-transition: 0.25s ease;
+  transition: 0.25s ease;
+  font-size: 20px;
+}
+
+#options-section #section label span:hover {
+  background-color: #deebfc;
+}
+
+#options-section #section label span:before {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  content: "";
+  background-color: #fff;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 0.375em;
+  -webkit-transition: 0.25s ease;
+  transition: 0.25s ease;
+  -webkit-box-shadow: inset 0 0 0 0.125em #2F80ED;
+          box-shadow: inset 0 0 0 0.125em #2F80ED;
+}
+/*# sourceMappingURL=style.css.map */
