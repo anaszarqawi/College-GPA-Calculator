@@ -4,7 +4,7 @@ for ($i = 1; $i < 4; $i++) {
     <div id='row' class='row_$i'>
         <span class='num'>$i</span>
         <input type='text' name='field' class='course'>
-        <select name='field_grade' class='grade' oninput='getValues()'>
+        <select name='field_grade' class='grade' oninput='getValues(this)'>
             <option value='none'></option>
             <option value='4'>A+</option>
             <option value='3.8'>A</option>
@@ -21,11 +21,11 @@ for ($i = 1; $i < 4; $i++) {
         </select>
 
         <div class='formatAndPercentageSign'>
-            <input type='number' min='0' max='4' name='field' class='format' oninput='getValues()'>
+            <input type='number' min='0' max='4' name='field' class='format' oninput='getValues(this)'>
             <span class='percentageSign'>%</span>
         </div>
 
-        <input type='number' value='3' name='field_credit' class='credits' oninput='getValues()'>
+        <input type='number' value='3' name='field_credit' class='credits' oninput='getValues(this)'>
 
         <div class='remove-icon-course' title='Remove this row'>
             <svg version='1.1' class='x_remove' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 95.939 95.939' xml:space='preserve'>
