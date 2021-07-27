@@ -398,7 +398,7 @@ $(".dark_mode_btn").click(function () {
 })
 
 $(".add-semester").click(function () { 
-    newSemester = `<?php include '../php/semester.php' ?>`
+    newSemester = `<?php include '../php/College-GPA-Calculator/semester.php' ?>`
     tableBody = $(".semesters");
     tableBody.append(newSemester)
 
