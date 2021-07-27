@@ -1,0 +1,74 @@
+$body-Color: #f2f2f3;
+$nav-items-color:#757b85;
+$primary-color: #2F80ED;
+$secondary-color: #02679a;
+$primary-color-light: #028ed4;
+$red : #ee4539;
+$black : #1e1e1e;
+$gradient-part1 : #56CCF2;  /* fallback for old browsers */
+$gradient-part2 : -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
+$gradient-part3 : linear-gradient(to right, #2F80ED, #56CCF2);
+$font-1 : 'Comfortaa', cursive;
+$font-2 : 'Barlow Condensed', sans-serif;
+$border-radius1: 4px;
+$font-size: 22px;
+
+
+.nav{
+    background-color: $body-Color;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 1;
+    padding: 20px 200px;
+
+
+    .logo{
+        
+        a{
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            text-align: left;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 36px;
+            line-height: 24px;
+            color: $black;
+            
+            .underscore-logo{
+                color: $primary-color;
+            }
+        }
+    }
+
+    .menu-items{
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+
+        ul{
+            list-style: none;
+            display: flex;
+            padding: 10px;
+    
+            li{
+                padding: 0 20px;
+                a{
+                    font-family: mz-arabica, "Segoe UI", sans-serif;
+                    font-weight: 500;   
+                    margin: 0;
+                    padding: 0;
+                    font-size: 18px;
+                    color: #141c25;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
