@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAO4B,+BAA+B",
+    "sources": [
+        "style.scss"
+    ],
+    "names": [],
+    "file": "style.css"
+}

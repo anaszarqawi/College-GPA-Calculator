@@ -4,7 +4,7 @@ let GPA = 0
 let gpaInPercentage = 0
 
 function getSemesterElement(Element) {
-    console.log(Element);
+    // console.log(Element);
     while (true) {
         if ($(Element).hasClass("semester")) {
             break
@@ -201,21 +201,21 @@ function getFormat(element) {
 function getValues(Element) {
 
     let Semester = getSemesterElement(Element)
-    console.log(Semester);
+    // console.log(Semester);
     format = $(Semester).find('input[name="format"]:checked').attr('id');
 
     switch(format) {
         case "Letter":
             getValuesByLetter(Semester)
-            console.log("getValuesByLetter()");
+            // console.log("getValuesByLetter()");
             break;
         case "percentage":
             getValuesByPercentage(Semester)
-            console.log("getValuesByPercentage()");
+            // console.log("getValuesByPercentage()");
           break;
         case "Point_Value":
             getValuesByPointVal(Semester)
-            console.log("getValuesByPointVal()");
+            // console.log("getValuesByPointVal()");
           break;
 
     }
@@ -296,12 +296,14 @@ function getGPA(semester) {
     gpaInPercentage = rounding(gpaInPercentage, 2)
 
     ////////////////////////////////////////////
-    console.log(`GPA = ${GPA}`);
-    console.log(`gpaInPercentage = ${gpaInPercentage}`);
-    console.table(array);
+    // console.log(`GPA = ${GPA}`);
+    // console.log(`gpaInPercentage = ${gpaInPercentage}`);
+    // console.table(array);
 
     if (!isNaN(GPA) && GPA <= 4) {printGPA(semester)}
-    else{ResetColorsAndText(semester)}
+    else { ResetColorsAndText(semester) }
+    getTotalGPA()
+    
 }
 
 function rounding(num, digit) {
@@ -311,25 +313,27 @@ function rounding(num, digit) {
 
 function printGPA(semester) {
     $(semester).find(".GPA").text(`${GPA}`)
-    coloring(semester)
+    coloring(semester, gpaInPercentage)
+    
 }
 
-function coloring(semester) {
+function coloring(semester, Percentage) { 
     let containerGpaAndEstimate = $(semester).find(".containerGPA, .estimate")
     let Estimate = $(semester).find(".estimate")
-    if (gpaInPercentage < 50) {containerGpaAndEstimate.css("background-color", "#ee4539"); Estimate.text(`${gpaInPercentage}% | Weak | D`)}
-    else if(gpaInPercentage >= 50 && gpaInPercentage < 60){containerGpaAndEstimate.css("background-color", '#b6b434'); Estimate.text(`${gpaInPercentage}% | Weak | D`)}
-    else if(gpaInPercentage >= 60 && gpaInPercentage < 65){containerGpaAndEstimate.css("background-color", '#c2843d'); Estimate.text(`${gpaInPercentage}% | Sufficient | D+`)}
-    else if(gpaInPercentage >= 65 && gpaInPercentage < 69){containerGpaAndEstimate.css("background-color", '#c2843d'); Estimate.text(`${gpaInPercentage}% | Sufficient | C-`)}
-    else if(gpaInPercentage >= 69 && gpaInPercentage < 72){containerGpaAndEstimate.css("background-color", '#ffc038'); Estimate.text(`${gpaInPercentage}% | Good | C`)}
-    else if(gpaInPercentage >= 72 && gpaInPercentage < 75){containerGpaAndEstimate.css("background-color", '#ffc038'); Estimate.text(`${gpaInPercentage}% | Good | C+`)}
-    else if(gpaInPercentage >= 75 && gpaInPercentage < 79){containerGpaAndEstimate.css("background-color", '#ffc038'); Estimate.text(`${gpaInPercentage}% | Good | B-`)}
-    else if(gpaInPercentage >= 79 && gpaInPercentage < 82){containerGpaAndEstimate.css("background-color", '#5db747'); Estimate.text(`${gpaInPercentage}% | Very Good | B`)}
-    else if(gpaInPercentage >= 82 && gpaInPercentage < 85){containerGpaAndEstimate.css("background-color", '#5db747'); Estimate.text(`${gpaInPercentage}% | Very Good | B+`)}
-    else if(gpaInPercentage >= 85 && gpaInPercentage < 90){containerGpaAndEstimate.css("background-color", '#5db747'); Estimate.text(`${gpaInPercentage}% | Very Good | A-`)}
-    else if(gpaInPercentage >= 90 && gpaInPercentage < 95){containerGpaAndEstimate.css("background-color", '#00b3ff'); Estimate.text(`${gpaInPercentage}% | Excellent | A`)}
-    else if(gpaInPercentage >= 95 && gpaInPercentage <= 100){containerGpaAndEstimate.css("background-color", '#00b3ff'); Estimate.text(`${gpaInPercentage}% | Excellent | A+`)}
+    if (Percentage < 50) {containerGpaAndEstimate.css("background-color", "#ee4539"); Estimate.text(`${Percentage}% | Weak | F`)}
+    else if(Percentage >= 50 && Percentage < 60){containerGpaAndEstimate.css("background-color", '#c2843d'); Estimate.text(`${Percentage}% | Sufficient | D`)}
+    else if(Percentage >= 60 && Percentage < 65){containerGpaAndEstimate.css("background-color", '#c2843d'); Estimate.text(`${Percentage}% | Sufficient | D+`)}
+    else if(Percentage >= 65 && Percentage < 69){containerGpaAndEstimate.css("background-color", '#ffc038'); Estimate.text(`${Percentage}% | Good | C-`)}
+    else if(Percentage >= 69 && Percentage < 72){containerGpaAndEstimate.css("background-color", '#ffc038'); Estimate.text(`${Percentage}% | Good | C`)}
+    else if(Percentage >= 72 && Percentage < 75){containerGpaAndEstimate.css("background-color", '#ffc038'); Estimate.text(`${Percentage}% | Good | C+`)}
+    else if(Percentage >= 75 && Percentage < 79){containerGpaAndEstimate.css("background-color", '#5db747'); Estimate.text(`${Percentage}% | Very Good | B-`)}
+    else if(Percentage >= 79 && Percentage < 82){containerGpaAndEstimate.css("background-color", '#5db747'); Estimate.text(`${Percentage}% | Very Good | B`)}
+    else if(Percentage >= 82 && Percentage < 85){containerGpaAndEstimate.css("background-color", '#5db747'); Estimate.text(`${Percentage}% | Very Good | B+`)}
+    else if(Percentage >= 85 && Percentage < 90){containerGpaAndEstimate.css("background-color", '#00b3ff'); Estimate.text(`${Percentage}% | Excellent | A-`)}
+    else if(Percentage >= 90 && Percentage < 95){containerGpaAndEstimate.css("background-color", '#00b3ff'); Estimate.text(`${Percentage}% | Excellent | A`)}
+    else if(Percentage >= 95 && Percentage <= 100){containerGpaAndEstimate.css("background-color", '#00b3ff'); Estimate.text(`${Percentage}% | Excellent | A+`)}
 
+    
 }
 
 function rearrangeSemester(element) {
@@ -348,6 +352,7 @@ function rearrangeSemester(element) {
 
     //console.log(Element);
     let numCourse = $(Element).find(".semesters .semester").length;
+    // console.log(numCourse);
     //console.log(numCourse);
     //console.log(`numCourse = ${numCourse}`);
     for (let i = 0; i < numCourse; i++) {
@@ -379,14 +384,17 @@ $(document).on("click", ".remove-icon-semester", function () {
     if (numSemester > 1) {
         $(semester).slideUp().promise().done(function () {
             $(this).remove()
+            $(".add-semester").removeClass("redHover");
         })
     }else{$(semester).shake()}
-    console.log(numSemester);
+    // console.log(numSemester);
 
     for (let i = 1; i < numSemester; i++) {
         let titleSemester = Element.find(`.semesters .semester:eq(${i}) .title_semester span`)
         titleSemester.text(`Semester ${i}`)
     }
+
+    getTotalGPA()
     
 })
 
@@ -398,10 +406,44 @@ $(".dark_mode_btn").click(function () {
 })
 
 $(".add-semester").click(function () { 
-    newSemester = `<?php include '../php/College-GPA-Calculator/semester.php' ?>`
-    tableBody = $(".semesters");
-    tableBody.append(newSemester)
-
-    rearrangeSemester(this)
+    let length = $(this).parent().find(".semesters .semester").length
+    // console.log(length);
+    if (length < 6) {
+        newSemester = `<?php include 'php/semester.php' ?>`
+        tableBody = $(".semesters");
+        tableBody.append(newSemester)
+        rearrangeSemester(this)
+        $(this).removeClass("redHover");
+    } else {
+        $(this).addClass("redHover");
+    }
     
 });
+
+function getTotalGPA() {
+    let length = $(".add-semester").parent().find(".semesters .semester").length
+    let sumGPA = 0;
+    let sumPercentage = 0;
+    // console.log(`numSemester = ${length}`);
+
+    if (length > 1) {
+        for (let i = 0; i < length; i++) {
+            sumGPA += parseFloat($(`.GPA:eq(${i})`).text())
+            sumPercentage += parseFloat($(`.estimate:eq(${i})`).text().substr(0, 5))
+            totalGpaHtml = $(`.GPA:eq(${length})`)
+            
+            if (isNaN(sumGPA) || isNaN(sumPercentage)) {
+                ResetColorsAndText((totalGpaHtml.parent().parent()))
+            } else {
+                totalGPA = (sumGPA * 4 / (4 * length))
+                totalPercentage = (sumPercentage * 100 / (100 * length))
+                totalPercentage = rounding(totalPercentage, 2)
+                totalGPA = rounding(totalGPA, 2)
+                totalGpaHtml.text(totalGPA)
+                coloring((totalGpaHtml.parent().parent()), totalPercentage)
+                console.log(totalGpaHtml);
+                $(".totalSemester").css("display", "block")
+            }
+        }
+    }else{$(".totalSemester").css("display", "none")}
+}

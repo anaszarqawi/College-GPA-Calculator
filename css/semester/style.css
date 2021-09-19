@@ -67,6 +67,7 @@ body {
 }
 
 #container .totalSemester {
+  display: none;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
@@ -630,6 +631,16 @@ body {
   color: #f2f2f3;
   background-color: #004a72;
   border-color: #004a72;
+}
+
+#container .redHover {
+  border-color: #ee4539;
+  color: #ee4539;
+}
+
+#container .redHover:hover {
+  background-color: #ee4539;
+  color: #f2f2f3;
 }
 
 #btns {

@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        <?php include './css/GPA/style.css' ?><?php include './css/Options/style.css' ?><?php include './css/semester/style.css' ?>
+        <?php include './css/GPA/style.css' ?><?php include './css/Options/style.css' ?><?php include './css/semester/style.css' ?><?php include './css/mobile-style/style.css' ?>
     </style>
 </head>
 

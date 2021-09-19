@@ -22,7 +22,7 @@
             <div class="title">Credit<sup style="color: #f00;">*</sup></div>
         </div>
         <div class="rows">
-            <?php include './row.php' ?>
+            <?php include 'php/row.php' ?>
         </div>
 
     </div>
@@ -33,6 +33,6 @@
         <button class="clear" title="Clear Data">Clear</button>
     </div>
 
-    <?php include './options.php' ?>
-    <?php include './GPA.php' ?>
+    <?php include 'php/options.php' ?>
+    <?php include 'php/GPA.php' ?>
 </div>
