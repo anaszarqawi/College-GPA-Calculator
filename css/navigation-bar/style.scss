@@ -21,18 +21,19 @@ $gradient-part3 : linear-gradient(to right, #2F80ED, #56CCF2);
 }
 
 .nav-Lower{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     //margin: 5px;
-    position: relative;
-    cursor: pointer;
     //background-color: $primary-color;
     border-radius: 5px;
     color: #ffff;
     padding: 9px 15px;
-    z-index: 1;
+    z-index: 2;
     overflow: auto;
     transition: all 0.5s ease-out;
     background: $gradient-part1;
@@ -52,11 +53,13 @@ $gradient-part3 : linear-gradient(to right, #2F80ED, #56CCF2);
         font-weight: 500;
         flex-grow: 4;
         align-self: center;
+        margin-right: -39px;
     }
 
 
     .add-semester{
         // stroke: #ffff;
+        cursor: pointer;
         display: flex;
 
         // align-self: center;

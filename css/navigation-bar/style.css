@@ -20,6 +20,9 @@
 }
 
 .nav-Lower {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -33,12 +36,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: relative;
-  cursor: pointer;
   border-radius: 5px;
   color: #ffff;
   padding: 9px 15px;
-  z-index: 1;
+  z-index: 2;
   overflow: auto;
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
@@ -64,9 +65,11 @@
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  margin-right: -39px;
 }
 
 .nav-Lower .add-semester {
+  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

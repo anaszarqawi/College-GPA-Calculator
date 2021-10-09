@@ -201,21 +201,21 @@ function getFormat(element) {
 function getValues(Element) {
 
     let Semester = getSemesterElement(Element)
-    // console.log(Semester);
+    console.log(Semester);
     format = $(Semester).find('input[name="format"]:checked').attr('id');
 
     switch(format) {
         case "Letter":
             getValuesByLetter(Semester)
-            // console.log("getValuesByLetter()");
+            console.log("getValuesByLetter()");
             break;
         case "percentage":
             getValuesByPercentage(Semester)
-            // console.log("getValuesByPercentage()");
+            console.log("getValuesByPercentage()");
           break;
         case "Point_Value":
             getValuesByPointVal(Semester)
-            // console.log("getValuesByPointVal()");
+            console.log("getValuesByPointVal()");
           break;
 
     }
@@ -245,8 +245,8 @@ function getValuesByPointVal(Semester) {
     let numCourse = $(Semester).find(".rows #row").length;
 
     for (let i = 0; i < numCourse; i++) {
-        let grade = $(`.row_${i+1} .format`).val();
-        let credits = $(`.row_${i+1} .credits`).val();
+        let grade = $(Semester).find(`.row_${i+1} .format`).val();
+        let credits = $(Semester).find(`.row_${i+1} .credits`).val();
         array[0][i] = +grade;
         array[1][i] = +credits;
     }
@@ -258,9 +258,9 @@ function getValuesByPercentage(Semester) {
     let numCourse = $(Semester).find(".rows #row").length;
 
     for (let i = 0; i < numCourse; i++) {
-        let gradeInPercentage = $(`.row_${i+1} .format`).val();
+        let gradeInPercentage = $(Semester).find(`.row_${i+1} .format`).val();
         let grade = (gradeInPercentage * 4)/100
-        let credits = $(`.row_${i+1} .credits`).val();
+        let credits = $(Semester).find(`.row_${i+1} .credits`).val();
         array[0][i] = grade;
         array[1][i] = +credits;
     }
@@ -296,9 +296,9 @@ function getGPA(semester) {
     gpaInPercentage = rounding(gpaInPercentage, 2)
 
     ////////////////////////////////////////////
-    // console.log(`GPA = ${GPA}`);
-    // console.log(`gpaInPercentage = ${gpaInPercentage}`);
-    // console.table(array);
+    console.log(`GPA = ${GPA}`);
+    console.log(`gpaInPercentage = ${gpaInPercentage}`);
+    console.table(array);
 
     if (!isNaN(GPA) && GPA <= 4) {printGPA(semester)}
     else { ResetColorsAndText(semester) }
