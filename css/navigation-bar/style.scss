@@ -1,0 +1,104 @@
+$gradient-part1 : #56CCF2;  /* fallback for old browsers */
+$gradient-part2 : -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
+$gradient-part3 : linear-gradient(to right, #2F80ED, #56CCF2);
+
+.nav-upper{
+    background-color: #ffff;
+    margin: 0;
+    position: static;
+    top: 0;
+    box-sizing: border-box;
+    width: 100%;
+    z-index: 999;
+    padding: 30px 200px 20px;
+    transition: all .2s;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    
+    img{
+        width: 150px;
+    }
+
+}
+
+.nav-Lower{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    //margin: 5px;
+    position: relative;
+    cursor: pointer;
+    //background-color: $primary-color;
+    border-radius: 5px;
+    color: #ffff;
+    padding: 9px 15px;
+    z-index: 1;
+    overflow: auto;
+    transition: all 0.5s ease-out;
+    background: $gradient-part1;
+    background: $gradient-part2;
+    background: $gradient-part3;
+
+    // top: 0;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px 200px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 0 0 15px 15px;
+
+    .website-title{
+        color: #ffff;
+        font-size: 30px;
+        font-weight: 500;
+        flex-grow: 4;
+        align-self: center;
+    }
+
+
+    .add-semester{
+        // stroke: #ffff;
+        display: flex;
+
+        // align-self: center;
+        transition: all 0.2s ease-out;
+
+        .plus-icon{
+            width: 40px;
+            height: 40px;
+            stroke: #ffff;
+            fill: none;
+        }
+    }
+    //     //box-shadow: #00000005 0px 1px 3px 0px, #1b1f2326 0px 0px 0px 1px;
+    //     padding-block: 2px 4px;
+    //     font-size: $font-size;
+    //     text-align: center;
+    //     transition: all 0.1s ease-out;
+    //     outline: none;
+    //     border-radius: $border-radius1;
+    //     background-color: #fff;
+    //     color: $primary-color;
+    //     border: 1px $primary-color solid;
+    //     cursor: pointer;
+    //     margin-inline: 2px;
+    //     //margin-top: 10px;
+        
+    // }
+
+    // .add-semester{
+    //     border-radius: $border-radius1;
+    //     width: 50%;
+    //     transition: all 0.2s ease-out;
+    //     &:hover{
+    //         //box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+    //         background-color: $primary-color;
+    //         color: $body-Color;
+    //     }
+
+    //     &:active{
+    //         color: $body-Color;
+    //         background-color: #004a72;
+    //         border-color: #004a72;
+    //     }
+    // }
+}

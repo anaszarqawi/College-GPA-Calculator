@@ -339,6 +339,7 @@ function coloring(semester, Percentage) {
 function rearrangeSemester(element) {
     let Element = $(element).parent()
     //Element = Element.attr("id")
+    // console.log(Element);
     
 
     while (true) {
@@ -406,13 +407,13 @@ $(".dark_mode_btn").click(function () {
 })
 
 $(".add-semester").click(function () { 
-    let length = $(this).parent().find(".semesters .semester").length
+    let length = $(this).parent().parent().find("#container .semesters .semester").length
     // console.log(length);
     if (length < 6) {
-        newSemester = `<?php include 'php/semester.php' ?>`
-        tableBody = $(".semesters");
+        let newSemester = `<?php include 'php/semester.php' ?>`
+        let tableBody = $(".semesters");
         tableBody.append(newSemester)
-        rearrangeSemester(this)
+        rearrangeSemester($(this).parent().parent().find("#container .semesters"))
         $(this).removeClass("redHover");
     } else {
         $(this).addClass("redHover");
@@ -421,7 +422,7 @@ $(".add-semester").click(function () {
 });
 
 function getTotalGPA() {
-    let length = $(".add-semester").parent().find(".semesters .semester").length
+    let length = $(".add-semester").parent().parent().find("#container .semesters .semester").length
     let sumGPA = 0;
     let sumPercentage = 0;
     // console.log(`numSemester = ${length}`);
@@ -430,18 +431,18 @@ function getTotalGPA() {
         for (let i = 0; i < length; i++) {
             sumGPA += parseFloat($(`.GPA:eq(${i})`).text())
             sumPercentage += parseFloat($(`.estimate:eq(${i})`).text().substr(0, 5))
-            totalGpaHtml = $(`.GPA:eq(${length})`)
+            let totalGpaHtml = $(`.GPA:eq(${length})`)
             
             if (isNaN(sumGPA) || isNaN(sumPercentage)) {
                 ResetColorsAndText((totalGpaHtml.parent().parent()))
             } else {
-                totalGPA = (sumGPA * 4 / (4 * length))
-                totalPercentage = (sumPercentage * 100 / (100 * length))
+                let totalGPA = (sumGPA * 4 / (4 * length))
+                let totalPercentage = (sumPercentage * 100 / (100 * length))
                 totalPercentage = rounding(totalPercentage, 2)
                 totalGPA = rounding(totalGPA, 2)
                 totalGpaHtml.text(totalGPA)
                 coloring((totalGpaHtml.parent().parent()), totalPercentage)
-                console.log(totalGpaHtml);
+                // console.log(totalGpaHtml);
                 $(".totalSemester").css("display", "block")
             }
         }
