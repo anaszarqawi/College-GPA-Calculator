@@ -28,6 +28,20 @@ $font-size: 22px;
     color: $body-Color !important;
 }
 
+html{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+
+}
+
+.content-page{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
 
 *{
     font-family: $font-2;
@@ -40,7 +54,7 @@ body{
     text-align: center;
     background-color: #ECE9E6;
     transition: all 0.2s ease-out;
-
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -106,8 +120,7 @@ body{
     .semester{
         box-sizing: border-box;
         padding: 0;
-        margin: 20px;
-        padding-bottom: 24px;
+        margin: 10px;
         box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
         //box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
         border-radius: 10px;
@@ -137,6 +150,8 @@ body{
                 font-weight: bold;
                 flex-grow: 4;
                 align-self: center;
+                margin-right: -11px;
+
             }
 
             .remove-icon-semester{
@@ -166,7 +181,7 @@ body{
 
                 margin-inline: 20px;
                 font-weight: 600;
-                font-size: 26px;
+                font-size: 24px;
                 color: $black;
 
                 .title:nth-child(1){

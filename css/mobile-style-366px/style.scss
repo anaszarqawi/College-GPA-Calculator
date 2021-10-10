@@ -1,0 +1,124 @@
+$body-Color: #f2f2f3;
+$nav-items-color:#757b85;
+$primary-color: #2F80ED;
+$secondary-color: #02679a;
+$primary-color-light: #028ed4;
+$red : #ee4539;
+$black : #1e1e1e;
+$gradient-part1 : #56CCF2;  /* fallback for old browsers */
+$gradient-part2 : -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
+$gradient-part3 : linear-gradient(to right, #2F80ED, #56CCF2);
+//$gradient-part3 : linear-gradient(to right, #00ffcc, #2a7fff);
+$font-1 : 'Comfortaa', cursive;
+$font-2 : 'Barlow Condensed', sans-serif;
+$border-radius1: 4px;
+$font-size: 22px;
+
+@media only screen and (max-width:366px) {
+
+    .titles{
+        font-size: 20px !important;
+
+        .title:nth-child(1){
+            width: 100%;
+            }
+
+            .title:nth-child(2){
+            width: 16% !important;
+            }
+
+            .title:nth-child(3){
+            width: 50% !important;
+            }
+    }
+
+    .course{
+        width: 115px !important;
+    }
+
+    .credits{
+        width: 43px !important;
+    }
+
+    .rows{
+        margin-inline: 10px !important;
+    }
+
+    #options-section{
+        #section{
+            p{
+                font-weight: 600;
+                font-size: 20px !important;
+                text-align: left;
+                margin: 0;
+                margin-top: 6px;
+
+            }
+
+        }   
+    }
+
+    .nav-upper{
+        img{
+            width: 110px !important;
+        }
+    }
+
+    .nav-Lower{
+        .website-title{
+            font-size: 25px !important;
+        }
+
+
+        .add-semester{
+            .plus-icon{
+                width: 30px !important;
+                height: 30px !important;
+
+            }
+        }
+
+    }
+
+    .formatAndPercentageSign{
+
+        width: 70px !important;
+        margin-inline: 2px;
+
+
+        .format{
+            margin: 0;
+            width: 100%;
+            cursor: text;
+            font-size: $font-size;
+            border-width: 1px 0 1px 1px ;
+            border-radius: 4px 0 0 4px;
+            
+            &:out-of-range{
+                border-color:$red;
+            }
+
+            &:out-of-range + .percentageSign{
+                border-color:$red !important;
+            }
+
+            &:focus + .percentageSign{
+                border-color:$primary-color;
+            }
+        }
+
+        .percentageSign{
+
+            border: 1px #1b1f2326 solid;
+            border-left: 0;
+            border-radius: 0 4px 4px 0;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #fff;
+            transition: all 0.1s ease-out;
+            padding-right: 5px;
+
+        }
+    }
+}

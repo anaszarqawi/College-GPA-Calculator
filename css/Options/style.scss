@@ -39,6 +39,8 @@ $font-size: 22px;
     flex-grow: 4;
     align-self: center;
     font-size: $font-size;
+    margin-right: -17px;
+
 
   }
 
@@ -106,6 +108,7 @@ $font-size: 22px;
       flex-wrap: wrap;
       flex-direction: column;
       margin-left: 15px;
+      margin-right: -15px;
       
     }
     
