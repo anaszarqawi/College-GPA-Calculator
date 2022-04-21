@@ -352,11 +352,11 @@ function rearrangeSemester(element) {
     }
 
     //console.log(Element);
-    let numCourse = $(Element).find(".semesters .semester").length;
+    let numSemesters = $(Element).find(".semesters .semester").length;
     // console.log(numCourse);
     //console.log(numCourse);
     //console.log(`numCourse = ${numCourse}`);
-    for (let i = 0; i < numCourse; i++) {
+    for (let i = 0; i < numSemesters; i++) {
         let titleSemester = Element.find(`.semesters .semester:eq(${i}) .title_semester span`)
         //console.log(`titleSemester = ${titleSemester}`);
         titleSemester.text(`Semester ${i + 1}`)
