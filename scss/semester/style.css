@@ -75,7 +75,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 20px 20px;
+  margin: 40px 20px;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -226,7 +226,7 @@ body {
   margin-inline: 32px;
 }
 
-#container .semester .table .rows #row {
+#container .semester .table .rows .row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -243,7 +243,7 @@ body {
   margin-block: 5px;
 }
 
-#container .semester .table .rows #row .num {
+#container .semester .table .rows .row .num {
   background-color: #2F80ED;
   border: 1px #2F80ED solid;
   display: -webkit-box;
@@ -263,10 +263,10 @@ body {
   font-size: 18px;
 }
 
-#container .semester .table .rows #row .course,
-#container .semester .table .rows #row .grade,
-#container .semester .table .rows #row .credits,
-#container .semester .table .rows #row .format {
+#container .semester .table .rows .row .course,
+#container .semester .table .rows .row .grade,
+#container .semester .table .rows .row .credits,
+#container .semester .table .rows .row .format {
   font-size: 22px;
   border: 0;
   border: 1px #1b1f2326 solid;
@@ -279,39 +279,39 @@ body {
   margin-inline: 2px;
 }
 
-#container .semester .table .rows #row .course:focus,
-#container .semester .table .rows #row .grade:focus,
-#container .semester .table .rows #row .credits:focus,
-#container .semester .table .rows #row .format:focus {
+#container .semester .table .rows .row .course:focus,
+#container .semester .table .rows .row .grade:focus,
+#container .semester .table .rows .row .credits:focus,
+#container .semester .table .rows .row .format:focus {
   border: 1px #2F80ED solid;
 }
 
-#container .semester .table .rows #row .format {
+#container .semester .table .rows .row .format {
   width: 100%;
 }
 
-#container .semester .table .rows #row .grade,
-#container .semester .table .rows #row .credits,
-#container .semester .table .rows #row .format {
+#container .semester .table .rows .row .grade,
+#container .semester .table .rows .row .credits,
+#container .semester .table .rows .row .format {
   width: 70px;
 }
 
-#container .semester .table .rows #row .grade {
+#container .semester .table .rows .row .grade {
   cursor: pointer;
   padding: 3px;
 }
 
-#container .semester .table .rows #row .grade option {
+#container .semester .table .rows .row .grade option {
   color: #1e1e1e;
 }
 
-#container .semester .table .rows #row .format::-webkit-inner-spin-button,
-#container .semester .table .rows #row .credits::-webkit-inner-spin-button {
+#container .semester .table .rows .row .format::-webkit-inner-spin-button,
+#container .semester .table .rows .row .credits::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-#container .semester .table .rows #row .formatAndPercentageSign {
+#container .semester .table .rows .row .formatAndPercentageSign {
   display: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -324,7 +324,7 @@ body {
   margin-inline: 2px;
 }
 
-#container .semester .table .rows #row .formatAndPercentageSign .format {
+#container .semester .table .rows .row .formatAndPercentageSign .format {
   margin: 0;
   width: 100%;
   cursor: text;
@@ -333,19 +333,19 @@ body {
   border-radius: 4px 0 0 4px;
 }
 
-#container .semester .table .rows #row .formatAndPercentageSign .format:out-of-range {
+#container .semester .table .rows .row .formatAndPercentageSign .format:out-of-range {
   border-color: #ee4539;
 }
 
-#container .semester .table .rows #row .formatAndPercentageSign .format:out-of-range + .percentageSign {
+#container .semester .table .rows .row .formatAndPercentageSign .format:out-of-range + .percentageSign {
   border-color: #ee4539 !important;
 }
 
-#container .semester .table .rows #row .formatAndPercentageSign .format:focus + .percentageSign {
+#container .semester .table .rows .row .formatAndPercentageSign .format:focus + .percentageSign {
   border-color: #2F80ED;
 }
 
-#container .semester .table .rows #row .formatAndPercentageSign .percentageSign {
+#container .semester .table .rows .row .formatAndPercentageSign .percentageSign {
   border: 1px #1b1f2326 solid;
   border-left: 0;
   border-radius: 0 4px 4px 0;
@@ -363,7 +363,7 @@ body {
   padding-right: 5px;
 }
 
-#container .semester .table .rows #row .remove-icon-course {
+#container .semester .table .rows .row .remove-icon-course {
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -384,16 +384,16 @@ body {
   margin-inline: 2px;
 }
 
-#container .semester .table .rows #row .remove-icon-course:hover {
+#container .semester .table .rows .row .remove-icon-course:hover {
   background-color: #ee4539;
   color: #f2f2f3;
 }
 
-#container .semester .table .rows #row .remove-icon-course:hover > .x_remove {
+#container .semester .table .rows .row .remove-icon-course:hover > .x_remove {
   fill: #f2f2f3;
 }
 
-#container .semester .table .rows #row .remove-icon-course .x_remove {
+#container .semester .table .rows .row .remove-icon-course .x_remove {
   height: 5px;
   width: 5px;
   fill: #ee4539;
@@ -506,5 +506,30 @@ body {
 #btns .num_of_row_wanted::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+footer {
+  margin: 0;
+  position: static;
+  bottom: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  z-index: 999;
+  padding: 20px 5% 20px;
+  border-radius: 15px 15px 0 0;
+  background: #56CCF2;
+  background: -webkit-gradient(linear, left top, right top, from(#2F80ED), to(#56CCF2));
+  background: linear-gradient(to right, #2F80ED, #56CCF2);
+  -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+footer .copyright,
+footer .github {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #f2f2f3;
+  margin: 5px;
 }
 /*# sourceMappingURL=style.css.map */

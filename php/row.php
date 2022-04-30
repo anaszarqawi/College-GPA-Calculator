@@ -1,7 +1,7 @@
 <?php
 for ($i = 1; $i < 4; $i++) {
     echo "
-    <div id='row' class='row_$i'>
+    <div class='row'>
         <span class='num'>$i</span>
         <input type='text' name='field' class='course'>
         <select name='field_grade' class='grade' oninput='getValues(this)'>

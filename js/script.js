@@ -1,38 +1,78 @@
-let format = "";
-let array  = [[],[]]
-let GPA = 0
-let gpaInPercentage = 0
+var format = "";
+var array = [
+    [], // Grades
+    [] // Credits
+]
+var GPA = 0
+var gpaInPercentage = 0
 
-function getSemesterElement(Element) {
-    // console.log(Element);
-    while (true) {
-        if ($(Element).hasClass("semester")) {
-            break
-        } else {
-            Element = $(Element).parent()
-        }
-    }
-
-    return Element
+const getParent = (currantElement, target) => {
+    return $(currantElement).closest(`.${target}`)
 }
 
-$(document).on('click', '.add-course', function () {
+/**
+ * function to get the index of the semester
+ * @param  {[object]} currantElement Element taken from event
+ * @param  {[string]} target The parent you want
+ * @param  {[string]} byElement The common class of the elements
+ * @return {[int]} index of element
+ */
+const getIndex = (currantElement, target, common) => {
+    var parent = getParent(currantElement, target)
+    return parent.index(common)
+}
 
-    let SemesterDiv = $(this).parent().parent()
-    let SemesterIndex = SemesterDiv.index(".semester")
-    let location = $(`.semester:eq(${SemesterIndex})`)
-    let numOfRepetition = location.find(".num_of_row_wanted").val()
-    let length = location.find("div #row").length + 1;
+const getLength = (parentClass, commonClass) => {
+    return $(parentClass).find(`.${commonClass}`).length
+}
 
-    //console.log(`num From Add func : ${length}`);
-    
+/**
+ * function to rearrange elements in array by change title
+ * @param  {[object]} parentClass The common class of the elements
+ * @param  {[string]} commonClass The common class of the elements
+ * @param  {[string]} firstTile First tile in the title element
+ * @param  {[string]} TitlePath path of title in element
+ */
+const rearrange = (parentClass, commonClass, firstTile, TitlePath) => {
+    var arrElements = $(parentClass).find(`.${commonClass}`)
+    var length = getLength(parentClass, commonClass)
+
+    for (var i = 0; i < length; i++) {
+        $(arrElements[i]).find(TitlePath).text(`${firstTile}${i+1}`)
+    }
+}
+
+$(".add-semester").click(function() {
+
+    var length = $(".semester").length
+
+    if (length < 8) {
+        var newSemester = `<?php include 'php/semester.php' ?>`
+        $(".semesters").append(newSemester)
+
+        rearrange(document, "semester", "Semester ", ".title_semester span")
+        $(this).css("display", "block")
+        $(".website-title").css("margin-right", "-39px")
+
+
+    } else {
+        $(this).css("display", "none")
+        $(".website-title").css("margin-right", "0")
+    }
+
+});
+
+$(document).on('click', '.add-course', function() {
+
+    var semester = getParent(this, "semester")
+
+    var numOfRepetition = semester.find(".num_of_row_wanted").val()
+
     if (length <= 20 && numOfRepetition <= 6) {
+        for (var i = 1; i <= numOfRepetition; i++) {
 
-        for (let i = 1; i <= numOfRepetition; i++){
-            length = location.find("div #row").length + 1;
-            
-            course = `<div id='row' class='row_${length}'>
-            <span class='num'>${length}</span>
+            course = `<div class='row'>
+            <span class='num'>0</span>
             <input type='text' name='field' class='course'>
             <select name='field_grade' class='grade' oninput='getValues(this)'>
                 <option value='none'></option>
@@ -70,55 +110,47 @@ $(document).on('click', '.add-course', function () {
                 </svg>
             </div>
         </div>`
-            
-            tableBody = location.find(".rows");
+
+            tableBody = semester.find(".rows");
             tableBody.append(course)
-            //console.log(numRow);
-            rearrangeCourses(length, location)
-            //getFormat()
+            rearrange(semester, "row", "", ".num")
             getValues(this)
+            getFormat(this)
         }
     }
 });
 
-$(document).on("click", ".remove-icon-course", function () {
-    //     remove-icon => #row => .rows => .table => .semester
-    let SemesterIndex = $(this).parent().parent().parent().parent().index(".semester")
-    let location = $(`.semester:eq(${SemesterIndex})`)
-    let length = location.find(".rows #row").length;
+$(document).on("click", ".remove-icon-course", function() {
+    var row = getParent(this, "row")
+    var semester = getParent(this, "semester")
+    var length = getLength(semester, "row")
+
     if (length > 3) {
-        
-        $(this).parent().slideUp().promise().done(function() {
+        row.slideUp().promise().done(function() {
             $(this).remove();
-            length = location.find(".rows #row").length;
-            //console.log(`num From remove func : ${length}`);
-            rearrangeCourses(length, location)
-            getValues(location)
+            rearrange(semester, "row", "", ".num")
         });
-
     }
-
 });
 
-function rearrangeCourses(numRow, location) {
-    //console.log(`--------num From remove func : ${numRow}`);
+$(document).on("click", ".remove-icon-semester", function() {
+    var semester = getParent(this, "semester")
+    var length = $(".semester").length
+    $(".add-semester").css("display", "block")
+    $(".website-title").css("margin-right", "-39px")
 
-    for (let i = 1; i <= numRow; i++) {
-        let row = location.find(`.rows #row:eq(${i-1})`)
-        //console.log(row.attr("class"));
-        //let row = rows.find(`#row:eq(${i-1})`)
-        row.removeClass()
-        row.addClass(`row_${i}`);
-        row.find(".num").text(`${i}`)
-        //console.error("ss");
-    }
-}
+    if (length > 1) {
+        $(semester).slideUp().promise().done(function() {
+            $(this).remove()
+            rearrange(document, "semester", "Semester ", ".title_semester span")
+        })
+    } else { $(semester).shake() }
 
-$(document).on("click", "#options-title", function () {
-    let SemesterDiv = $(this).parent();
-    let SemesterIndex = SemesterDiv.index(".semester")
-    let currentSemester = $(`.semester:eq(${SemesterIndex})`)
-    let options_section = currentSemester.find('#options-section')
+})
+
+$(document).on("click", "#options-title", function() {
+    var semester = getParent(this, "semester")
+    var options_section = semester.find('#options-section')
 
     options_section.slideToggle();
     $(this).toggleClass("options-title-open");
@@ -126,325 +158,251 @@ $(document).on("click", "#options-title", function () {
 
 });
 
-$(document).on("click", ".clear", function () {
-    let semesterDiv = $(this).parent().parent()
-    let SemesterIndex = semesterDiv.index(".semester")
-    let location = $(`.semester:eq(${SemesterIndex})`)
+$(document).on("click", ".clear", function() {
+    var semester = getParent(this, "semester")
 
-    location.find( "input[name='field']" ).val( "" );
-    location.find( "input[name='field_credit']" ).val( 3 );
-    location.find("select[name='field_grade'] option[value='none']").prop('selected', true);
-    ResetColorsAndText()
-    
+    semester.find("input[name='field']").val("");
+    semester.find("input[name='field_credit']").val(3);
+    semester.find("select[name='field_grade'] option[value='none']").prop('selected', true);
+    getValues(semester)
+
+
 });
 
-function ResetColorsAndText(semester) {
-    $(semester).find(".containerGPA , .estimate").css("background-color", "#15b7ed");
-    $(semester).find(".GPA").text("--")
-    $(semester).find(".estimate").text("Estimate")
-}
+const getFormat = (element) => {
 
-function getFormat(element) {
+    var semester = getParent(element, "semester")
+    var format = $(semester).find('input[name="format"]:checked').attr('id');
 
-    let Semester = getSemesterElement(element)
-    //console.log(Semester);
-    let numCourse = $(Semester).find(".rows #row").length;
-    //console.log(numCourse);
-    format = $(Semester).find('input[name="format"]:checked').attr('id');
-    //console.log(format);
-    let formatElement = Semester.find(".format")
-    let GradeElement = Semester.find(".grade")
-    //console.log(formatElement);
-    //console.log(GradeElement);
+    var formatElement = semester.find(".format")
+    var GradeElement = semester.find(".grade")
 
     if (format == "Letter") {
         $(GradeElement).css("display", "block");
-        
-        //hide percentage Sign
-        $(Semester).find(".formatAndPercentageSign").css("display", "none");
-        $(Semester).find(".percentageSign").css("display", "none");
 
-    }
-    else if (format == "percentage") {
+        //hide percentage Sign
+        $(semester).find(".formatAndPercentageSign").css("display", "none");
+        $(semester).find(".percentageSign").css("display", "none");
+
+    } else if (format == "percentage") {
         $(formatElement).attr("max", "100");
         $(formatElement).css("border-width", "1px 0 1px 1px");
         $(formatElement).css("border-radius", "4px 0 0 4px");
         $(GradeElement).css("display", "none");
 
         //show percentage Sign
-        $(Semester).find(".formatAndPercentageSign").css("display", "flex");
-        $(Semester).find(".percentageSign").css("display", "flex");
+        $(semester).find(".formatAndPercentageSign").css("display", "flex");
+        $(semester).find(".percentageSign").css("display", "flex");
 
-        for (let i = 0; i < numCourse; i++) {
-            let grade = $(Semester).find(`.row_${i+1} .format`);
-            grade.val(`${((array[0][i])*100)/4}`)
-        }
-    }
-    else{
+    } else {
         $(formatElement).attr("max", "4");
         $(formatElement).css("border-width", "1px");
         $(formatElement).css("border-radius", "2px");
         $(GradeElement).css("display", "none");
 
         //hide percentage Sign
-        $(Semester).find(".formatAndPercentageSign").css("display", "flex");
-        $(Semester).find(".percentageSign").css("display", "none");
-
-        for (let i = 0; i < numCourse; i++) {
-            let grade = $(Semester).find(`.row_${i+1} .format`);
-            grade.val(`${array[0][i]}`)
-        }
+        $(semester).find(".formatAndPercentageSign").css("display", "flex");
+        $(semester).find(".percentageSign").css("display", "none");
     }
-    
+
 }
 
-function getValues(Element) {
+const getValues = (Element) => {
 
-    let Semester = getSemesterElement(Element)
-    console.log(Semester);
-    format = $(Semester).find('input[name="format"]:checked').attr('id');
+    var semester = getParent(Element, "semester")
+    format = $(semester).find('input[name="format"]:checked').attr('id');
 
-    switch(format) {
+    switch (format) {
         case "Letter":
-            getValuesByLetter(Semester)
-            console.log("getValuesByLetter()");
+            getValuesByLetter(semester)
             break;
         case "percentage":
-            getValuesByPercentage(Semester)
-            console.log("getValuesByPercentage()");
-          break;
+            getValuesByPercentage(semester)
+            break;
         case "Point_Value":
-            getValuesByPointVal(Semester)
-            console.log("getValuesByPointVal()");
-          break;
+            getValuesByPointVal(semester)
+            break;
 
     }
 
-    
+
 }
 
-function getValuesByLetter(Semester) {
-    
-    let numCourse = $(Semester).find(".rows #row").length;
-    //console.log(`numCourse = ${numCourse}`);
+const getValuesByLetter = (semester) => {
+
+    var length = getLength(semester, "row")
+    var rows = $(semester).find('.row')
 
     // Get Grade and Credits Values
-    for (let i = 0; i < numCourse; i++) {
-        let grade = $(Semester).find(`.row_${i+1} .grade option:selected`).val();
-        let credits = $(Semester).find(`.row_${i + 1} .credits`).val();
-        //console.log(`grade = ${grade}`);
-        //console.log(`credits = ${credits}`);
+    for (var i = 0; i < length; i++) {
+        var grade = $(rows[i]).find(".grade option:selected").val();
+        var credits = $(rows[i]).find(`.credits`).val();
+
         array[0][i] = +grade;
         array[1][i] = +credits;
     }
-
-    getGPA(Semester)
+    getGPA(semester)
 }
 
-function getValuesByPointVal(Semester) {
-    let numCourse = $(Semester).find(".rows #row").length;
+const getValuesByPointVal = (semester) => {
 
-    for (let i = 0; i < numCourse; i++) {
-        let grade = $(Semester).find(`.row_${i+1} .format`).val();
-        let credits = $(Semester).find(`.row_${i+1} .credits`).val();
+    var length = getLength(semester, "row")
+    var rows = $(semester).find('.row')
+
+    for (let i = 0; i < length; i++) {
+        let grade = $(rows[i]).find(`.format`).val();
+        let credits = $(rows[i]).find(`.credits`).val();
+
         array[0][i] = +grade;
         array[1][i] = +credits;
+
     }
 
-    getGPA(Semester)
+    for (let i = 0; i < length; i++) {
+
+        if (array[0][i] > 4 || array[0][i] < 0) {
+            ResetColorsAndText(semester)
+            return
+        }
+    }
+    getGPA(semester)
 }
 
-function getValuesByPercentage(Semester) {
-    let numCourse = $(Semester).find(".rows #row").length;
+const getValuesByPercentage = (semester) => {
+    var length = getLength(semester, "row")
+    var rows = $(semester).find('.row')
 
-    for (let i = 0; i < numCourse; i++) {
-        let gradeInPercentage = $(Semester).find(`.row_${i+1} .format`).val();
-        let grade = (gradeInPercentage * 4)/100
-        let credits = $(Semester).find(`.row_${i+1} .credits`).val();
+    for (let i = 0; i < length; i++) {
+        let gradeInPercentage = $(rows[i]).find(`.format`).val();
+        let grade = (gradeInPercentage * 4) / 100
+        let credits = $(rows[i]).find(`.credits`).val();
+
         array[0][i] = grade;
         array[1][i] = +credits;
     }
 
-    getGPA(Semester)
+    for (let i = 0; i < length; i++) {
+
+        if (array[0][i] > 4 || array[0][i] < 0) {
+            ResetColorsAndText(semester)
+            return
+        }
+    }
+
+    getGPA(semester)
 }
 
-function getGPA(semester) {
+const rounding = (num, digit) => {
+    let NUM = num.toFixed(digit)
+    return NUM
+}
 
-    let numCourse = $(semester).find(".rows #row").length;
+const getGPA = (semester) => {
 
-    let sumGradeXcredits = 0;
-    let GradeXcredits = 1;
-    let totalCredits = 0;
-    //let totalGrades = 0;
+    var length = getLength(semester, "row")
+    var tempArr = [0, 0]
+        // tempArr[0] += (grad*credit)
+        // tempArr[1] += credit
 
-    for (let i = 0; i < numCourse; i++) {
-        GradeXcredits = array[0][i] * array[1][i]
-        let credits = array[1][i]
-
-        sumGradeXcredits += GradeXcredits;
-        
-        //totalGrades += grade;
-        totalCredits += credits;
+    for (var i = 0; i < length; i++) {
+        tempArr[0] += array[0][i] * array[1][i]
+        tempArr[1] += array[1][i]
     }
 
     //calculate GPA and GPA in percentage
-    GPA = sumGradeXcredits / totalCredits
+    GPA = tempArr[0] / tempArr[1]
     gpaInPercentage = (GPA * 100) / 4
 
     // Rounding
     GPA = rounding(GPA, 2)
     gpaInPercentage = rounding(gpaInPercentage, 2)
 
-    ////////////////////////////////////////////
-    console.log(`GPA = ${GPA}`);
-    console.log(`gpaInPercentage = ${gpaInPercentage}`);
-    console.table(array);
-
-    if (!isNaN(GPA) && GPA <= 4) {printGPA(semester)}
-    else { ResetColorsAndText(semester) }
+    if (!isNaN(GPA) && GPA <= 4) { printGPA(semester) } else { ResetColorsAndText(semester) }
     getTotalGPA()
-    
 }
 
-function rounding(num, digit) {
-    let NUM = num.toFixed(digit)
-    return NUM
-}
-
-function printGPA(semester) {
+const printGPA = (semester) => {
     $(semester).find(".GPA").text(`${GPA}`)
     coloring(semester, gpaInPercentage)
-    
 }
 
-function coloring(semester, Percentage) { 
+const coloring = (semester, Percentage) => {
     let containerGpaAndEstimate = $(semester).find(".containerGPA, .estimate")
     let Estimate = $(semester).find(".estimate")
-    if (Percentage < 50) {containerGpaAndEstimate.css("background-color", "#ee4539"); Estimate.text(`${Percentage}% | Weak | F`)}
-    else if(Percentage >= 50 && Percentage < 60){containerGpaAndEstimate.css("background-color", '#c2843d'); Estimate.text(`${Percentage}% | Sufficient | D`)}
-    else if(Percentage >= 60 && Percentage < 65){containerGpaAndEstimate.css("background-color", '#c2843d'); Estimate.text(`${Percentage}% | Sufficient | D+`)}
-    else if(Percentage >= 65 && Percentage < 69){containerGpaAndEstimate.css("background-color", '#ffc038'); Estimate.text(`${Percentage}% | Good | C-`)}
-    else if(Percentage >= 69 && Percentage < 72){containerGpaAndEstimate.css("background-color", '#ffc038'); Estimate.text(`${Percentage}% | Good | C`)}
-    else if(Percentage >= 72 && Percentage < 75){containerGpaAndEstimate.css("background-color", '#ffc038'); Estimate.text(`${Percentage}% | Good | C+`)}
-    else if(Percentage >= 75 && Percentage < 79){containerGpaAndEstimate.css("background-color", '#5db747'); Estimate.text(`${Percentage}% | Very Good | B-`)}
-    else if(Percentage >= 79 && Percentage < 82){containerGpaAndEstimate.css("background-color", '#5db747'); Estimate.text(`${Percentage}% | Very Good | B`)}
-    else if(Percentage >= 82 && Percentage < 85){containerGpaAndEstimate.css("background-color", '#5db747'); Estimate.text(`${Percentage}% | Very Good | B+`)}
-    else if(Percentage >= 85 && Percentage < 90){containerGpaAndEstimate.css("background-color", '#00b3ff'); Estimate.text(`${Percentage}% | Excellent | A-`)}
-    else if(Percentage >= 90 && Percentage < 95){containerGpaAndEstimate.css("background-color", '#00b3ff'); Estimate.text(`${Percentage}% | Excellent | A`)}
-    else if(Percentage >= 95 && Percentage <= 100){containerGpaAndEstimate.css("background-color", '#00b3ff'); Estimate.text(`${Percentage}% | Excellent | A+`)}
 
-    
+    if (Percentage < 50) {
+        containerGpaAndEstimate.css("background-color", "#ee4539");
+        Estimate.text(`${Percentage}% | Weak | F`)
+    } else if (Percentage >= 50 && Percentage < 60) {
+        containerGpaAndEstimate.css("background-color", '#c2843d');
+        Estimate.text(`${Percentage}% | Sufficient | D`)
+    } else if (Percentage >= 60 && Percentage < 65) {
+        containerGpaAndEstimate.css("background-color", '#c2843d');
+        Estimate.text(`${Percentage}% | Sufficient | D+`)
+    } else if (Percentage >= 65 && Percentage < 69) {
+        containerGpaAndEstimate.css("background-color", '#ffc038');
+        Estimate.text(`${Percentage}% | Good | C-`)
+    } else if (Percentage >= 69 && Percentage < 72) {
+        containerGpaAndEstimate.css("background-color", '#ffc038');
+        Estimate.text(`${Percentage}% | Good | C`)
+    } else if (Percentage >= 72 && Percentage < 75) {
+        containerGpaAndEstimate.css("background-color", '#ffc038');
+        Estimate.text(`${Percentage}% | Good | C+`)
+    } else if (Percentage >= 75 && Percentage < 79) {
+        containerGpaAndEstimate.css("background-color", '#5db747');
+        Estimate.text(`${Percentage}% | Very Good | B-`)
+    } else if (Percentage >= 79 && Percentage < 82) {
+        containerGpaAndEstimate.css("background-color", '#5db747');
+        Estimate.text(`${Percentage}% | Very Good | B`)
+    } else if (Percentage >= 82 && Percentage < 85) {
+        containerGpaAndEstimate.css("background-color", '#5db747');
+        Estimate.text(`${Percentage}% | Very Good | B+`)
+    } else if (Percentage >= 85 && Percentage < 90) {
+        containerGpaAndEstimate.css("background-color", '#00b3ff');
+        Estimate.text(`${Percentage}% | Excellent | A-`)
+    } else if (Percentage >= 90 && Percentage < 95) {
+        containerGpaAndEstimate.css("background-color", '#00b3ff');
+        Estimate.text(`${Percentage}% | Excellent | A`)
+    } else if (Percentage >= 95 && Percentage <= 100) {
+        containerGpaAndEstimate.css("background-color", '#00b3ff');
+        Estimate.text(`${Percentage}% | Excellent | A+`)
+    }
 }
 
-function rearrangeSemester(element) {
-    let Element = $(element).parent()
-    //Element = Element.attr("id")
-    // console.log(Element);
-    
-
-    while (true) {
-        if (Element.attr("id") === "container") {
-            break
-        } else {
-            Element = Element.parent()
-        }
-
-    }
-
-    //console.log(Element);
-    let numSemesters = $(Element).find(".semesters .semester").length;
-    // console.log(numCourse);
-    //console.log(numCourse);
-    //console.log(`numCourse = ${numCourse}`);
-    for (let i = 0; i < numSemesters; i++) {
-        let titleSemester = Element.find(`.semesters .semester:eq(${i}) .title_semester span`)
-        //console.log(`titleSemester = ${titleSemester}`);
-        titleSemester.text(`Semester ${i + 1}`)
-    }
-
+const ResetColorsAndText = (semester) => {
+    $(semester).find(".containerGPA , .estimate").css("background-color", "#15b7ed");
+    $(semester).find(".GPA").text("--")
+    $(semester).find(".estimate").text("Estimate")
 }
 
-$(document).on("click", ".remove-icon-semester", function () {
-    
-
-    let Element = $(this)
-
-    //get container element
-    while (true) {
-        if (Element.attr("id") === "container") {
-            break
-        } else {
-            Element = Element.parent()
-        }
-    }
-
-    let semesterIndex = $(this).parent().parent().index(".semester")
-    let semester = $(`.semester:eq(${semesterIndex})`)
-    let numSemester = $(Element).find(".semesters .semester").length;
-
-    if (numSemester > 1) {
-        $(semester).slideUp().promise().done(function () {
-            $(this).remove()
-            $(".add-semester").removeClass("redHover");
-        })
-    }else{$(semester).shake()}
-    // console.log(numSemester);
-
-    for (let i = 1; i < numSemester; i++) {
-        let titleSemester = Element.find(`.semesters .semester:eq(${i}) .title_semester span`)
-        titleSemester.text(`Semester ${i}`)
-    }
-
-    getTotalGPA()
-    
-})
+const getTotalGPA = () => {
+    var length = $(".semester").length
+    var arrGpa = $(".semesters .GPA")
+    var arrEstimate = $(".semesters .estimate")
+    var totalGpaHtml = $(`.GPA:eq(${length})`)
 
 
-$(".dark_mode_btn").click(function () {
-    $("body").toggleClass("dark");
-    $("#container").toggleClass("dark_container");
-    
-})
-
-$(".add-semester").click(function () { 
-    let length = $(this).parent().parent().find("#container .semesters .semester").length
-    // console.log(length);
-    if (length < 6) {
-        let newSemester = `<?php include 'php/semester.php' ?>`
-        let tableBody = $(".semesters");
-        tableBody.append(newSemester)
-        rearrangeSemester($(this).parent().parent().find("#container .semesters"))
-        $(this).removeClass("redHover");
-    } else {
-        $(this).addClass("redHover");
-    }
-    
-});
-
-function getTotalGPA() {
-    let length = $(".add-semester").parent().parent().find("#container .semesters .semester").length
-    let sumGPA = 0;
-    let sumPercentage = 0;
-    // console.log(`numSemester = ${length}`);
+    var sumGPA = 0;
+    var sumPercentage = 0;
 
     if (length > 1) {
         for (let i = 0; i < length; i++) {
-            sumGPA += parseFloat($(`.GPA:eq(${i})`).text())
-            sumPercentage += parseFloat($(`.estimate:eq(${i})`).text().substr(0, 5))
-            let totalGpaHtml = $(`.GPA:eq(${length})`)
-            
+
+            sumGPA += parseFloat($(arrGpa[i]).text())
+            sumPercentage += parseFloat($(arrEstimate[i]).text().substr(0, 5))
+
             if (isNaN(sumGPA) || isNaN(sumPercentage)) {
-                ResetColorsAndText((totalGpaHtml.parent().parent()))
+                ResetColorsAndText($(".totalSemester #Result"))
             } else {
                 let totalGPA = (sumGPA * 4 / (4 * length))
                 let totalPercentage = (sumPercentage * 100 / (100 * length))
                 totalPercentage = rounding(totalPercentage, 2)
                 totalGPA = rounding(totalGPA, 2)
+
                 totalGpaHtml.text(totalGPA)
                 coloring((totalGpaHtml.parent().parent()), totalPercentage)
-                // console.log(totalGpaHtml);
                 $(".totalSemester").css("display", "block")
             }
         }
-    }else{$(".totalSemester").css("display", "none")}
+    } else { $(".totalSemester").css("display", "none") }
 }

@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College GPA Calculator</title>
+    <link rel="icon" type="image/png" href="./assets/icon-05.png" />
     <meta property="og:title" content="College GPA Calculator" />
-    <meta property="og:description" content="This calculator is designed to calculate your GPA by specifying your current GPA in letter, percentage or grade" />
+    <meta property="og:description" content="This calculator is designed to calculate your GPA by specifying your current GPA in a letter, percentage, or grade for one semester or more. It will also give you your grade as Letter Grade, percentage, and estimate." />
     <meta property="og:image" content="./scss/logo.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +22,7 @@
 
 <body>
     <div class="nav-upper">
-        <img src="./assets/anas-zaqrawi-logo.svg" alt="Anas Zarqawi" title="Anas Zarqawi logo">
+        <a href="https://anaszarqawi.com/about-me/" target="blank"><img src="./assets/anas-zaqrawi-logo.svg" alt="Anas Zarqawi" title="Anas Zarqawi logo"></a>
     </div>
     <div class="nav-Lower">
         <span class="website-title">College GPA Calculator</span>
@@ -44,15 +45,21 @@
                 <span>Total GPA</span>
             </div>
             <?php include './php/GPA.php' ?>
-
         </div>
+    </div>
+    <footer>
+        <p class="copyright">anaszarqawi_ © 2022</p>
+        <a href="https://github.com/Anaszarqawi/College-GPA-Calculator" target="_blank" class="github">source code on github</a>
+    </footer>
 
 
-        <script>
-            <?php include './js/jquery-3.6.0.min.js' ?>
-            <?php include './js/shake-element-transform/shake.js' ?>
-            <?php include './js/script.js' ?>
-        </script>
+
+
+    <script>
+        <?php include './js/jquery-3.6.0.min.js' ?>
+        <?php include './js/shake-element-transform/shake.js' ?>
+        <?php include './js/script.js' ?>
+    </script>
 </body>
 
 </html>

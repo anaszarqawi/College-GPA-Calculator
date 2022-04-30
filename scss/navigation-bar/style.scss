@@ -1,8 +1,10 @@
-$gradient-part1 : #56CCF2;  /* fallback for old browsers */
-$gradient-part2 : -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
-$gradient-part3 : linear-gradient(to right, #2F80ED, #56CCF2);
+$gradient-part1: #56CCF2;
 
-.nav-upper{
+/* fallback for old browsers */
+
+$gradient-part2: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
+$gradient-part3: linear-gradient(to right, #2F80ED, #56CCF2);
+.nav-upper {
     background-color: #ffff;
     margin: 0;
     position: static;
@@ -13,14 +15,12 @@ $gradient-part3 : linear-gradient(to right, #2F80ED, #56CCF2);
     padding: 30px 5% 20px;
     transition: all .2s;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    
-    img{
+    img {
         width: 150px;
     }
-
 }
 
-.nav-Lower{
+.nav-Lower {
     position: sticky;
     top: 0;
     display: flex;
@@ -38,8 +38,7 @@ $gradient-part3 : linear-gradient(to right, #2F80ED, #56CCF2);
     padding: 20px 5%;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 0 0 15px 15px;
-
-    .website-title{
+    .website-title {
         color: #ffff;
         font-size: 30px;
         font-weight: 500;
@@ -47,53 +46,17 @@ $gradient-part3 : linear-gradient(to right, #2F80ED, #56CCF2);
         align-self: center;
         margin-right: -39px;
     }
-
-
-    .add-semester{
+    .add-semester {
         // stroke: #ffff;
         cursor: pointer;
         display: flex;
-
         // align-self: center;
         transition: all 0.2s ease-out;
-
-        .plus-icon{
+        .plus-icon {
             width: 40px;
             height: 40px;
             stroke: #ffff;
             fill: none;
         }
     }
-    //     //box-shadow: #00000005 0px 1px 3px 0px, #1b1f2326 0px 0px 0px 1px;
-    //     padding-block: 2px 4px;
-    //     font-size: $font-size;
-    //     text-align: center;
-    //     transition: all 0.1s ease-out;
-    //     outline: none;
-    //     border-radius: $border-radius1;
-    //     background-color: #fff;
-    //     color: $primary-color;
-    //     border: 1px $primary-color solid;
-    //     cursor: pointer;
-    //     margin-inline: 2px;
-    //     //margin-top: 10px;
-        
-    // }
-
-    // .add-semester{
-    //     border-radius: $border-radius1;
-    //     width: 50%;
-    //     transition: all 0.2s ease-out;
-    //     &:hover{
-    //         //box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
-    //         background-color: $primary-color;
-    //         color: $body-Color;
-    //     }
-
-    //     &:active{
-    //         color: $body-Color;
-    //         background-color: #004a72;
-    //         border-color: #004a72;
-    //     }
-    // }
 }
