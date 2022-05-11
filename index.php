@@ -53,8 +53,6 @@
     </footer>
 
 
-
-
     <script>
         <?php include './js/jquery-3.6.0.min.js' ?>
         <?php include './js/shake-element-transform/shake.js' ?>

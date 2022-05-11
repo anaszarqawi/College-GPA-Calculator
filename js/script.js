@@ -5,34 +5,115 @@ var array = [
 ]
 var GPA = 0
 var gpaInPercentage = 0
+var my_settings = {};
+
+
+$(document).ready(() => {
+    if (localStorage.getItem('my-settings') != null) {
+        my_settings = JSON.parse(localStorage.getItem('my-settings'))
+        applySettings();
+
+        // console.log(my_settings);
+    } else {
+        localStorage.setItem('my-settings', JSON.stringify(my_settings))
+    }
+})
+
+$(document).on("click keypress", () => {
+    // generate settings on click or press any key
+    generateSettings()
+})
+
+const generateSettings = () => {
+    var semestersElements = $('.semester');
+    [course, grade, credits, gradeType, numberOfRows, json] = ['', 0, 0, '', 0, '']
+    var rows = []
+    var semesters = []
+
+    my_settings['numOfSemesters'] = semestersElements.length;
+
+    for (let semester of semestersElements) {
+        var rowsElements = $(semester).find('.row');
+
+        gradeType = getFormat(semester)
+        numberOfRows = rowsElements.length
+
+        for (let row of rowsElements) {
+            if (gradeType === 'Letter') {
+                grade = $(row).find('.grade').val()
+            } else {
+                grade = $(row).find('.format').val()
+            }
+            course = $(row).find('.course').val()
+            credits = $(row).find('.credits').val()
+            rows.push({ course: course, grade: grade, credits: credits });
+        }
+
+        semesters.push({
+            numberOfRows: numberOfRows,
+            gradeType: gradeType,
+            rows: rows,
+        });
+        rows = []
+    }
+    my_settings["semesters"] = semesters
+    localStorage.setItem('my-settings', JSON.stringify(my_settings));
+}
+
+const applySettings = () => {
+
+    // Generating semesters
+    for (let i = 1; i < my_settings.numOfSemesters; i++) {
+        addSemester();
+    }
+    // declaring a list of semesters
+    var semesters = $('.semester');
+
+    for (let i = 0; i < semesters.length; i++) {
+        // Generating Rows
+        for (let j = 0; j < my_settings.semesters[i].numberOfRows - 3; j++) {
+            addRow(semesters[i]);
+        }
+
+        // declaring a list of rows
+        var rows = $(semesters[i]).find('.row')
+
+        // Change grade type for current semester
+        let gradeType = my_settings.semesters[i].gradeType
+        $(semesters[i]).find(`#${gradeType}`).prop("checked", true);
+
+        // call getFormat function to change grade input
+        getFormat(semesters[i])
+
+        // change values of title course & and grade according to grade type & credits
+        for (let k = 0; k < rows.length; k++) {
+            // check grade type to change
+            if (gradeType === 'Letter') {
+                // if a type == letter
+                $(rows[k]).find('.grade').val(my_settings.semesters[i].rows[k].grade);
+            } else {
+                // if a type == percentage || point value
+                $(rows[k]).find('.format').val(my_settings.semesters[i].rows[k].grade);
+            }
+            // set title course
+            $(rows[k]).find('.course').val(my_settings.semesters[i].rows[k].course);
+            // set credits
+            $(rows[k]).find('.credits').val(my_settings.semesters[i].rows[k].credits);
+        }
+        // calculate gpa for each semester
+        getValues(semesters[i]);
+    }
+
+}
 
 const getParent = (currantElement, target) => {
     return $(currantElement).closest(`.${target}`)
-}
-
-/**
- * function to get the index of the semester
- * @param  {[object]} currantElement Element taken from event
- * @param  {[string]} target The parent you want
- * @param  {[string]} byElement The common class of the elements
- * @return {[int]} index of element
- */
-const getIndex = (currantElement, target, common) => {
-    var parent = getParent(currantElement, target)
-    return parent.index(common)
 }
 
 const getLength = (parentClass, commonClass) => {
     return $(parentClass).find(`.${commonClass}`).length
 }
 
-/**
- * function to rearrange elements in array by change title
- * @param  {[object]} parentClass The common class of the elements
- * @param  {[string]} commonClass The common class of the elements
- * @param  {[string]} firstTile First tile in the title element
- * @param  {[string]} TitlePath path of title in element
- */
 const rearrange = (parentClass, commonClass, firstTile, TitlePath) => {
     var arrElements = $(parentClass).find(`.${commonClass}`)
     var length = getLength(parentClass, commonClass)
@@ -42,35 +123,30 @@ const rearrange = (parentClass, commonClass, firstTile, TitlePath) => {
     }
 }
 
-$(".add-semester").click(function() {
-
-    var length = $(".semester").length
+const addSemester = () => {
+    // console.log("Add Semester");
+    var length = $('.semester').length;
 
     if (length < 8) {
-        var newSemester = `<?php include 'php/semester.php' ?>`
-        $(".semesters").append(newSemester)
+        var newSemester = `<?php include 'php/semester.php' ?>`;
+        $('.semesters').append(newSemester);
 
-        rearrange(document, "semester", "Semester ", ".title_semester span")
-        $(this).css("display", "block")
-        $(".website-title").css("margin-right", "-39px")
-
-
+        rearrange(document, 'semester', 'Semester ', '.title_semester span');
+        $(this).css('display', 'block');
+        $('.website-title').css('margin-right', '-39px');
     } else {
-        $(this).css("display", "none")
-        $(".website-title").css("margin-right", "0")
+        $(this).css('display', 'none');
+        $('.website-title').css('margin-right', '0');
     }
+}
 
-});
+const addRow = (element) => {
+    var semester = getParent(element, 'semester');
 
-$(document).on('click', '.add-course', function() {
-
-    var semester = getParent(this, "semester")
-
-    var numOfRepetition = semester.find(".num_of_row_wanted").val()
+    var numOfRepetition = semester.find('.num_of_row_wanted').val();
 
     if (length <= 20 && numOfRepetition <= 6) {
         for (var i = 1; i <= numOfRepetition; i++) {
-
             course = `<div class='row'>
             <span class='num'>0</span>
             <input type='text' name='field' class='course'>
@@ -109,15 +185,23 @@ $(document).on('click', '.add-course', function() {
                 </g>
                 </svg>
             </div>
-        </div>`
+        </div>`;
 
-            tableBody = semester.find(".rows");
-            tableBody.append(course)
-            rearrange(semester, "row", "", ".num")
-            getValues(this)
-            getFormat(this)
+            tableBody = semester.find('.rows');
+            tableBody.append(course);
+            rearrange(semester, 'row', '', '.num');
+            getValues(element);
+            getFormat(element);
         }
     }
+};
+
+$(".add-semester").on("click", function() {
+    addSemester();
+});
+
+$(document).on('click', '.add-course', function() {
+    addRow(this);
 });
 
 $(document).on("click", ".remove-icon-course", function() {
@@ -129,6 +213,7 @@ $(document).on("click", ".remove-icon-course", function() {
         row.slideUp().promise().done(function() {
             $(this).remove();
             rearrange(semester, "row", "", ".num")
+            generateSettings()
         });
     }
 });
@@ -143,6 +228,7 @@ $(document).on("click", ".remove-icon-semester", function() {
         $(semester).slideUp().promise().done(function() {
             $(this).remove()
             rearrange(document, "semester", "Semester ", ".title_semester span")
+            generateSettings()
         })
     } else { $(semester).shake() }
 
@@ -204,6 +290,7 @@ const getFormat = (element) => {
         $(semester).find(".formatAndPercentageSign").css("display", "flex");
         $(semester).find(".percentageSign").css("display", "none");
     }
+    return format;
 
 }
 
