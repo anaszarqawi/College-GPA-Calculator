@@ -1,0 +1,61 @@
+.nav-upper {
+    background-color: #ffff;
+    margin: 0;
+    position: static;
+    top: 0;
+    box-sizing: border-box;
+    width: 100%;
+    z-index: 999;
+    padding: 30px 5% 20px;
+    transition: all .2s;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    img {
+        width: 150px;
+    }
+}
+
+.nav-Lower {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 5px;
+    z-index: 2;
+    transition: all 0.5s ease-out;
+    background: var(--gradient-part1);
+    background: var(--gradient-part2);
+    background: var(--gradient-part3);
+    width: 100%;
+    padding: 20px 5%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 0 0 15px 15px;
+    .website-title {
+        color: #ffff;
+        font-size: 30px;
+        font-weight: 500;
+        flex-grow: 4;
+        align-self: center;
+        margin-right: -39px;
+    }
+    .add-semester {
+        // stroke: #ffff;
+        cursor: pointer;
+        display: flex;
+        // align-self: center;
+        .plus-icon {
+            width: 40px;
+            height: 40px;
+            stroke: #ffff;
+            fill: none;
+            transition: all 0.1s;
+
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+}
