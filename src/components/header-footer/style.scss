@@ -1,0 +1,122 @@
+// style blur background for header
+
+.header,
+.footer {
+    width: 100%;
+    padding: var(--space-50) 0;
+    background-color: var(--color-1-80);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    // backdrop-filter: blur(100px);
+    backdrop-filter: blur(5px);
+    // -webkit-backdrop-filter: blur(60px);
+    border-bottom: 1px solid var(--color-2);
+
+    .header-container,
+    .footer-container {
+        width: var(--page-width);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+
+        .logo {
+            width: 200px;
+
+            svg {
+                width: 70px;
+                fill: var(--color-3);
+            }
+        }
+
+        .title {
+            font-size: var(--font-size-1);
+            font-weight: var(--font-weight-2);
+            color: var(--color-3-70);
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-buttons,
+        .footer-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-1);
+            width: 200px;
+
+            .header-button {
+                color: var(--color-3-70);
+                transition: var(--transition-1);
+                cursor: pointer;
+
+                &:hover {
+                    color: var(--color-3);
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    top: auto;
+    bottom: 0;
+    border-top: 1px solid var(--color-2);
+    border-bottom: none;
+
+    .copyright {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        font-size: 13px;
+        font-weight: 300;
+
+        .logo {
+            width: auto;
+            svg {
+                fill: var(--color-3-70) !important;
+                width: 50px !important;
+            }
+        }
+
+        .text {
+            color: var(--color-3-70);
+        }
+    }
+
+    .version {
+        color: var(--color-3-70);
+        transition: var(--transition-1);
+        cursor: pointer;
+
+        &:hover {
+            color: var(--color-3);
+        }
+    }
+
+    .social {
+        width: 180px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+
+        .social-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--color-3-70);
+            transition: var(--transition-1);
+            cursor: pointer;
+
+            &:hover {
+                fill: var(--color-3);
+            }
+        }
+    }
+}
