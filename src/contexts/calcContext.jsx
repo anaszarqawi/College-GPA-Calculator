@@ -34,16 +34,6 @@ export default function CalcProvider({ children }) {
           grade: 'C',
           credit: 3,
         },
-        {
-          course: 'CS 103',
-          grade: 'C',
-          credit: 3,
-        },
-        {
-          course: 'CS 103',
-          grade: 'C',
-          credit: 3,
-        },
       ],
       gpa: 'UoU',
       totalHours: 0,

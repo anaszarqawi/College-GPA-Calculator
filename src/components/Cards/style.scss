@@ -1,6 +1,21 @@
 .Cards {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-50);
+    // width: 100%;
     margin-top: calc(72px + var(--space-1));
+    margin-bottom: calc(72px + var(--space-1));
+}
+
+.line-divider {
+    width: 98%;
+    height: 1px;
+    border-width: 0;
+    color: var(--color-2);
+    background-color: var(--color-2);
+    // margin: 0;
 }
 
 .test {

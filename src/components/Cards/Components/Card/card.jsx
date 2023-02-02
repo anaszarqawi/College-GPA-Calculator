@@ -1,15 +1,24 @@
 import React from 'react';
 import './style.scss';
+import { ReactComponent as DeleteIcon } from '../../../../assets/svg/delete-icon.svg';
 
 const Card = (props) => {
   return (
     <div className="card">
       <div className="card-calculator">
         <div className="card-header">
-          <div className="card-header-title">{props.semester.name}</div>
+          <div className="card-header-title">
+            <input
+              className="input-header"
+              type="text"
+              placeholder={`Semester ${props.i + 1}`}
+              insideText={props.semester.name}
+            />
+          </div>
           <div className="card-header-buttons">
-            <div className="card-header-button">Edit</div>
-            <div className="card-header-button">Delete</div>
+            <div className="card-header-button">
+              <DeleteIcon />
+            </div>
           </div>
         </div>
         <table className="card-body">
@@ -21,17 +30,24 @@ const Card = (props) => {
           </tr>
 
           {props.semester.courses.map((course, i) => {
+            console.log(course.course);
             return (
               <tr>
                 <td>{i + 1}</td>
                 <td>
-                  <input type="text" placeholder="Untitled Course" value={course.course} />
+                  <input type="text" placeholder={`Untitled Course ${i + 1}`} insideText={course.course} />
                 </td>
                 <td>{course.grade}</td>
                 <td>{course.credit}</td>
               </tr>
             );
           })}
+          <tr className="add-row-btn">
+            <td className="add-row-btn-id">{props.semester.courses.length + 1}</td>
+            <td>Tap to add new course {props.semester.courses.length + 1}</td>
+            <td>-</td>
+            <td>3</td>
+          </tr>
         </table>
       </div>
       <div className="card-result">
