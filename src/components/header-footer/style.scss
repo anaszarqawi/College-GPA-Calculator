@@ -36,7 +36,7 @@
         .title {
             font-size: var(--font-size-1);
             font-weight: var(--font-weight-2);
-            color: var(--color-3-70);
+            color: var(--color-3-60);
             margin: 0;
             padding: 0;
         }
@@ -50,7 +50,7 @@
             width: 200px;
 
             .header-button {
-                color: var(--color-3-70);
+                color: var(--color-3-60);
                 transition: var(--transition-1);
                 cursor: pointer;
 
@@ -79,18 +79,18 @@
         .logo {
             width: auto;
             svg {
-                fill: var(--color-3-70) !important;
+                fill: var(--color-3-60) !important;
                 width: 50px !important;
             }
         }
 
         .text {
-            color: var(--color-3-70);
+            color: var(--color-3-60);
         }
     }
 
     .version {
-        color: var(--color-3-70);
+        color: var(--color-3-60);
         transition: var(--transition-1);
         cursor: pointer;
 
@@ -110,7 +110,7 @@
         .social-icon {
             width: 20px;
             height: 20px;
-            fill: var(--color-3-70);
+            fill: var(--color-3-60);
             transition: var(--transition-1);
             cursor: pointer;
 
