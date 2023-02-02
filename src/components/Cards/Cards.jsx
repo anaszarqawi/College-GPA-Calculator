@@ -8,8 +8,13 @@ const Cards = (props) => {
 
   return (
     <div className="Cards">
-      {semesters.map((semester) => {
-        return <Card semester={semester} />;
+      {semesters.map((semester, i) => {
+        return (
+          <>
+            <Card semester={semester} i={i} />
+            {semesters.length > i + 1 && <hr className="line-divider"></hr>}
+          </>
+        );
       })}
     </div>
   );

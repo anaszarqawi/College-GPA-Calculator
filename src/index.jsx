@@ -6,11 +6,7 @@ import './App.scss';
 
 const app = ReactDOM.createRoot(document.getElementById('app'));
 
-app.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+app.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
