@@ -16,7 +16,6 @@ export default function CalcProvider({ children }) {
 
   const [semesters, setSemesters] = React.useState([
     {
-      id: 0,
       name: 'Fall 2020',
       courses: [
         {
@@ -41,6 +40,17 @@ export default function CalcProvider({ children }) {
     },
   ]);
 
+  React.useEffect(() => {
+    const semesters = JSON.parse(localStorage.getItem('semesters'));
+    if (semesters) {
+      setSemesters(semesters);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem('semesters', JSON.stringify(semesters));
+  }, [semesters]);
+
   const addSemester = () => {
     const newSemester = { ...semester };
     newSemester.id = semesters.length;
@@ -52,10 +62,26 @@ export default function CalcProvider({ children }) {
     setSemesters(newSemesters);
   };
 
+  const toLocalStorage = () => {
+    localStorage.setItem('semesters', JSON.stringify(semesters));
+  };
+
+  const CalcualteGPA = (courses) => {
+    let totalHours = 0;
+    let totalPoints = 0;
+    courses.forEach((course) => {
+      totalHours += parseInt(course.credit);
+      totalPoints += parseInt(course.credit) * parseInt(course.grade);
+    });
+    return (totalPoints / totalHours).toFixed(2);
+  };
+
   const value = {
     semesters,
+    setSemesters,
     addSemester,
     removeSemester,
+    toLocalStorage,
   };
 
   return <CalcContext.Provider value={value}>{children}</CalcContext.Provider>;
