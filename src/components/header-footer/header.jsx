@@ -20,6 +20,7 @@ const Header = () => {
               const newSemesters = [...semesters];
               newSemesters.push({
                 name: '',
+                isLocked: false,
                 courses: [
                   {
                     course: '',

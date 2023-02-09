@@ -3,11 +3,13 @@ import './style.scss';
 import { ReactComponent as DeleteIcon } from '../../../../assets/svg/delete-icon.svg';
 import { ReactComponent as CloseSquare } from '../../../../assets/svg/Close-Square.svg';
 import { ReactComponent as EditIcon } from '../../../../assets/svg/edit-icon.svg';
+import { ReactComponent as LockIcon } from '../../../../assets/svg/lock-icon.svg';
 import { useCalc } from '../../../../contexts/calcContext';
 
 const Card = (props) => {
   const { semesters, setSemesters } = useCalc();
   const [editMode, setEditMode] = useState(false);
+  const [lockMode, setLockMode] = useState(false);
 
   return (
     <div className="card">
@@ -27,7 +29,7 @@ const Card = (props) => {
             />
           </div>
           <div className="card-header-buttons">
-            {props.semester.courses.length !== 3 && (
+            {props.semester.courses.length !== 3 && !props.semester.isLocked && (
               <div
                 className={`card-header-button ${editMode && 'active-button'}`}
                 onClick={() => {
@@ -48,6 +50,16 @@ const Card = (props) => {
                 <DeleteIcon />
               </div>
             )}
+            <div
+              className={`card-header-button ${props.semester.isLocked && 'active-button'}`}
+              onClick={() => {
+                setLockMode(!lockMode);
+                const newSemesters = [...semesters];
+                newSemesters[props.i].isLocked = !newSemesters[props.i].isLocked;
+                setSemesters(newSemesters);
+              }}>
+              <LockIcon />
+            </div>
           </div>
         </div>
         <table className="card-body">
@@ -106,22 +118,21 @@ const Card = (props) => {
               </tr>
             );
           })}
-          {props.semester.courses.length !== 10 && (
-            <tr className="add-row-btn">
+          {props.semester.courses.length !== 10 && !props.semester.isLocked && (
+            <tr
+              className="add-row-btn"
+              onClick={() => {
+                const newSemesters = [...semesters];
+                newSemesters[props.i].courses.push({
+                  course: '',
+                  grade: '-',
+                  credit: 3,
+                });
+                setSemesters(newSemesters);
+                console.log(newSemesters);
+              }}>
               <td className="add-row-btn-id">{props.semester.courses.length + 1}</td>
-              <td
-                onClick={() => {
-                  const newSemesters = [...semesters];
-                  newSemesters[props.i].courses.push({
-                    course: '',
-                    grade: '-',
-                    credit: 3,
-                  });
-                  setSemesters(newSemesters);
-                  console.log(newSemesters);
-                }}>
-                Tap to add new course {props.semester.courses.length + 1}
-              </td>
+              <td>Tap to add new course {props.semester.courses.length + 1}</td>
               <td>-</td>
               <td>3</td>
             </tr>
