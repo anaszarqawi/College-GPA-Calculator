@@ -1,0 +1,37 @@
+.total-results {
+    bottom: 71px;
+    // transition: ease-in 0.2s;
+
+    .total-results-container {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-1);
+
+        .total-gpa {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-50);
+
+            .total-gpa-arrow {
+                color: var(--color-3-50);
+            }
+        }
+
+        .total-estimate {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-50);
+
+            .estimate-divider {
+                font-weight: var(--font-weight-1);
+                color: var(--color-3-50);
+            }
+        }
+    }
+}
+
+.hide-total-results {
+    opacity: 0;
+}
