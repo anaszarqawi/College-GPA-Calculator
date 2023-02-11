@@ -14,35 +14,39 @@ const Header = () => {
         </div>
         <h1 className="title">College GPA Calculator</h1>
         <div className="header-buttons">
-          <div
-            className="header-button"
-            onClick={() => {
-              const newSemesters = [...semesters];
-              newSemesters.push({
-                name: '',
-                isLocked: false,
-                courses: [
-                  {
-                    course: '',
-                    grade: [],
-                    credit: '3',
-                  },
-                  {
-                    course: '',
-                    grade: [],
-                    credit: '3',
-                  },
-                  {
-                    course: '',
-                    grade: [],
-                    credit: '3',
-                  },
-                ],
-              });
-              setSemesters(newSemesters);
-            }}>
-            New Semester
-          </div>
+          {semesters.length !== 20 ? (
+            <div
+              className="header-button"
+              onClick={() => {
+                const newSemesters = [...semesters];
+                newSemesters.push({
+                  name: '',
+                  isLocked: false,
+                  courses: [
+                    {
+                      course: '',
+                      grade: [],
+                      credit: '3',
+                    },
+                    {
+                      course: '',
+                      grade: [],
+                      credit: '3',
+                    },
+                    {
+                      course: '',
+                      grade: [],
+                      credit: '3',
+                    },
+                  ],
+                });
+                setSemesters(newSemesters);
+              }}>
+              New Semester
+            </div>
+          ) : (
+            <div className="header-button">Max Semesters</div>
+          )}
         </div>
       </div>
     </div>

@@ -11,8 +11,8 @@ const Cards = (props) => {
       {semesters.map((semester, i) => {
         return (
           <>
-            <Card key={i} semester={semester} i={i} />
-            {semesters.length > i + 1 && <hr className="line-divider"></hr>}
+            <Card semester={semester} i={i} />
+            {semesters.length > i + 1 && <hr className="line-divider" key={`line ${i}`}></hr>}
           </>
         );
       })}

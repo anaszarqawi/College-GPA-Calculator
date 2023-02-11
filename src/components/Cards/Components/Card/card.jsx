@@ -12,7 +12,7 @@ const Card = (props) => {
   const [lockMode, setLockMode] = useState(false);
 
   return (
-    <div className="card">
+    <div className="card" key={props.i}>
       <div className="card-calculator">
         <div className="card-header">
           <div className="card-header-title">
@@ -63,80 +63,83 @@ const Card = (props) => {
           </div>
         </div>
         <table className="card-body">
-          <tr>
-            <th className="col-id">#</th>
-            <th className="col-course">Course</th>
-            <th className="col-grade">Grade</th>
-            <th className="col-credit">Credit</th>
+          <thead>
+            <tr>
+              <th className="col-id">#</th>
+              <th className="col-course">Course</th>
+              <th className="col-grade">Grade</th>
+              <th className="col-credit">Credit</th>
 
-            {editMode && <th className="col-delete"></th>}
-          </tr>
-
-          {props.semester.courses.map((course, i) => {
-            return (
-              <tr key={i}>
-                <td>{i + 1}</td>
-                <td>
-                  <input
-                    type="text"
-                    placeholder={`Untitled Course ${i + 1}`}
-                    value={course.course}
-                    onChange={(e) => {
-                      const newSemesters = [...semesters];
-                      newSemesters[props.i].courses[i].course = e.target.value;
-                      setSemesters(newSemesters);
-                    }}
-                  />
-                </td>
-
-                <td>{course.grade}</td>
-                <td>
-                  <input
-                    type="number"
-                    placeholder="-"
-                    value={course.credit}
-                    onChange={(e) => {
-                      const newSemesters = [...semesters];
-                      newSemesters[props.i].courses[i].credit = e.target.value;
-                      setSemesters(newSemesters);
-                    }}
-                  />
-                </td>
-                {editMode && (
-                  <td
-                    onClick={() => {
-                      if (props.semester.courses.length === 3) return;
-
-                      const newSemesters = [...semesters];
-                      newSemesters[props.i].courses.splice(i, 1);
-                      setSemesters(newSemesters);
-                      if (newSemesters[props.i].courses.length === 3) setEditMode(false);
-                    }}>
-                    <CloseSquare />
-                  </td>
-                )}
-              </tr>
-            );
-          })}
-          {props.semester.courses.length !== 10 && !props.semester.isLocked && (
-            <tr
-              className="add-row-btn"
-              onClick={() => {
-                const newSemesters = [...semesters];
-                newSemesters[props.i].courses.push({
-                  course: '',
-                  grade: '-',
-                  credit: 3,
-                });
-                setSemesters(newSemesters);
-                console.log(newSemesters);
-              }}>
-              <td className="add-row-btn-id">{props.semester.courses.length + 1}</td>
-              <td>Tap to add new course {props.semester.courses.length + 1}</td>
-              <td>-</td>
-              <td>3</td>
+              {editMode && <th className="col-delete"></th>}
             </tr>
-          )}
+          </thead>
+          <tbody>
+            {props.semester.courses.map((course, i) => {
+              return (
+                <tr key={i}>
+                  <td>{i + 1}</td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder={`Untitled Course ${i + 1}`}
+                      value={course.course}
+                      onChange={(e) => {
+                        const newSemesters = [...semesters];
+                        newSemesters[props.i].courses[i].course = e.target.value;
+                        setSemesters(newSemesters);
+                      }}
+                    />
+                  </td>
+
+                  <td>{course.grade}</td>
+                  <td>
+                    <input
+                      type="number"
+                      placeholder="-"
+                      value={course.credit}
+                      onChange={(e) => {
+                        const newSemesters = [...semesters];
+                        newSemesters[props.i].courses[i].credit = e.target.value;
+                        setSemesters(newSemesters);
+                      }}
+                    />
+                  </td>
+                  {editMode && (
+                    <td
+                      onClick={() => {
+                        if (props.semester.courses.length === 3) return;
+
+                        const newSemesters = [...semesters];
+                        newSemesters[props.i].courses.splice(i, 1);
+                        setSemesters(newSemesters);
+                        if (newSemesters[props.i].courses.length === 3) setEditMode(false);
+                      }}>
+                      <CloseSquare />
+                    </td>
+                  )}
+                </tr>
+              );
+            })}
+            {props.semester.courses.length !== 10 && !props.semester.isLocked && (
+              <tr
+                className="add-row-btn"
+                onClick={() => {
+                  const newSemesters = [...semesters];
+                  newSemesters[props.i].courses.push({
+                    course: '',
+                    grade: '-',
+                    credit: 3,
+                  });
+                  setSemesters(newSemesters);
+                  console.log(newSemesters);
+                }}>
+                <td className="add-row-btn-id">{props.semester.courses.length + 1}</td>
+                <td>Tap to add new course {props.semester.courses.length + 1}</td>
+                <td>-</td>
+                <td>3</td>
+              </tr>
+            )}
+          </tbody>
         </table>
       </div>
       <div className="card-result">
