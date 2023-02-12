@@ -54,6 +54,7 @@ const Card = (props) => {
               className={`card-header-button ${props.semester.isLocked && 'active-button'}`}
               onClick={() => {
                 setLockMode(!lockMode);
+                setEditMode(false);
                 const newSemesters = [...semesters];
                 newSemesters[props.i].isLocked = !newSemesters[props.i].isLocked;
                 setSemesters(newSemesters);
@@ -134,7 +135,7 @@ const Card = (props) => {
                   console.log(newSemesters);
                 }}>
                 <td className="add-row-btn-id">{props.semester.courses.length + 1}</td>
-                <td>Tap to add new course {props.semester.courses.length + 1}</td>
+                <td>Tap to add new course</td>
                 <td>-</td>
                 <td>3</td>
               </tr>

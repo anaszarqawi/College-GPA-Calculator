@@ -1,6 +1,6 @@
 .card {
     input {
-        font-size: var(--font-size-1);
+        font-size: var(--font-size-0);
         background-color: transparent;
         border: none;
         outline: none;
@@ -81,7 +81,7 @@
         }
 
         .card-body {
-            font-size: var(--font-size-1);
+            font-size: var(--font-size-0);
 
             color: var(--color-3);
             width: 100%;
@@ -117,7 +117,7 @@
 
             td {
                 padding: 6px;
-                font-size: var(--font-size-1);
+                font-size: var(--font-size-0);
 
                 svg {
                     fill: var(--color-3-20);
@@ -146,14 +146,16 @@
 
     .card-result {
         background-color: var(--color-2);
-        border-radius: var(--border-radius);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        // grid-area: result;
         flex: 1 0;
-        // flex-grow: 1;
+
+        // background: linear-gradient(var(--color-2), var(--color-2)) padding-box,
+        //     linear-gradient(to right, #4ebefd, #0074b6) border-box;
+        // border: 1px solid transparent;
+        border-radius: var(--border-radius);
 
         gap: var(--space-50);
         padding: var(--space-3) var(--space-3);
@@ -171,7 +173,7 @@
         }
 
         .card-estimate {
-            font-size: var(--font-size-1);
+            font-size: var(--font-size-0);
             font-weight: var(--font-weight-2);
             color: var(--color-3);
         }
