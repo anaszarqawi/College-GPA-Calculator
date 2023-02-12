@@ -39,6 +39,7 @@ export default function CalcProvider({ children }) {
       totalPoints: 0,
     },
   ]);
+  const [selectedGrade, setSelectedGrade] = React.useState('A+');
 
   React.useEffect(() => {
     const semesters = JSON.parse(localStorage.getItem('semesters'));
@@ -82,6 +83,8 @@ export default function CalcProvider({ children }) {
     addSemester,
     removeSemester,
     toLocalStorage,
+    selectedGrade,
+    setSelectedGrade,
   };
 
   return <CalcContext.Provider value={value}>{children}</CalcContext.Provider>;

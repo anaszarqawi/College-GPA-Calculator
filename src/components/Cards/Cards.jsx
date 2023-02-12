@@ -2,6 +2,7 @@ import React from 'react';
 import './style.scss';
 import { useCalc } from '../../contexts/calcContext';
 import Card from './Components/Card/card';
+import GardePopup from './Components/GradePopup/GardePopup';
 
 const Cards = (props) => {
   const { semesters } = useCalc();
@@ -16,6 +17,7 @@ const Cards = (props) => {
           </>
         );
       })}
+      <GardePopup />
     </div>
   );
 };

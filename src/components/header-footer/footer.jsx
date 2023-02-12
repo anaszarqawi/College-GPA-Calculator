@@ -9,13 +9,16 @@ import { ReactComponent as Telegram } from '../../assets/svg/Telegram - Negative
 import './style.scss';
 
 const Footer = () => {
+  console.log(window.innerWidth);
   return (
     <div className="footer">
       <div className="footer-container">
         <div className="copyright">
-          <div className="logo">
-            <Logo />
-          </div>
+          {window.innerWidth > 768 && (
+            <div className="logo">
+              <Logo />
+            </div>
+          )}
           <span className="text">© {new Date().getFullYear()} anaszarqawi.</span>
         </div>
         <a
