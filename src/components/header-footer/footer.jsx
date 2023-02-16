@@ -9,7 +9,6 @@ import { ReactComponent as Telegram } from '../../assets/svg/Telegram - Negative
 import './style.scss';
 
 const Footer = () => {
-  console.log(window.innerWidth);
   return (
     <div className="footer">
       <div className="footer-container">
