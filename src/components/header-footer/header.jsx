@@ -25,20 +25,31 @@ const Header = () => {
                   courses: [
                     {
                       course: '',
-                      grade: [],
-                      credit: '3',
+                      grade: {
+                        name: null,
+                        value: null,
+                      },
+                      credit: 3,
                     },
                     {
                       course: '',
-                      grade: [],
-                      credit: '3',
+                      grade: {
+                        name: null,
+                        value: null,
+                      },
+                      credit: 3,
                     },
                     {
                       course: '',
-                      grade: [],
-                      credit: '3',
+                      grade: {
+                        name: null,
+                        value: null,
+                      },
+                      credit: 3,
                     },
                   ],
+                  gpa: null,
+                  estimate: null,
                 });
                 setSemesters(newSemesters);
               }}>

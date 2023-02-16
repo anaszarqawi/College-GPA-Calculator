@@ -5,9 +5,10 @@ import { ReactComponent as CloseSquare } from '../../../../assets/svg/Close-Squa
 import { ReactComponent as EditIcon } from '../../../../assets/svg/edit-icon.svg';
 import { ReactComponent as LockIcon } from '../../../../assets/svg/lock-icon.svg';
 import { useCalc } from '../../../../contexts/calcContext';
+import GradeInput from '../GradeInput/gradeInput';
 
 const Card = (props) => {
-  const { semesters, setSemesters } = useCalc();
+  const { semesters, setSemesters, grades, calculateGPA } = useCalc();
   const [editMode, setEditMode] = useState(false);
   const [lockMode, setLockMode] = useState(false);
 
@@ -91,8 +92,9 @@ const Card = (props) => {
                       }}
                     />
                   </td>
-
-                  <td>{course.grade}</td>
+                  <td>
+                    <GradeInput semesterNum={props.i} courseNum={i} grade={course.grade} />
+                  </td>
                   <td>
                     <input
                       type="number"
@@ -102,6 +104,7 @@ const Card = (props) => {
                         const newSemesters = [...semesters];
                         newSemesters[props.i].courses[i].credit = e.target.value;
                         setSemesters(newSemesters);
+                        calculateGPA();
                       }}
                     />
                   </td>
@@ -113,6 +116,7 @@ const Card = (props) => {
                         const newSemesters = [...semesters];
                         newSemesters[props.i].courses.splice(i, 1);
                         setSemesters(newSemesters);
+                        calculateGPA();
                         if (newSemesters[props.i].courses.length === 3) setEditMode(false);
                       }}>
                       <CloseSquare />
@@ -128,11 +132,12 @@ const Card = (props) => {
                   const newSemesters = [...semesters];
                   newSemesters[props.i].courses.push({
                     course: '',
-                    grade: '-',
+                    grade: { name: null, value: null },
                     credit: 3,
                   });
                   setSemesters(newSemesters);
-                  console.log(newSemesters);
+                  calculateGPA();
+                  // console.log(newSemesters);
                 }}>
                 <td className="add-row-btn-id">{props.semester.courses.length + 1}</td>
                 <td>Tap to add new course</td>
@@ -145,7 +150,7 @@ const Card = (props) => {
       </div>
       <div className="card-result">
         <div className="card-gpa-title">GPA</div>
-        <div className="card-gpa-value">UoU</div>
+        <div className="card-gpa-value">{props.semester.gpa ? props.semester.gpa : 'UoU'}</div>
         <div className="card-estimate">Estimate</div>
       </div>
     </div>

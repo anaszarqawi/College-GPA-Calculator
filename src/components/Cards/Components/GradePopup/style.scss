@@ -5,6 +5,8 @@
     border: 1px solid var(--color-3-20);
     border-radius: var(--border-radius);
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    z-index: 999;
+    width: 370px;
 
     .grade-popup-header {
         display: flex;
@@ -18,6 +20,16 @@
             font-weight: var(--font-weight-1);
             color: var(--color-3);
             padding-left: var(--space-1);
+        }
+
+        .title-btn {
+            color: var(--color-3-60);
+            cursor: pointer;
+            transition: var(--transition-1);
+
+            &:hover {
+                color: var(--color-3);
+            }
         }
 
         .grade-popup-buttons {
@@ -40,25 +52,27 @@
                     fill: var(--color-3-60);
                 }
 
-                &:hover > svg {
+                &:hover>svg {
                     fill: var(--color-3);
                 }
             }
 
             .active-button {
                 color: var(--color-3);
+
                 svg {
                     fill: var(--color-3);
                 }
             }
         }
     }
+
     .grade-popup-options {
         display: flex;
         flex-direction: column;
         padding: var(--space-50) var(--space-1);
-        // gap: var(--space-25);
 
+        // gap: var(--space-25);
         .selected {
             background-color: var(--color-3);
             border-color: var(--color-3);
@@ -75,8 +89,8 @@
             transition: var(--transition-1);
             border-bottom: 1px solid var(--color-3-20);
 
-            &:hover {
-                background-color: var(--color-3-10);
+            &:hover>.grade-popup-option-value {
+                color: var(--color-3);
             }
 
             .grade-popup-option-name {
@@ -91,6 +105,16 @@
                 font-weight: var(--font-weight-1);
                 color: var(--color-3-50);
                 text-align: center;
+                transition: var(--transition-1);
+                max-width: 50px;
+
+                &:focus {
+                    color: var(--color-3);
+                }
+            }
+
+            .active-input {
+                text-align: right;
             }
 
             .grade-popup-option-button {
@@ -98,6 +122,10 @@
                 width: 18px;
                 height: 18px;
                 border-radius: 50%;
+            }
+
+            &:hover>.grade-popup-option-button-container .grade-popup-option-button {
+                border: 1px solid var(--color-3);
             }
 
             &:last-child {
