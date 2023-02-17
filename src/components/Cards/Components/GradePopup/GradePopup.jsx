@@ -6,7 +6,7 @@ import { ReactComponent as EditIcon } from '../../../../assets/svg/edit-icon.svg
 import { useCalc } from '../../../../contexts/calcContext';
 
 const GradePopup = (props) => {
-  const { grades, setGrades, semesters, setSemesters, resetGrades, calculateGPA } = useCalc();
+  const { grades, setGrades, semesters, setSemesters, resetGrades, calculateGPA, defaultGrades } = useCalc();
   const [editMode, setEditMode] = React.useState(false);
 
   return (
@@ -59,13 +59,35 @@ const GradePopup = (props) => {
             </div>
             <input
               type="number"
+              min={0}
+              max={4}
               className={`grade-popup-option-value ${editMode && 'active-input'}`}
               value={grade.value}
+              placeholder={+defaultGrades[i].value}
               onChange={(e) => {
                 if (editMode) {
                   const newGrades = [...grades];
+                  if (e.target.value > 4) {
+                    newGrades[i].value = +defaultGrades[i].value;
+                    setGrades(newGrades);
+                    calculateGPA();
+                    return;
+                  }
                   newGrades[i].value = e.target.value;
                   setGrades(newGrades);
+                  calculateGPA();
+                }
+              }}
+              onBlur={(e) => {
+                if (editMode) {
+                  console.log(e.target.value);
+                  const newGrades = [...grades];
+                  if (e.target.value === '') {
+                    newGrades[i].value = +defaultGrades[i].value;
+                    setGrades(newGrades);
+                    calculateGPA();
+                    return;
+                  }
                 }
               }}
               disabled={!editMode}></input>

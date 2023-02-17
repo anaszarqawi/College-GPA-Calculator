@@ -3,8 +3,7 @@ import './style.scss';
 import { useCalc } from '../../contexts/calcContext';
 
 const TotalResults = () => {
-  const { semesters } = useCalc();
-  const [totalGpa, setTotalGpa] = React.useState(3.5);
+  const { semesters, totalGpa } = useCalc();
 
   return (
     semesters.length !== 1 && (
@@ -17,7 +16,7 @@ const TotalResults = () => {
             <div className="small-divider">|</div>
             <div className="total-gpa-title">Total GPA</div>
             <div className="total-gpa-arrow">⇒</div>
-            <div className="total-gpa-value">{totalGpa}</div>
+            <div className="total-gpa-value">{totalGpa === null ? 'UoU' : totalGpa}</div>
           </div>
           <div className="total-estimate">
             <div className="total-estimate-part">97.00%</div>
