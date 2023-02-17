@@ -4,6 +4,8 @@ import { ReactComponent as DeleteIcon } from '../../../../assets/svg/delete-icon
 import { ReactComponent as CloseSquare } from '../../../../assets/svg/Close-Square.svg';
 import { ReactComponent as EditIcon } from '../../../../assets/svg/edit-icon.svg';
 import { ReactComponent as LockIcon } from '../../../../assets/svg/lock-icon.svg';
+import { ReactComponent as UnlockIcon } from '../../../../assets/svg/unlock-icon.svg';
+
 import { useCalc } from '../../../../contexts/calcContext';
 import GradeInput from '../GradeInput/gradeInput';
 
@@ -39,7 +41,7 @@ const Card = (props) => {
                 <EditIcon />
               </div>
             )}
-            {semesters.length !== 1 && (
+            {semesters.length !== 1 && !lockMode && (
               <div
                 className="card-header-button"
                 onClick={() => {
@@ -52,7 +54,7 @@ const Card = (props) => {
               </div>
             )}
             <div
-              className={`card-header-button ${props.semester.isLocked && 'active-button'}`}
+              className="card-header-button"
               onClick={() => {
                 setLockMode(!lockMode);
                 setEditMode(false);
@@ -60,7 +62,7 @@ const Card = (props) => {
                 newSemesters[props.i].isLocked = !newSemesters[props.i].isLocked;
                 setSemesters(newSemesters);
               }}>
-              <LockIcon />
+              {props.semester.isLocked ? <LockIcon /> : <UnlockIcon />}
             </div>
           </div>
         </div>
