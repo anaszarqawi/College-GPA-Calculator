@@ -66,13 +66,14 @@
                         fill: var(--color-3-60);
                     }
 
-                    &:hover > svg {
+                    &:hover>svg {
                         fill: var(--color-3);
                     }
                 }
 
                 .active-button {
                     color: var(--color-3);
+
                     svg {
                         fill: var(--color-3);
                     }
@@ -176,6 +177,10 @@
             font-size: var(--font-size-0);
             font-weight: var(--font-weight-2);
             color: var(--color-3);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-50);
         }
     }
 }

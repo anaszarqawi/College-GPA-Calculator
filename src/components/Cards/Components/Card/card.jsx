@@ -45,7 +45,6 @@ const Card = (props) => {
               <div
                 className="card-header-button"
                 onClick={() => {
-                  // delete semester
                   const newSemesters = [...semesters];
                   newSemesters.splice(props.i, 1);
                   setSemesters(newSemesters);
@@ -153,7 +152,21 @@ const Card = (props) => {
       <div className="card-result">
         <div className="card-gpa-title">GPA</div>
         <div className="card-gpa-value">{props.semester.gpa ? props.semester.gpa : 'UoU'}</div>
-        <div className="card-estimate">Estimate</div>
+        <div className="card-estimate">
+          {props.semester.estimate.percentage === null ||
+          props.semester.estimate.grade === null ||
+          props.semester.estimate.estimateGrade === null ? (
+            'General Estimate'
+          ) : (
+            <>
+              <div className="total-estimate-part">{props.semester.estimate.percentage + '%'}</div>
+              <div className="small-divider">|</div>
+              <div className="total-estimate-part">{props.semester.estimate.estimateGrade}</div>
+              <div className="small-divider">|</div>
+              <div className="total-estimate-part">{props.semester.estimate.grade}</div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
