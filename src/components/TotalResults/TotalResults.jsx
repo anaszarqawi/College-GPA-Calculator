@@ -3,7 +3,7 @@ import './style.scss';
 import { useCalc } from '../../contexts/calcContext';
 
 const TotalResults = () => {
-  const { semesters, totalGpa } = useCalc();
+  const { semesters, totalGpa, totalPercentage, totalGrade, totalEstimateGrade } = useCalc();
 
   return (
     semesters.length !== 1 && (
@@ -19,11 +19,17 @@ const TotalResults = () => {
             <div className="total-gpa-value">{totalGpa === null ? 'UoU' : totalGpa}</div>
           </div>
           <div className="total-estimate">
-            <div className="total-estimate-part">97.00%</div>
-            <div className="small-divider">|</div>
-            <div className="total-estimate-part">Excellent</div>
-            <div className="small-divider">|</div>
-            <div className="total-estimate-part">A+</div>
+            {totalPercentage === null || totalGrade === null || totalEstimateGrade === null ? (
+              'General Estimate'
+            ) : (
+              <>
+                <div className="total-estimate-part">{totalPercentage + '%'}</div>
+                <div className="small-divider">|</div>
+                <div className="total-estimate-part">{totalEstimateGrade}</div>
+                <div className="small-divider">|</div>
+                <div className="total-estimate-part">{totalGrade}</div>
+              </>
+            )}
           </div>
         </div>
       </div>

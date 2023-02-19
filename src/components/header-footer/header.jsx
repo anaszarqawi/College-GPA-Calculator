@@ -5,7 +5,7 @@ import './style.scss';
 import { useCalc } from '../../contexts/calcContext';
 
 const Header = () => {
-  const { semesters, setSemesters } = useCalc();
+  const { semesters, setSemesters, calculateGPA } = useCalc();
   return (
     <div className="header">
       <div className="header-container">
@@ -49,9 +49,14 @@ const Header = () => {
                     },
                   ],
                   gpa: null,
-                  estimate: null,
+                  estimate: {
+                    percentage: null,
+                    grade: null,
+                    estimateGrade: null,
+                  },
                 });
                 setSemesters(newSemesters);
+                // calculateGPA();
               }}>
               New Semester
             </div>

@@ -16,7 +16,6 @@ function App() {
     <CalcContextProvider>
       <Header />
       <Cards />
-
       <TotalResults />
       <Footer />
     </CalcContextProvider>
