@@ -14,6 +14,14 @@ const ControlBar = () => {
   const [copySuccess, setCopySuccess] = React.useState(false);
   const [saveSuccess, setSaveSuccess] = React.useState(false);
   const [history, setHistory] = React.useState([]);
+  const [popupIsOpened, setPopupIsOpened] = React.useState(false);
+
+  React.useEffect(() => {
+    const history = localStorage.getItem('history');
+    if (history) {
+      setHistory(JSON.parse(history));
+    }
+  }, []);
 
   const handleCopy = async () => {
     const url = window.location.href;
@@ -87,6 +95,15 @@ const ControlBar = () => {
     }, 2000);
   };
 
+  const handleDate = (date) => {
+    const newDate = new Date(date);
+    return `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`;
+  };
+
+  const handleHistory = () => {
+    setPopupIsOpened(!popupIsOpened);
+  };
+
   // TODO: Popup for History
 
   return (
@@ -101,7 +118,25 @@ const ControlBar = () => {
         <ControlButton icon={<BookMarkIcon />} name={saveSuccess ? 'Saved!' : 'Save'} onClick={handleSave} />
       </div>
       <div className="control-bar-buttons right-side">
-        <ControlButton icon={<ClockIcon />} name="History" onClick={null} />
+        <ControlButton icon={<ClockIcon />} name="History" onClick={handleHistory} />
+      </div>
+      <div
+        className={`popup ${popupIsOpened ? 'popup-opened' : ''}`}
+        onClick={() => {
+          setPopupIsOpened(!popupIsOpened);
+        }}>
+        <div className="popup-inner">
+          <div className="popup-header">
+            <div className="popup-title">History</div>
+          </div>
+          <div className="popup-content">
+            {history.map((item, index) => (
+              <div className="popup-item" key={index}>
+                <div className="popup-item-date">{handleDate(item.date)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
