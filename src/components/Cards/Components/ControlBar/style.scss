@@ -1,0 +1,67 @@
+.control-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-2);
+    padding: 0 var(--space-25);
+    width: 100%;
+    border-radius: var(--border-radius);
+    margin-bottom: var(--space-50);
+    overflow: hidden;
+
+    .control-bar-buttons {
+        display: flex;
+        // justify-content: space-between;
+        align-items: center;
+        // flex-wrap: wrap;
+        // flex-direction: column;
+
+        // gap: var(--space-1);
+
+        .control-bar-button {
+            display: flex;
+            // align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            gap: var(--space-50);
+            color: var(--color-3-60);
+            transition: var(--transition-1);
+            padding: var(--space-1);
+            cursor: pointer;
+            // flex: 1 0 100px;
+
+            .control-bar-button-icon {
+                svg {
+                    transition: var(--transition-1);
+                    display: flex;
+                    width: 15px;
+                    height: 15px;
+                }
+
+                fill: var(--color-3-60);
+            }
+
+            .control-bar-button-name {
+                transition: var(--transition-1);
+                font-size: var(--font-size-0);
+                font-weight: var(--font-weight-2);
+                color: var(--color-3-60);
+                margin: 0;
+                padding: 0;
+            }
+
+            &:hover {
+
+                .control-bar-button-icon {
+                    svg {
+                        fill: var(--color-3);
+                    }
+                }
+
+                .control-bar-button-name {
+                    color: var(--color-3);
+                }
+            }
+        }
+    }
+}

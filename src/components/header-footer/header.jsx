@@ -14,55 +14,7 @@ const Header = () => {
         </div>
         <h1 className="title">College GPA Calculator</h1>
         <div className="header-buttons">
-          {semesters.length !== 20 ? (
-            <div
-              className="header-button"
-              onClick={() => {
-                const newSemesters = [...semesters];
-                newSemesters.push({
-                  name: '',
-                  isLocked: false,
-                  courses: [
-                    {
-                      course: '',
-                      grade: {
-                        name: null,
-                        value: null,
-                      },
-                      credit: 3,
-                    },
-                    {
-                      course: '',
-                      grade: {
-                        name: null,
-                        value: null,
-                      },
-                      credit: 3,
-                    },
-                    {
-                      course: '',
-                      grade: {
-                        name: null,
-                        value: null,
-                      },
-                      credit: 3,
-                    },
-                  ],
-                  gpa: null,
-                  estimate: {
-                    percentage: null,
-                    grade: null,
-                    estimateGrade: null,
-                  },
-                });
-                setSemesters(newSemesters);
-                // calculateGPA();
-              }}>
-              New Semester
-            </div>
-          ) : (
-            <div className="header-button">Max Semesters</div>
-          )}
+          <div className="header-button">Calculator</div>
         </div>
       </div>
     </div>

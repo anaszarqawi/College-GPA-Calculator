@@ -157,19 +157,6 @@ export default function CalcProvider({ children }) {
   ]);
 
   React.useEffect(() => {
-    const semesters = JSON.parse(localStorage.getItem('semesters'));
-    const grades = JSON.parse(localStorage.getItem('grades'));
-    if (semesters) {
-      setSemesters(semesters);
-      calculateGPA();
-    }
-
-    if (grades) {
-      setGrades(grades);
-    }
-  }, []);
-
-  React.useEffect(() => {
     localStorage.setItem('semesters', JSON.stringify(semesters));
     localStorage.setItem('grades', JSON.stringify(grades));
   }, [semesters, grades]);
@@ -200,8 +187,6 @@ export default function CalcProvider({ children }) {
       }
       totalPoints += semesterPoints;
       totalHours += semesterHours;
-
-      setSemesters(newSemesters);
 
       if (semester.gpa === null) {
         setTotalGpa(null);

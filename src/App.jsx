@@ -1,23 +1,27 @@
 import React from 'react';
 import CalcContextProvider from './contexts/calcContext';
+import { BrowserRouter as Router, Route, Routes, useSearchParams } from 'react-router-dom';
 
 // Components
 import Header from './components/header-footer/header';
 import Footer from './components/header-footer/footer';
 import TotalResults from './components/TotalResults/TotalResults';
+import Cards from './components/Cards/Cards';
 
 // Styles
 import './common/constants.scss';
 import './App.scss';
-import Cards from './components/Cards/Cards';
 
 function App() {
   return (
     <CalcContextProvider>
-      <Header />
-      <Cards />
-      <TotalResults />
-      <Footer />
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Cards />} />
+        </Routes>
+        <Footer />
+      </Router>
     </CalcContextProvider>
   );
 }
