@@ -6,6 +6,7 @@ import { ReactComponent as ClipboardIcon } from '../../../../assets/svg/clipboar
 import { ReactComponent as PlusIcon } from '../../../../assets/svg/plus-icon.svg';
 import { ReactComponent as ClockIcon } from '../../../../assets/svg/clock-icon.svg';
 import { ReactComponent as BookMarkIcon } from '../../../../assets/svg/bookmark-icon.svg';
+import Popup from '../../../Popup/Popup';
 
 import axios from 'axios';
 const ControlBar = () => {
@@ -104,8 +105,6 @@ const ControlBar = () => {
     setPopupIsOpened(!popupIsOpened);
   };
 
-  // TODO: Popup for History
-
   return (
     <div className="control-bar">
       <div className="control-bar-buttons left-side">
@@ -120,24 +119,25 @@ const ControlBar = () => {
       <div className="control-bar-buttons right-side">
         <ControlButton icon={<ClockIcon />} name="History" onClick={handleHistory} />
       </div>
-      <div
-        className={`popup ${popupIsOpened ? 'popup-opened' : ''}`}
-        onClick={() => {
-          setPopupIsOpened(!popupIsOpened);
-        }}>
-        <div className="popup-inner">
-          <div className="popup-header">
-            <div className="popup-title">History</div>
+      <Popup
+        title="History"
+        content={history.map((item, index) => (
+          <div
+            className="popup-item"
+            key={index}
+            onClick={() => {
+              setSemesters(item.semesters);
+              setPopupIsOpened(!popupIsOpened);
+            }}>
+            <div className="popup-item-date">{handleDate(item.date)}</div>
+            <div className="popup-item-grades">
+              {item.semesters.length === 1 ? item.semesters.length + ' Semester' : item.semesters.length + ' Semesters'}
+            </div>
           </div>
-          <div className="popup-content">
-            {history.map((item, index) => (
-              <div className="popup-item" key={index}>
-                <div className="popup-item-date">{handleDate(item.date)}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+        ))}
+        isOpened={popupIsOpened}
+        setIsOpened={setPopupIsOpened}
+      />
     </div>
   );
 };
