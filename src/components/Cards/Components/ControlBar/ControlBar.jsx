@@ -10,7 +10,7 @@ import Popup from '../../../Popup/Popup';
 
 import axios from 'axios';
 const ControlBar = () => {
-  const { semesters, setSemesters, grades, calculateGPA } = useCalc();
+  const { semesters, setSemesters, grades, setGrades, calculateGPA, defaultGrades } = useCalc();
 
   const [copySuccess, setCopySuccess] = React.useState(false);
   const [saveSuccess, setSaveSuccess] = React.useState(false);
@@ -105,6 +105,49 @@ const ControlBar = () => {
     setPopupIsOpened(!popupIsOpened);
   };
 
+  const handleReset = () => {
+    setSemesters([
+      {
+        name: '',
+        isLocked: false,
+        courses: [
+          {
+            course: '',
+            grade: {
+              name: null,
+              value: null,
+            },
+            credit: '3',
+          },
+          {
+            course: '',
+            grade: {
+              name: null,
+              value: null,
+            },
+            credit: '3',
+          },
+          {
+            course: '',
+            grade: {
+              name: null,
+              value: null,
+            },
+            credit: '3',
+          },
+        ],
+        gpa: null,
+        estimate: {
+          percentage: null,
+          grade: null,
+          estimateGrade: null,
+        },
+      },
+    ]);
+
+    setGrades(defaultGrades);
+  };
+
   return (
     <div className="control-bar">
       <div className="control-bar-buttons left-side">
@@ -115,26 +158,35 @@ const ControlBar = () => {
         />
         <ControlButton icon={<ClipboardIcon />} name={copySuccess ? 'Copied!' : 'Copy Link'} onClick={handleCopy} />
         <ControlButton icon={<BookMarkIcon />} name={saveSuccess ? 'Saved!' : 'Save'} onClick={handleSave} />
+        <ControlButton icon={null} name="Reset" onClick={handleReset} />
       </div>
       <div className="control-bar-buttons right-side">
         <ControlButton icon={<ClockIcon />} name="History" onClick={handleHistory} />
       </div>
       <Popup
         title="History"
-        content={history.map((item, index) => (
-          <div
-            className="popup-item"
-            key={index}
-            onClick={() => {
-              setSemesters(item.semesters);
-              setPopupIsOpened(!popupIsOpened);
-            }}>
-            <div className="popup-item-date">{handleDate(item.date)}</div>
-            <div className="popup-item-grades">
-              {item.semesters.length === 1 ? item.semesters.length + ' Semester' : item.semesters.length + ' Semesters'}
-            </div>
-          </div>
-        ))}
+        content={
+          history.length === 0 ? (
+            <div>Nothing Saved!</div>
+          ) : (
+            history.map((item, index) => (
+              <div
+                className="popup-item"
+                key={index}
+                onClick={() => {
+                  setSemesters(item.semesters);
+                  setPopupIsOpened(!popupIsOpened);
+                }}>
+                <div className="popup-item-date">{handleDate(item.date)}</div>
+                <div className="popup-item-grades">
+                  {item.semesters.length === 1
+                    ? item.semesters.length + ' Semester'
+                    : item.semesters.length + ' Semesters'}
+                </div>
+              </div>
+            ))
+          )
+        }
         isOpened={popupIsOpened}
         setIsOpened={setPopupIsOpened}
       />

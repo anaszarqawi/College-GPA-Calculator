@@ -11,21 +11,20 @@ const GradeInput = (props) => {
   return (
     <div className="grade-input-container">
       <div
-        className="grade-input"
+        className={`grade-input ${props.isDisabled ? 'disabled' : ''}`}
         onClick={() => {
-          setIsOpened(true);
+          if (!props.isDisabled) setIsOpened(true);
         }}>
         {props.grade.name === null ? '-' : props.grade.name}
       </div>
-      {isOpened && (
-        <GradePopup
-          selectedGrade={props.grade.name}
-          // setGrade={setGrade}
-          semesterNum={props.semesterNum}
-          courseNum={props.courseNum}
-          setIsOpened={setIsOpened}
-        />
-      )}
+      <GradePopup
+        selectedGrade={props.grade.name}
+        // setGrade={setGrade}
+        isOpened={isOpened}
+        semesterNum={props.semesterNum}
+        courseNum={props.courseNum}
+        setIsOpened={setIsOpened}
+      />
     </div>
   );
 };

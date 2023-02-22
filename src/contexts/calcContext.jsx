@@ -10,6 +10,10 @@ export default function CalcProvider({ children }) {
   const [totalPercentage, setTotalPercentage] = React.useState(null);
   const [totalGrade, setTotalGrade] = React.useState(null);
   const [totalEstimateGrade, setTotalEstimateGrade] = React.useState(null);
+  // detect theme from window and set it
+  const [theme, setTheme] = React.useState(
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  );
 
   const [semesters, setSemesters] = React.useState([
     {
@@ -302,6 +306,8 @@ export default function CalcProvider({ children }) {
     totalPercentage,
     totalGrade,
     totalEstimateGrade,
+    theme,
+    setTheme,
   };
 
   return <CalcContext.Provider value={value}>{children}</CalcContext.Provider>;
