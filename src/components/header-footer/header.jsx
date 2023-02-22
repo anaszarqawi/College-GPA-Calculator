@@ -1,5 +1,7 @@
 import React from 'react';
 import { ReactComponent as Logo } from '../../assets/svg/logo.svg';
+import { ReactComponent as MoonIcon } from '../../assets/svg/moon-icon.svg';
+import { ReactComponent as SunIcon } from '../../assets/svg/sun-icon.svg';
 
 import './style.scss';
 import { useCalc } from '../../contexts/calcContext';
@@ -34,6 +36,7 @@ const Header = () => {
       document.documentElement.style.setProperty('--color-3-20', 'rgba(59, 60, 69, 0.2)');
       document.documentElement.style.setProperty('--color-3-10', 'rgba(59, 60, 69, 0.1)');
       setTheme('light');
+      localStorage.setItem('theme', 'light');
     } else {
       document.documentElement.style.setProperty('--color-1', '#1a1e22');
       document.documentElement.style.setProperty('--color-2', '#272d33');
@@ -43,6 +46,7 @@ const Header = () => {
       document.documentElement.style.setProperty('--color-3-20', 'rgba(216, 210, 204, 0.2)');
       document.documentElement.style.setProperty('--color-3-10', 'rgba(216, 210, 204, 0.1)');
       setTheme('dark');
+      localStorage.setItem('theme', 'dark');
     }
   };
 
@@ -54,9 +58,8 @@ const Header = () => {
         </div>
         <h1 className="title">College GPA Calculator</h1>
         <div className="header-buttons">
-          <div className="header-button">Calculator</div>
           <div className="header-button" onClick={handleChangeTheme}>
-            {theme === 'light' ? 'Dark' : 'Light'}
+            {theme === 'light' ? <MoonIcon /> : <SunIcon />}
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ export default function CalcProvider({ children }) {
   const [totalEstimateGrade, setTotalEstimateGrade] = React.useState(null);
   // detect theme from window and set it
   const [theme, setTheme] = React.useState(
-    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    localStorage.getItem('theme') || window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   );
 
   const [semesters, setSemesters] = React.useState([
@@ -165,6 +165,36 @@ export default function CalcProvider({ children }) {
     localStorage.setItem('grades', JSON.stringify(grades));
   }, [semesters, grades]);
 
+  const handleChangeTheme = () => {
+    if (theme === 'dark') {
+      document.documentElement.style.setProperty('--color-1', '#fafafc');
+      document.documentElement.style.setProperty('--color-2', '#eaeaed');
+      document.documentElement.style.setProperty('--color-3', 'rgb(59, 60, 69)');
+      document.documentElement.style.setProperty('--color-3-60', 'rgba(59, 60, 69, 0.6)');
+      document.documentElement.style.setProperty('--color-3-50', 'rgba(59, 60, 69, 0.5)');
+      document.documentElement.style.setProperty('--color-3-20', 'rgba(59, 60, 69, 0.2)');
+      document.documentElement.style.setProperty('--color-3-10', 'rgba(59, 60, 69, 0.1)');
+      setTheme('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.style.setProperty('--color-1', '#1a1e22');
+      document.documentElement.style.setProperty('--color-2', '#272d33');
+      document.documentElement.style.setProperty('--color-3', '#d8d2cc');
+      document.documentElement.style.setProperty('--color-3-60', 'rgba(216, 210, 204, 0.6)');
+      document.documentElement.style.setProperty('--color-3-50', 'rgba(216, 210, 204, 0.5)');
+      document.documentElement.style.setProperty('--color-3-20', 'rgba(216, 210, 204, 0.2)');
+      document.documentElement.style.setProperty('--color-3-10', 'rgba(216, 210, 204, 0.1)');
+      setTheme('light');
+      localStorage.setItem('theme', 'light');
+    }
+  };
+
+  React.useEffect(() => {
+    if (localStorage.getItem('theme')) setTheme(localStorage.getItem('theme'));
+    else setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    handleChangeTheme();
+  }, []);
+
   const calculateGPA = () => {
     const newSemesters = [...semesters];
     let totalPoints = 0;
@@ -308,6 +338,7 @@ export default function CalcProvider({ children }) {
     totalEstimateGrade,
     theme,
     setTheme,
+    handleChangeTheme,
   };
 
   return <CalcContext.Provider value={value}>{children}</CalcContext.Provider>;

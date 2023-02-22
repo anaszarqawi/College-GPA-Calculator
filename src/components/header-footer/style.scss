@@ -57,8 +57,16 @@
                 padding: var(--space-50);
                 cursor: pointer;
 
-                &:hover {
-                    color: var(--color-3);
+                &:hover>svg {
+                    fill: var(--color-3);
+                }
+
+                svg {
+                    display: flex;
+                    cursor: pointer;
+                    width: 25px;
+                    transition: var(--transition-1);
+                    fill: var(--color-3-60);
                 }
             }
         }
