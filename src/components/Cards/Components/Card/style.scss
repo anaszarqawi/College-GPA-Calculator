@@ -92,7 +92,7 @@
             th {
                 text-align: left;
                 padding: 6px;
-                font-weight: var(--font-weight-3);
+                font-weight: var(--font-weight-4);
             }
 
             .col-course {
@@ -133,13 +133,13 @@
             }
 
             .add-row-btn {
-                opacity: 0.4;
+                color: var(--color-3-60);
                 cursor: pointer;
                 transition: var(--transition-1);
                 margin-bottom: 0 !important;
 
                 &:hover {
-                    opacity: 0.6;
+                    color: var(--color-3);
                 }
             }
         }

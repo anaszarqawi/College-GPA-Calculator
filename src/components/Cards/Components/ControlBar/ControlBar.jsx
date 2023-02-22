@@ -6,6 +6,7 @@ import { ReactComponent as ClipboardIcon } from '../../../../assets/svg/clipboar
 import { ReactComponent as PlusIcon } from '../../../../assets/svg/plus-icon.svg';
 import { ReactComponent as ClockIcon } from '../../../../assets/svg/clock-icon.svg';
 import { ReactComponent as BookMarkIcon } from '../../../../assets/svg/bookmark-icon.svg';
+import { ReactComponent as ResetIcon } from '../../../../assets/svg/x-square.svg';
 import Popup from '../../../Popup/Popup';
 
 import axios from 'axios';
@@ -158,7 +159,7 @@ const ControlBar = () => {
         />
         <ControlButton icon={<ClipboardIcon />} name={copySuccess ? 'Copied!' : 'Copy Link'} onClick={handleCopy} />
         <ControlButton icon={<BookMarkIcon />} name={saveSuccess ? 'Saved!' : 'Save'} onClick={handleSave} />
-        <ControlButton icon={null} name="Reset" onClick={handleReset} />
+        <ControlButton icon={<ResetIcon />} name="Reset" onClick={handleReset} />
       </div>
       <div className="control-bar-buttons right-side">
         <ControlButton icon={<ClockIcon />} name="History" onClick={handleHistory} />
