@@ -10,7 +10,6 @@
     margin: var(--space-1) 0;
 
     // transition: ease-in 0.1s;
-
     .total-results-container {
         display: flex;
         width: calc(var(--page-width) - var(--space-4));
@@ -25,6 +24,7 @@
         border-radius: var(--border-radius);
         z-index: 99;
         font-size: var(--font-size-0);
+        color: var(--color-3);
 
         .total-gpa {
             display: flex;

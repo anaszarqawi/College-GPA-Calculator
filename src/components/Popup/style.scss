@@ -39,7 +39,6 @@
         }
 
         .popup-content {
-
             display: flex;
             flex-direction: column;
             padding: var(--space-50) var(--space-1);
@@ -64,10 +63,8 @@
             &:hover {
                 color: var(--color-3);
             }
-
         }
     }
-
 }
 
 .popup-opened {

@@ -5,8 +5,10 @@ const Popup = (props) => {
   return (
     <div
       className={`popup ${props.isOpened ? 'popup-opened' : ''}`}
-      onClick={() => {
-        props.setIsOpened(!props.isOpened);
+      onClick={(e) => {
+        if (e.target.className === 'popup popup-opened') {
+          props.setIsOpened(!props.isOpened);
+        }
       }}>
       <div className="popup-inner">
         <div className="popup-header">
