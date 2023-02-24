@@ -13,8 +13,8 @@
     transform: scale(0.9);
     opacity: 0;
     visibility: hidden;
-    // transition: var(--transition-3);
 
+    // transition: var(--transition-3);
     .popup-inner {
         // background-color: var(--color-2);
         background-color: transparent;
@@ -43,6 +43,10 @@
             display: flex;
             flex-direction: column;
             padding: var(--space-50) var(--space-1);
+
+            .not-found-msg {
+                padding: var(--space-75) var(--space-1);
+            }
         }
 
         .popup-item {
@@ -63,6 +67,29 @@
 
             &:hover {
                 color: var(--color-3);
+            }
+
+            .popup-item-left-side {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: var(--space-1);
+
+                .popup-item-remove {
+                    padding: 0 var(--space-50);
+                    color: var(--color-50);
+                    cursor: pointer;
+
+                    svg {
+                        display: flex;
+                        transition: var(--transition-1);
+                        fill: var(--color-3-50);
+                    }
+
+                    &:hover>svg {
+                        fill: var(--color-3);
+                    }
+                }
             }
         }
     }

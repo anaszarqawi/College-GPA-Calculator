@@ -127,6 +127,7 @@
                     text-align: center;
                     transition: var(--transition-1);
                     max-width: 120px;
+                    cursor: pointer;
 
                     &:focus {
                         color: var(--color-3);
@@ -134,6 +135,7 @@
                 }
 
                 .active-input {
+                    cursor: text;
                     text-align: right;
                 }
 

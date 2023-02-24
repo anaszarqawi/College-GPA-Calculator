@@ -7,6 +7,8 @@ import { ReactComponent as PlusIcon } from '../../../../assets/svg/plus-icon.svg
 import { ReactComponent as ClockIcon } from '../../../../assets/svg/clock-icon.svg';
 import { ReactComponent as BookMarkIcon } from '../../../../assets/svg/bookmark-icon.svg';
 import { ReactComponent as ResetIcon } from '../../../../assets/svg/x-square.svg';
+import { ReactComponent as CloseSquare } from '../../../../assets/svg/Close-Square.svg';
+
 import Popup from '../../../Popup/Popup';
 
 import axios from 'axios';
@@ -149,6 +151,18 @@ const ControlBar = () => {
     setGrades(defaultGrades);
   };
 
+  const handleSelect = (item) => {
+    setSemesters(item.semesters);
+    setPopupIsOpened(!popupIsOpened);
+  };
+
+  const handleRemove = (index) => {
+    const newHistory = [...history];
+    newHistory.splice(index, 1);
+    setHistory(newHistory);
+    localStorage.setItem('history', JSON.stringify(newHistory));
+  };
+
   return (
     <div className="control-bar">
       <div className="control-bar-buttons left-side">
@@ -168,21 +182,22 @@ const ControlBar = () => {
         title="History"
         content={
           history.length === 0 ? (
-            <div>Nothing Saved!</div>
+            <div className="not-found-msg">Nothing Saved!</div>
           ) : (
             history.map((item, index) => (
-              <div
-                className="popup-item"
-                key={index}
-                onClick={() => {
-                  setSemesters(item.semesters);
-                  setPopupIsOpened(!popupIsOpened);
-                }}>
-                <div className="popup-item-date">{handleDate(item.date)}</div>
-                <div className="popup-item-grades">
+              <div className="popup-item" key={index}>
+                <div className="popup-item-info" onClick={() => handleSelect(item)}>
                   {item.semesters.length === 1
                     ? item.semesters.length + ' Semester'
                     : item.semesters.length + ' Semesters'}
+                </div>
+                <div className="popup-item-left-side">
+                  <div className="popup-item-date" onClick={() => handleSelect(item)}>
+                    {handleDate(item.date)}
+                  </div>
+                  <div className="popup-item-remove" onClick={() => handleRemove(index)}>
+                    <CloseSquare />
+                  </div>
                 </div>
               </div>
             ))
