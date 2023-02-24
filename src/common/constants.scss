@@ -49,6 +49,7 @@
     --space-10: 10rem;
     --border-radius: 10px;
     --transition-1: all 0.1s ease-in-out;
+    --transition-3: all 0.3s ease-in-out;
 }
 
 body,
@@ -59,6 +60,7 @@ html {
     color: #d8d2cc;
     scroll-padding-top: var(--header-height);
     font-size: var(--font-size-0);
+    transition: var(--transition-3);
 }
 
 * {

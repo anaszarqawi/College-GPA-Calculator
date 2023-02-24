@@ -10,10 +10,10 @@
     align-items: center;
     transition: var(--transition-1);
     // display: none;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
     transform: scale(0.9);
     opacity: 0;
     visibility: hidden;
+    // transition: var(--transition-3);
 
     .popup-inner {
         // background-color: var(--color-2);
