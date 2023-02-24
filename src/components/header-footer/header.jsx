@@ -7,7 +7,7 @@ import './style.scss';
 import { useCalc } from '../../contexts/calcContext';
 
 const Header = () => {
-  const { theme, setTheme } = useCalc();
+  const { theme, setTheme, changeThemeToDark, changeThemeToLight } = useCalc();
 
   // Dark theme
   // --color-1: #1a1e22;
@@ -27,27 +27,8 @@ const Header = () => {
   // --color-3-10: rgba(59, 60, 69, 0.1);
 
   const handleChangeTheme = () => {
-    if (theme === 'dark') {
-      document.documentElement.style.setProperty('--color-1', '#fafafc');
-      document.documentElement.style.setProperty('--color-2', '#eaeaed');
-      document.documentElement.style.setProperty('--color-3', 'rgb(59, 60, 69)');
-      document.documentElement.style.setProperty('--color-3-60', 'rgba(59, 60, 69, 0.6)');
-      document.documentElement.style.setProperty('--color-3-50', 'rgba(59, 60, 69, 0.5)');
-      document.documentElement.style.setProperty('--color-3-20', 'rgba(59, 60, 69, 0.2)');
-      document.documentElement.style.setProperty('--color-3-10', 'rgba(59, 60, 69, 0.1)');
-      setTheme('light');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.style.setProperty('--color-1', '#1a1e22');
-      document.documentElement.style.setProperty('--color-2', '#272d33');
-      document.documentElement.style.setProperty('--color-3', '#d8d2cc');
-      document.documentElement.style.setProperty('--color-3-60', 'rgba(216, 210, 204, 0.6)');
-      document.documentElement.style.setProperty('--color-3-50', 'rgba(216, 210, 204, 0.5)');
-      document.documentElement.style.setProperty('--color-3-20', 'rgba(216, 210, 204, 0.2)');
-      document.documentElement.style.setProperty('--color-3-10', 'rgba(216, 210, 204, 0.1)');
-      setTheme('dark');
-      localStorage.setItem('theme', 'dark');
-    }
+    if (theme === 'dark') changeThemeToLight();
+    else changeThemeToDark();
   };
 
   return (

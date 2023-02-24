@@ -8,6 +8,7 @@
     border-radius: var(--border-radius);
     margin-bottom: var(--space-50);
     overflow: hidden;
+    transition: var(--transition-3);
 
     .control-bar-buttons {
         display: flex;
