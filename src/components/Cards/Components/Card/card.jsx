@@ -92,7 +92,7 @@ const Card = (props) => {
                 <EditIcon />
               </div>
             )}
-            {semesters.length !== 1 && !lockMode && (
+            {semesters.length !== 1 && !props.semester.isLocked && (
               <div className="card-header-button" onClick={handleRemove}>
                 <DeleteIcon />
               </div>

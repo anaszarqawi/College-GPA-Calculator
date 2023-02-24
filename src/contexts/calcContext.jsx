@@ -105,7 +105,7 @@ export default function CalcProvider({ children }) {
     },
   ]);
 
-  const [defaultGrades, setDefaultGrades] = React.useState([
+  const defaultGrades = [
     {
       name: 'A+',
       value: 4.0,
@@ -158,11 +158,12 @@ export default function CalcProvider({ children }) {
       name: 'F',
       value: 0.0,
     },
-  ]);
+  ];
 
   React.useEffect(() => {
     localStorage.setItem('semesters', JSON.stringify(semesters));
     localStorage.setItem('grades', JSON.stringify(grades));
+    calculateGPA();
   }, [semesters, grades]);
 
   React.useEffect(() => {
@@ -186,7 +187,12 @@ export default function CalcProvider({ children }) {
           semester.estimate.percentage = null;
           semester.estimate.grade = null;
           semester.estimate.estimateGrade = null;
-          break;
+
+          setTotalGpa(null);
+          setTotalPercentage(null);
+          setTotalGrade(null);
+          setTotalEstimateGrade(null);
+          return;
         } else {
           semesterPoints += +course.grade.value * +course.credit;
           semesterHours += +course.credit;
@@ -196,21 +202,15 @@ export default function CalcProvider({ children }) {
         semester.estimate.grade = getGradeLetter(semester.gpa);
         semester.estimate.estimateGrade = getEstimateGrade(semester.gpa);
       }
+
       totalPoints += semesterPoints;
       totalHours += semesterHours;
 
-      if (semester.gpa === null) {
-        setTotalGpa(null);
-        setTotalPercentage(null);
-        setTotalGrade(null);
-        setTotalEstimateGrade(null);
-      } else {
-        setTotalGpa((+totalPoints / +totalHours).toFixed(2));
-        const totalGpa_ = (+totalPoints / +totalHours).toFixed(2);
-        setTotalPercentage((((+totalPoints / +totalHours) * 100) / 4).toFixed(2));
-        setTotalGrade(getGradeLetter(totalGpa_));
-        setTotalEstimateGrade(getEstimateGrade(totalGpa_));
-      }
+      setTotalGpa((+totalPoints / +totalHours).toFixed(2));
+      const totalGpa_ = (+totalPoints / +totalHours).toFixed(2);
+      setTotalPercentage((((+totalPoints / +totalHours) * 100) / 4).toFixed(2));
+      setTotalGrade(getGradeLetter(totalGpa_));
+      setTotalEstimateGrade(getEstimateGrade(totalGpa_));
     }
   };
 
