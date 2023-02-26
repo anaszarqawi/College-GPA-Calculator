@@ -40,7 +40,7 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--color-3-50);
-            padding: 0 var(--space-50) var(--space-25) var(--space-50);
+            padding: 0 0 var(--space-25) var(--space-50);
 
             .card-header-title {
                 font-size: var(--font-size-2);
@@ -83,62 +83,173 @@
             }
         }
 
-        .card-body {
-            font-size: var(--font-size-0);
+        // .card-body {
+        //     font-size: var(--font-size-0);
 
+        //     color: var(--color-3);
+        //     width: 100%;
+        //     padding: var(--space-1) var(--space-1) 0 var(--space-25);
+        //     table-layout: fixed;
+
+        //     th {
+        //         text-align: left;
+        //         padding: 6px;
+        //         font-weight: var(--font-weight-4);
+        //     }
+
+        //     .col-course {
+        //         width: 65%;
+        //     }
+
+        //     .col-grade,
+        //     .col-credit {
+        //         width: 12.5%;
+        //     }
+
+        //     .col-delete {
+        //         width: 5%;
+        //     }
+
+        //     .col-id {
+        //         width: 5%;
+        //     }
+
+        //     tr {
+        //         margin-bottom: var(--space-1);
+        //     }
+
+        //     td {
+        //         padding: 6px;
+        //         font-size: var(--font-size-0);
+
+        //         svg {
+        //             fill: var(--color-3-20);
+        //             transition: var(--transition-1);
+        //             cursor: pointer;
+        //             width: 12px;
+
+        //             &:hover {
+        //                 fill: var(--color-3);
+        //             }
+        //         }
+        //     }
+
+        //     .add-row-btn {
+        //         color: var(--color-3-60);
+        //         cursor: pointer;
+        //         transition: var(--transition-1);
+        //         margin-bottom: 0 !important;
+
+        //         &:hover {
+        //             color: var(--color-3);
+        //         }
+        //     }
+        // }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            font-size: var(--font-size-0);
             color: var(--color-3);
             width: 100%;
-            padding: var(--space-1) var(--space-25) 0 var(--space-25);
-            table-layout: fixed;
+            // padding: 0 var(--space-1);
+            padding-top: var(--space-1);
+            // gap: var(--space-75);
 
-            th {
-                text-align: left;
-                padding: 6px;
+            .header-row {
                 font-weight: var(--font-weight-4);
+                padding: var(--space-50);
             }
 
-            .col-course {
-                width: 65%;
-            }
 
-            .col-grade,
-            .col-credit {
-                width: 12.5%;
-            }
+            .card-row {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
 
-            .col-delete {
-                width: 5%;
-            }
+                .card-row-left-side {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: var(--space-1);
 
-            .col-id {
-                width: 5%;
-            }
+                    .card-row-id {
+                        text-align: left;
+                        padding: var(--space-50);
 
-            tr {
-                margin-bottom: var(--space-1);
-            }
-
-            td {
-                padding: 6px;
-                font-size: var(--font-size-0);
-
-                svg {
-                    fill: var(--color-3-20);
-                    transition: var(--transition-1);
-                    cursor: pointer;
-                    width: 12px;
-
-                    &:hover {
-                        fill: var(--color-3);
                     }
+
+                    .card-row-course {
+                        text-align: left;
+
+                        input {
+                            padding: var(--space-50);
+                        }
+                    }
+                }
+
+                .card-row-right-side {
+                    display: flex;
+                    flex-direction: row;
+                    gap: var(--space-1);
+
+                    .card-row-grade {
+                        width: 60px;
+                        text-align: left;
+                    }
+
+                    .card-row-credit {
+                        width: 60px;
+                        text-align: left;
+                        padding: var(--space-50);
+                    }
+
+                    .card-row-delete {
+
+
+                        svg {
+                            fill: var(--color-3);
+
+                        }
+                    }
+                }
+
+                .remove-btn {
+                    padding: var(--space-50);
+                    cursor: pointer;
+
+
+                    &:hover>svg {
+                        fill: var(--color-3);
+
+                    }
+
+
+                    svg {
+                        fill: var(--color-3-20);
+                        transition: var(--transition-1);
+                        cursor: pointer;
+                        width: 12px;
+
+                        &:hover {
+                            fill: var(--color-3);
+                        }
+                    }
+
                 }
             }
 
             .add-row-btn {
-                color: var(--color-3-60);
+                color: var(--color-3-50);
                 cursor: pointer;
                 transition: var(--transition-1);
                 margin-bottom: 0 !important;
+                width: 100%;
+
+                .card-row-course {
+                    padding: var(--space-50);
+                }
 
                 &:hover {
                     color: var(--color-3);
@@ -192,5 +303,16 @@
     .card {
         flex-direction: column;
         gap: var(--space-1);
+
     }
+
+    .card-row-left-side {
+        gap: var(--space-50) !important
+    }
+
+    .card-row-right-side {
+        gap: var(--space-50) !important;
+    }
+
+
 }

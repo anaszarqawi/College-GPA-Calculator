@@ -102,7 +102,7 @@ const Card = (props) => {
             </div>
           </div>
         </div>
-        <table className="card-body">
+        {/* <table className="card-body">
           <thead>
             <tr>
               <th className="col-id">#</th>
@@ -155,13 +155,78 @@ const Card = (props) => {
             {props.semester.courses.length !== 10 && !props.semester.isLocked && (
               <tr className="add-row-btn" onClick={handleAddCourse}>
                 <td className="add-row-btn-id">{props.semester.courses.length + 1}</td>
-                <td>Tap to add new course</td>
-                <td>-</td>
-                <td>3</td>
+                <td className="add-row-btn-title">Add new course</td>
               </tr>
             )}
           </tbody>
-        </table>
+        </table> */}
+        <div className="card-body">
+          <div className="card-row">
+            <div className="card-row-left-side">
+              <div className="card-row-id header-row">#</div>
+              <div className="card-row-course header-row">Course</div>
+            </div>
+            <div className="card-row-right-side">
+              <div className="card-row-grade header-row">Grade</div>
+              <div className="card-row-credit header-row">Credit</div>
+              {editMode && (
+                <div className="card-row-delete header-row">
+                  <EditIcon />
+                </div>
+              )}
+            </div>
+          </div>
+          {props.semester.courses.map((course, i) => {
+            return (
+              <div className="card-row" key={i}>
+                <div className="card-row-left-side">
+                  <div className="card-row-id">{i + 1}</div>
+                  <div className="card-row-course">
+                    <input
+                      type="text"
+                      placeholder={`Untitled Course ${i + 1}`}
+                      value={course.course}
+                      onChange={(e) => handleChangeCourseName(e, i)}
+                      disabled={props.semester.isLocked}
+                    />
+                  </div>
+                </div>
+                <div className="card-row-right-side">
+                  <div className="card-row-grade">
+                    <GradeInput
+                      semesterNum={props.i}
+                      courseNum={i}
+                      grade={course.grade}
+                      isDisabled={props.semester.isLocked}
+                    />
+                  </div>
+                  <div className="card-row-credit">
+                    <input
+                      type="number"
+                      placeholder="-"
+                      value={course.credit}
+                      onChange={(e) => handleChangeCredit(e, i)}
+                      disabled={props.semester.isLocked}
+                    />
+                  </div>
+                  {editMode && (
+                    <div className="remove-btn" onClick={() => handleRemoveCourse(i)}>
+                      <CloseSquare />
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+          {props.semester.courses.length !== 10 && !props.semester.isLocked && (
+            <div className="card-row add-row-btn" onClick={handleAddCourse}>
+              <div className="card-row-left-side">
+                <div className="card-row-id">{props.semester.courses.length + 1}</div>
+                <div className="card-row-course">Add New Course</div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <div className="card-result">
         <div className="card-gpa-title">GPA</div>

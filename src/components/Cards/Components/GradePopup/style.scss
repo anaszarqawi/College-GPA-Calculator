@@ -23,7 +23,7 @@
         border-radius: var(--border-radius);
         box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
         z-index: 999;
-        width: 370px;
+        width: 330px;
 
         .grade-popup-header {
             display: flex;
@@ -103,7 +103,6 @@
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
-                gap: var(--space-7);
                 padding: var(--space-75) var(--space-1);
                 cursor: pointer;
                 transition: var(--transition-1);

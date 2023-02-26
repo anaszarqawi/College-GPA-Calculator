@@ -13,11 +13,10 @@ const Footer = () => {
     <div className="footer">
       <div className="footer-container">
         <div className="copyright">
-          {window.innerWidth > 768 && (
-            <div className="logo">
-              <Logo />
-            </div>
-          )}
+          <div className="logo">
+            <Logo />
+          </div>
+
           <span className="text">© {new Date().getFullYear()} anaszarqawi.</span>
         </div>
         <a
