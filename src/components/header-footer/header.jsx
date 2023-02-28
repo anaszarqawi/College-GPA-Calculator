@@ -34,10 +34,14 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header-container">
-        <div className="logo">
-          <Logo />
-        </div>
-        <h1 className="title">College GPA Calculator</h1>
+        <a href="https://github.com/anaszarqawi" target="_blank" rel="noreferrer">
+          <div className="logo">
+            <Logo />
+          </div>
+        </a>
+        <a href="https://github.com/anaszarqawi/College-GPA-Calculator" target="_blank" rel="noreferrer">
+          <h1 className="title">College GPA Calculator</h1>
+        </a>
         <div className="header-buttons">
           <div className="header-button" onClick={handleChangeTheme}>
             {theme === 'light' ? <MoonIcon /> : <SunIcon />}

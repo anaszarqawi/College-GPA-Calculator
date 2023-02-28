@@ -28,9 +28,15 @@
             width: 230px;
             display: flex;
 
-            svg {
-                width: 70px;
+            &:hover>svg {
                 fill: var(--color-3);
+            }
+
+            svg {
+                display: flex;
+                transition: var(--transition-1);
+                width: 70px;
+                fill: var(--color-3-60);
             }
         }
 
@@ -38,8 +44,13 @@
             font-size: var(--font-size-1);
             font-weight: var(--font-weight-2);
             color: var(--color-3-60);
+            transition: var(--transition-1);
             margin: 0;
             padding: 0;
+
+            &:hover {
+                color: var(--color-3);
+            }
         }
 
         .header-buttons,
@@ -138,10 +149,34 @@
 
 @media only screen and (max-width: 600px) {
     .logo {
-        width: 150px;
+        width: 60px !important;
+    }
+
+    .header-buttons {
+        width: 60px !important;
     }
 
     .title {
-        display: none;
+        font-size: var(--font-size-0) !important;
+        // display: none;
+    }
+
+    .copyright {
+        .logo {
+
+            display: none !important;
+        }
+    }
+
+    .footer-container {
+        padding: var(--space-1) !important;
+    }
+
+    .social {
+        width: auto !important;
+    }
+
+    .version {
+        display: none !important;
     }
 }
