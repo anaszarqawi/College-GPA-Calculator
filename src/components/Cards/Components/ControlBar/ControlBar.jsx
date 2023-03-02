@@ -8,12 +8,24 @@ import { ReactComponent as ClockIcon } from '../../../../assets/svg/clock-icon.s
 import { ReactComponent as BookMarkIcon } from '../../../../assets/svg/bookmark-icon.svg';
 import { ReactComponent as ResetIcon } from '../../../../assets/svg/x-square.svg';
 import { ReactComponent as CloseSquare } from '../../../../assets/svg/Close-Square.svg';
+import { ReactComponent as ShareIcon } from '../../../../assets/svg/Send-icon.svg';
 
 import Popup from '../../../Popup/Popup';
 
 import axios from 'axios';
 const ControlBar = () => {
-  const { semesters, setSemesters, grades, setGrades, calculateGPA, defaultGrades } = useCalc();
+  const {
+    semesters,
+    setSemesters,
+    grades,
+    setGrades,
+    calculateGPA,
+    defaultGrades,
+    totalGpa,
+    totalPercentage,
+    totalGrade,
+    totalEstimateGrade,
+  } = useCalc();
 
   const [copySuccess, setCopySuccess] = React.useState(false);
   const [saveSuccess, setSaveSuccess] = React.useState(false);
@@ -163,6 +175,49 @@ const ControlBar = () => {
     localStorage.setItem('history', JSON.stringify(newHistory));
   };
 
+  // share a results for whatsapp
+  //   *● Semester 1*
+  // - Course 1 ⇒ A+
+  // - Course 2 ⇒ B+
+  // - Course 3 ⇒ A
+  // - Course 4 ⇒ A+
+  // - Course 5 ⇒ B
+  // - Course 6 ⇒ A-
+  // *● GPA ⇒ 3.67*
+  // *● Estimate 91.67% | Excellent | A*
+
+  const handleShare = () => {
+    let text = '';
+    semesters.forEach((semester, i) => {
+      if (semester.gpa === null) return;
+      if (i !== 0) {
+        console.log(i !== 0);
+        console.log(i !== semesters.length - 1);
+        text += `\n\n`;
+      }
+
+      text += `*${semester.name || 'Semester ' + (i + 1)}*`;
+      semester.courses.forEach((course, i) => {
+        text += `\n\t- ${course.course || 'Course ' + (i + 1)} ⇒ *${course.grade.name}*`;
+      });
+      text += `\n*GPA* ⇒ *${semester.gpa}*`;
+      text += `\n*Estimate* ⇒ *${semester.estimate.percentage}%* | *${semester.estimate.estimateGrade}* | *${semester.estimate.grade}*`;
+
+      // Todo: add copyright with link of site to end of text
+    });
+
+    if (semesters.length > 1) {
+      text += `\n\n*Total GPA* ⇒ *${totalGpa}*`;
+      text += `\n*Total Estimate* ⇒ *${totalPercentage}%* | *${totalEstimateGrade}* | *${totalGrade}*`;
+    }
+
+    console.log(text);
+    navigator.share(text);
+
+    // navigator.clipboard.writeText(text);
+    // window.open(`https://wa.me/?text=${text}`);
+  };
+
   return (
     <div className="control-bar">
       <div className="control-bar-buttons left-side">
@@ -174,9 +229,12 @@ const ControlBar = () => {
         <ControlButton icon={<ClipboardIcon />} name={copySuccess ? 'Copied!' : 'Copy Link'} onClick={handleCopy} />
         <ControlButton icon={<BookMarkIcon />} name={saveSuccess ? 'Saved!' : 'Save'} onClick={handleSave} />
         <ControlButton icon={<ResetIcon />} name="Reset" onClick={handleReset} />
-      </div>
-      <div className="control-bar-buttons right-side">
         <ControlButton icon={<ClockIcon />} name="History" onClick={handleHistory} />
+        <ControlButton icon={<ShareIcon />} name="Share" onClick={handleShare} />
+      </div>
+
+      <div className="control-bar-buttons right-side">
+        <div className="total-semesters">{semesters.length}</div>
       </div>
       <Popup
         title="History"

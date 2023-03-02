@@ -1,14 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import './style.scss';
 import { useCalc } from '../../contexts/calcContext';
 import Card from './Components/Card/card';
-import GardePopup from './Components/GradePopup/GradePopup';
 import TotalResults from '../TotalResults/TotalResults';
 import { useSearchParams } from 'react-router-dom';
 import ControlBar from './Components/ControlBar/ControlBar';
 
-const Cards = (props) => {
-  const { semesters, setSemesters, calculateGPA, grades, setGrades } = useCalc();
+const Cards = () => {
+  const { semesters, setSemesters, grades, setGrades } = useCalc();
   const [searchParams, setSearchParams] = useSearchParams();
 
   React.useEffect(() => {

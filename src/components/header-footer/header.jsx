@@ -7,7 +7,7 @@ import './style.scss';
 import { useCalc } from '../../contexts/calcContext';
 
 const Header = () => {
-  const { theme, setTheme, changeThemeToDark, changeThemeToLight } = useCalc();
+  const { theme, changeThemeToDark, changeThemeToLight } = useCalc();
 
   // Dark theme
   // --color-1: #1a1e22;

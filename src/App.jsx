@@ -1,11 +1,10 @@
 import React from 'react';
 import CalcContextProvider from './contexts/calcContext';
-import { BrowserRouter as Router, Route, Routes, useSearchParams } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // Components
 import Header from './components/header-footer/header';
 import Footer from './components/header-footer/footer';
-import TotalResults from './components/TotalResults/TotalResults';
 import Cards from './components/Cards/Cards';
 
 // Styles

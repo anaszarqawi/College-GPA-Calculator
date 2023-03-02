@@ -33,8 +33,8 @@
         transition: var(--transition-3);
         // grid-area: Calc;
         flex: 3 0;
-        // flex-grow: 3;
 
+        // flex-grow: 3;
         .card-header {
             display: flex;
             justify-content: space-between;
@@ -59,11 +59,13 @@
                 gap: var(--space-25);
 
                 .card-header-button {
-                    padding: 0 var(--space-50);
+                    display: flex;
+                    padding: var(--space-50);
                     color: var(--color-3-60);
                     cursor: pointer;
 
                     svg {
+                        width: 15px;
                         transition: var(--transition-1);
                         fill: var(--color-3-60);
                     }
@@ -85,67 +87,54 @@
 
         // .card-body {
         //     font-size: var(--font-size-0);
-
         //     color: var(--color-3);
         //     width: 100%;
         //     padding: var(--space-1) var(--space-1) 0 var(--space-25);
         //     table-layout: fixed;
-
         //     th {
         //         text-align: left;
         //         padding: 6px;
         //         font-weight: var(--font-weight-4);
         //     }
-
         //     .col-course {
         //         width: 65%;
         //     }
-
         //     .col-grade,
         //     .col-credit {
         //         width: 12.5%;
         //     }
-
         //     .col-delete {
         //         width: 5%;
         //     }
-
         //     .col-id {
         //         width: 5%;
         //     }
-
         //     tr {
         //         margin-bottom: var(--space-1);
         //     }
-
         //     td {
         //         padding: 6px;
         //         font-size: var(--font-size-0);
-
         //         svg {
         //             fill: var(--color-3-20);
         //             transition: var(--transition-1);
         //             cursor: pointer;
         //             width: 12px;
-
         //             &:hover {
         //                 fill: var(--color-3);
         //             }
         //         }
         //     }
-
         //     .add-row-btn {
         //         color: var(--color-3-60);
         //         cursor: pointer;
         //         transition: var(--transition-1);
         //         margin-bottom: 0 !important;
-
         //         &:hover {
         //             color: var(--color-3);
         //         }
         //     }
         // }
-
         .card-body {
             display: flex;
             flex-direction: column;
@@ -154,13 +143,12 @@
             width: 100%;
             // padding: 0 var(--space-1);
             padding-top: var(--space-1);
-            // gap: var(--space-75);
 
+            // gap: var(--space-75);
             .header-row {
                 font-weight: var(--font-weight-4);
                 padding: var(--space-50);
             }
-
 
             .card-row {
                 display: flex;
@@ -177,7 +165,6 @@
                     .card-row-id {
                         text-align: left;
                         padding: var(--space-50);
-
                     }
 
                     .card-row-course {
@@ -206,11 +193,8 @@
                     }
 
                     .card-row-delete {
-
-
                         svg {
                             fill: var(--color-3);
-
                         }
                     }
                 }
@@ -219,12 +203,9 @@
                     padding: var(--space-50);
                     cursor: pointer;
 
-
                     &:hover>svg {
                         fill: var(--color-3);
-
                     }
-
 
                     svg {
                         fill: var(--color-3-20);
@@ -236,7 +217,6 @@
                             fill: var(--color-3);
                         }
                     }
-
                 }
             }
 
@@ -266,12 +246,10 @@
         align-items: center;
         flex: 1 0;
         transition: var(--transition-3);
-
         // background: linear-gradient(var(--color-2), var(--color-2)) padding-box,
         //     linear-gradient(to right, #4ebefd, #0074b6) border-box;
         // border: 1px solid transparent;
         border-radius: var(--border-radius);
-
         gap: var(--space-50);
         padding: var(--space-3) var(--space-3);
 
@@ -299,11 +277,16 @@
     }
 }
 
+@media only screen and (max-width: 900px) {
+    .card-result {
+        flex: 2 0 !important;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .card {
         flex-direction: column;
         gap: var(--space-1);
-
     }
 
     .card-row-left-side {
@@ -313,6 +296,4 @@
     .card-row-right-side {
         gap: var(--space-50) !important;
     }
-
-
 }
