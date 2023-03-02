@@ -5,12 +5,13 @@ import { ReactComponent as CloseSquare } from '../../../../assets/svg/Close-Squa
 import { ReactComponent as EditIcon } from '../../../../assets/svg/edit-icon.svg';
 import { ReactComponent as LockIcon } from '../../../../assets/svg/lock-icon.svg';
 import { ReactComponent as UnlockIcon } from '../../../../assets/svg/unlock-icon.svg';
+import { ReactComponent as ShareIcon } from '../../../../assets/svg/Send-icon.svg';
 
 import { useCalc } from '../../../../contexts/calcContext';
 import GradeInput from '../GradeInput/gradeInput';
 
 const Card = (props) => {
-  const { semesters, setSemesters, grades, calculateGPA } = useCalc();
+  const { semesters, setSemesters, calculateGPA } = useCalc();
   const [editMode, setEditMode] = useState(false);
   const [lockMode, setLockMode] = useState(false);
 
@@ -72,6 +73,8 @@ const Card = (props) => {
     setEditMode(!editMode);
   };
 
+  // todo : add a function to share
+
   return (
     <div className="card" key={props.i}>
       <div className="card-calculator">
@@ -81,12 +84,16 @@ const Card = (props) => {
               className="input-header"
               type="text"
               placeholder={`Semester ${props.i + 1}`}
-              value={props.semester.name}
-              onChange={handleChangeTitle}
+              defaultValue={props.semester.name}
+              onBlur={handleChangeTitle}
               disabled={props.semester.isLocked}
             />
           </div>
           <div className="card-header-buttons">
+            <div className="card-header-button" onClick={handleLock}>
+              {props.semester.gpa !== null && <ShareIcon />}
+            </div>
+
             {props.semester.courses.length !== 3 && !props.semester.isLocked && (
               <div className={`card-header-button ${editMode && 'active-button'}`} onClick={handleChangeEditMode}>
                 <EditIcon />
@@ -185,8 +192,8 @@ const Card = (props) => {
                     <input
                       type="text"
                       placeholder={`Untitled Course ${i + 1}`}
-                      value={course.course}
-                      onChange={(e) => handleChangeCourseName(e, i)}
+                      defaultValue={course.course}
+                      onBlur={(e) => handleChangeCourseName(e, i)}
                       disabled={props.semester.isLocked}
                     />
                   </div>

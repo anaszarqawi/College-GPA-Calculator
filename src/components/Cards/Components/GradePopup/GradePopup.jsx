@@ -1,7 +1,6 @@
 import React from 'react';
 import './style.scss';
 
-import { ReactComponent as CloseSquare } from '../../../../assets/svg/Close-Square.svg';
 import { ReactComponent as EditIcon } from '../../../../assets/svg/edit-icon.svg';
 import { useCalc } from '../../../../contexts/calcContext';
 

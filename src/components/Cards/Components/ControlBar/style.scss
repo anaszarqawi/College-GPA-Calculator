@@ -14,11 +14,10 @@
         display: flex;
         // justify-content: space-between;
         align-items: center;
+
         // flex-wrap: wrap;
         // flex-direction: column;
-
         // gap: var(--space-1);
-
         .control-bar-button {
             display: flex;
             // align-items: center;
@@ -29,8 +28,8 @@
             transition: var(--transition-1);
             padding: var(--space-1);
             cursor: pointer;
-            // flex: 1 0 100px;
 
+            // flex: 1 0 100px;
             .control-bar-button-icon {
                 svg {
                     transition: var(--transition-1);
@@ -52,7 +51,6 @@
             }
 
             &:hover {
-
                 .control-bar-button-icon {
                     svg {
                         fill: var(--color-3);
@@ -63,6 +61,14 @@
                     color: var(--color-3);
                 }
             }
+        }
+
+        .total-semesters {
+            color: var(--color-3);
+            font-size: var(--font-size-0);
+            padding: var(--space-50) var(--space-1);
+            // background-color: var(--color-3-60);
+            // border-radius: var(--border-radius);
         }
     }
 }
