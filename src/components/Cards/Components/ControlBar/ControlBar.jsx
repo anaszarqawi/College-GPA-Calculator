@@ -30,6 +30,7 @@ const ControlBar = () => {
     resultsPopupIsOpened,
     setResultsPopupIsOpened,
     openPopup,
+    hidePopup,
   } = useCalc();
 
   const [copySuccess, setCopySuccess] = React.useState(false);
@@ -48,7 +49,7 @@ const ControlBar = () => {
 
   useScrollPosition(
     ({ currPos }) => {
-      const isShow = currPos.y < 0;
+      const isShow = currPos.y < 150;
       console.log({ currPos, isShow });
       if (isShow !== isfloatOnScroll) setIsFloatOnScroll(isShow);
     },
@@ -181,7 +182,7 @@ const ControlBar = () => {
 
   const handleSelect = (item) => {
     setSemesters(item.semesters);
-    setHistoryPopupIsOpened(!historyPopupIsOpened);
+    hidePopup(setHistoryPopupIsOpened);
   };
 
   const handleRemove = (index) => {
@@ -246,6 +247,13 @@ const ControlBar = () => {
                   </div>
                 </div>
               ))
+            )
+          }
+          buttons={
+            history.length !== 0 && (
+              <div className="popup-button" onClick={() => setHistory([])}>
+                <ResetIcon />
+              </div>
             )
           }
           isOpened={historyPopupIsOpened}

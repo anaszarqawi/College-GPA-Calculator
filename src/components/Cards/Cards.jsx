@@ -31,8 +31,8 @@ const Cards = () => {
 
   return (
     <>
+      <ControlBar />
       <div className="Cards">
-        <ControlBar />
         {semesters.map((semester, i) => {
           return (
             <>

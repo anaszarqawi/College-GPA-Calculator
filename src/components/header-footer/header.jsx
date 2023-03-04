@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactComponent as Logo } from '../../assets/svg/logo.svg';
 import { ReactComponent as MoonIcon } from '../../assets/svg/moon-icon.svg';
 import { ReactComponent as SunIcon } from '../../assets/svg/sun-icon.svg';
+import { ReactComponent as SettingsIcon } from '../../assets/svg/settings-icon.svg';
 
 import './style.scss';
 import { useCalc } from '../../contexts/calcContext';
@@ -43,6 +44,9 @@ const Header = () => {
           <h1 className="title">College GPA Calculator</h1>
         </a>
         <div className="header-buttons">
+          <div className="header-button">
+            <SettingsIcon />
+          </div>
           <div className="header-button" onClick={handleChangeTheme}>
             {theme === 'light' ? <MoonIcon /> : <SunIcon />}
           </div>

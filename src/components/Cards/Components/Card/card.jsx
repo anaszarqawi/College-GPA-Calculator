@@ -78,6 +78,7 @@ const Card = (props) => {
     const newSemesters = [...semesters];
     newSemesters[props.i] = defaultSemester;
     setSemesters(newSemesters);
+    setEditMode(false);
   };
 
   // todo : add a function to share

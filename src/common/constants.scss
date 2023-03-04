@@ -48,8 +48,9 @@
     --space-9: 9rem;
     --space-10: 10rem;
     --border-radius: 10px;
-    --transition-1: all 0.1s ease-in-out;
-    --transition-3: all 0.3s ease-in-out;
+    --transition-1: all 0.1s ease-in;
+    --transition-2: all 0.2s ease-in;
+    --transition-3: all 0.3s ease-in;
 }
 
 body,
@@ -127,7 +128,7 @@ input[type="number"] {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-color-4);
+    background: var(--color-3-50);
 }
 
 @media only screen and (max-width: 600px) {
