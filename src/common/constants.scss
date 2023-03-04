@@ -63,6 +63,10 @@ html {
     transition: var(--transition-3);
 }
 
+.with-popup {
+    overflow-y: hidden;
+}
+
 * {
     box-sizing: border-box;
     font-family: var(--font-family);
@@ -95,6 +99,35 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+/* scroll bar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+
+    /* border-radius: var(--border-radius-1); */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-3-20);
+    border: none;
+    border-radius: var(--border-radius);
+
+    /* border-radius: var(--border-radius-1); */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color-4);
 }
 
 @media only screen and (max-width: 600px) {

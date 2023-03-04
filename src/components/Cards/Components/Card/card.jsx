@@ -5,13 +5,14 @@ import { ReactComponent as CloseSquare } from '../../../../assets/svg/Close-Squa
 import { ReactComponent as EditIcon } from '../../../../assets/svg/edit-icon.svg';
 import { ReactComponent as LockIcon } from '../../../../assets/svg/lock-icon.svg';
 import { ReactComponent as UnlockIcon } from '../../../../assets/svg/unlock-icon.svg';
-import { ReactComponent as ShareIcon } from '../../../../assets/svg/Send-icon.svg';
+import { ReactComponent as ClipboardIcon } from '../../../../assets/svg/clipboard-icon.svg';
+import { ReactComponent as ResetIcon } from '../../../../assets/svg/x-square.svg';
 
 import { useCalc } from '../../../../contexts/calcContext';
 import GradeInput from '../GradeInput/gradeInput';
 
 const Card = (props) => {
-  const { semesters, setSemesters, calculateGPA } = useCalc();
+  const { semesters, setSemesters, calculateGPA, handleCopyResults, defaultSemester } = useCalc();
   const [editMode, setEditMode] = useState(false);
   const [lockMode, setLockMode] = useState(false);
 
@@ -73,6 +74,12 @@ const Card = (props) => {
     setEditMode(!editMode);
   };
 
+  const handleResetSemester = () => {
+    const newSemesters = [...semesters];
+    newSemesters[props.i] = defaultSemester;
+    setSemesters(newSemesters);
+  };
+
   // todo : add a function to share
 
   return (
@@ -90,9 +97,16 @@ const Card = (props) => {
             />
           </div>
           <div className="card-header-buttons">
-            <div className="card-header-button" onClick={handleLock}>
-              {props.semester.gpa !== null && <ShareIcon />}
-            </div>
+            {props.semester !== defaultSemester && (
+              <div className="card-header-button" onClick={handleResetSemester}>
+                <ResetIcon />
+              </div>
+            )}
+            {props.semester.gpa !== null && (
+              <div className="card-header-button" onClick={() => handleCopyResults(props.i)}>
+                <ClipboardIcon />
+              </div>
+            )}
 
             {props.semester.courses.length !== 3 && !props.semester.isLocked && (
               <div className={`card-header-button ${editMode && 'active-button'}`} onClick={handleChangeEditMode}>
