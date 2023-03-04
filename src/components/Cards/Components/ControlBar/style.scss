@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: var(--space-50);
-    transition: var(--transition-3);
+    transition: var(--transition-2);
     top: calc(70px + var(--space-1));
     left: 0;
     right: 0;
@@ -19,7 +19,7 @@
         background-color: var(--color-2);
         border-radius: var(--border-radius);
         overflow: hidden;
-        transition: var(--transition-3);
+        transition: var(--transition-2);
         margin: 0 var(--space-1);
 
         .control-bar-buttons {

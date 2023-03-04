@@ -18,6 +18,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Cards />} />
+          {/* // TODO: add settings route */}
         </Routes>
         <Footer />
       </Router>

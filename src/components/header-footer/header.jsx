@@ -40,9 +40,9 @@ const Header = () => {
             <Logo />
           </div>
         </a>
-        {/* <a href="https://github.com/anaszarqawi/College-GPA-Calculator" target="_blank" rel="noreferrer">
+        <a href="https://github.com/anaszarqawi/College-GPA-Calculator" target="_blank" rel="noreferrer">
           <h1 className="title">College GPA Calculator</h1>
-        </a> */}
+        </a>
         <div className="header-buttons">
           <div className="header-button">
             <SettingsIcon />
