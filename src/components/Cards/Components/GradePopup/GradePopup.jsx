@@ -24,8 +24,10 @@ const GradePopup = (props) => {
       onClick={(e) => {
         if (e.target.className === 'grade-popup popup-opened') {
           props.setIsOpened(!props.isOpened);
+          setTimeout(() => {
+            setEditMode(false);
+          }, 1000);
         }
-        console.log({ isOpened: props.isOpened, tagName: e.target.localName, className: e.target.className });
       }}>
       <div className="grade-popup-inner">
         <div className="grade-popup-header">

@@ -10,6 +10,11 @@ export default function CalcProvider({ children }) {
   const [totalPercentage, setTotalPercentage] = React.useState(null);
   const [totalGrade, setTotalGrade] = React.useState(null);
   const [totalEstimateGrade, setTotalEstimateGrade] = React.useState(null);
+  const [copiedSemesters, setCopiedSemesters] = React.useState(null);
+  const [popupIsOpened, setPopupIsOpened] = React.useState(false);
+
+  const [resultsPopupIsOpened, setResultsPopupIsOpened] = React.useState(false);
+
   // detect theme from window and set it
   const [theme, setTheme] = React.useState(
     localStorage.getItem('theme') || window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -160,6 +165,42 @@ export default function CalcProvider({ children }) {
     },
   ];
 
+  const defaultSemester = {
+    name: '',
+    isLocked: false,
+    courses: [
+      {
+        course: '',
+        grade: {
+          name: null,
+          value: null,
+        },
+        credit: '3',
+      },
+      {
+        course: '',
+        grade: {
+          name: null,
+          value: null,
+        },
+        credit: '3',
+      },
+      {
+        course: '',
+        grade: {
+          name: null,
+          value: null,
+        },
+        credit: '3',
+      },
+    ],
+    gpa: null,
+    estimate: {
+      percentage: null,
+      grade: null,
+      estimateGrade: null,
+    },
+  };
   React.useEffect(() => {
     localStorage.setItem('semesters', JSON.stringify(semesters));
     localStorage.setItem('grades', JSON.stringify(grades));
@@ -300,6 +341,55 @@ export default function CalcProvider({ children }) {
     ]);
   };
 
+  const handleCopyResults = (index) => {
+    let text = '';
+
+    console.log(index);
+    if (index !== undefined) {
+      console.log('with index');
+      text = `${semesters[index].name || 'Semester ' + (index + 1)}`;
+      semesters[index].courses.forEach((course, i) => {
+        text += `\n\t- ${course.course || 'Course ' + (i + 1)} ⇒ ${course.grade.name}`;
+      });
+      text += `\nGPA ⇒ ${semesters[index].gpa}`;
+
+      text += `\nEstimate ⇒ ${semesters[index].estimate.percentage}% | ${semesters[index].estimate.estimateGrade} | ${semesters[index].estimate.grade}`;
+
+      // TODO: navigator.clipboard.writeText(text);
+      setCopiedSemesters(text);
+      openPopup(setResultsPopupIsOpened);
+
+      return;
+    }
+
+    console.log('without index');
+    semesters.forEach((semester, i) => {
+      if (semester.gpa === null) return;
+      if (i !== 0) {
+        console.log(i !== 0);
+        console.log(i !== semesters.length - 1);
+        text += `\n\n`;
+      }
+
+      text += `${semester.name || 'Semester ' + (i + 1)}`;
+      semester.courses.forEach((course, i) => {
+        text += `\n\t- ${course.course || 'Course ' + (i + 1)} ⇒ ${course.grade.name}`;
+      });
+      text += `\nGPA ⇒ ${semester.gpa}`;
+      text += `\nEstimate ⇒ ${semester.estimate.percentage}% | ${semester.estimate.estimateGrade} | ${semester.estimate.grade}`;
+    });
+
+    // get total gpa if more than one semester
+    if (semesters.length > 1) {
+      text += `\n\nTotal GPA ⇒ ${totalGpa}`;
+      text += `\nTotal Estimate ⇒ ${totalPercentage}% | ${totalEstimateGrade} | ${totalGrade}`;
+    }
+
+    // TODO: navigator.clipboard.writeText(text);
+    setCopiedSemesters(text);
+    openPopup(setResultsPopupIsOpened);
+  };
+
   const changeThemeToDark = () => {
     document.documentElement.style.setProperty('--color-1', '#1a1e22');
     document.documentElement.style.setProperty('--color-2', '#272d33');
@@ -324,6 +414,15 @@ export default function CalcProvider({ children }) {
     localStorage.setItem('theme', 'light');
   };
 
+  const openPopup = (setter) => {
+    document.body.classList.add('with-popup');
+    setter(true);
+  };
+  const hidePopup = (setter) => {
+    document.body.classList.remove('with-popup');
+    setter(false);
+  };
+
   const value = {
     semesters,
     setSemesters,
@@ -333,6 +432,7 @@ export default function CalcProvider({ children }) {
     resetGrades,
     calculateGPA,
     defaultGrades,
+    defaultSemester,
     totalGpa,
     totalPercentage,
     totalGrade,
@@ -341,6 +441,13 @@ export default function CalcProvider({ children }) {
     setTheme,
     changeThemeToDark,
     changeThemeToLight,
+    handleCopyResults,
+    copiedSemesters,
+    setCopiedSemesters,
+    resultsPopupIsOpened,
+    setResultsPopupIsOpened,
+    openPopup,
+    hidePopup,
   };
 
   return <CalcContext.Provider value={value}>{children}</CalcContext.Provider>;

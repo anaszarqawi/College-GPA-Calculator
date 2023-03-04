@@ -1,8 +1,10 @@
 import React from 'react';
 import './style.scss';
 import { useCalc } from '../../../../contexts/calcContext';
+import { useScrollPosition } from '../../../../contexts/useScrollPosition';
 import ControlButton from './ControlButton';
 import { ReactComponent as ClipboardIcon } from '../../../../assets/svg/clipboard-icon.svg';
+import { ReactComponent as LinkIcon } from '../../../../assets/svg/link-icon.svg';
 import { ReactComponent as PlusIcon } from '../../../../assets/svg/plus-icon.svg';
 import { ReactComponent as ClockIcon } from '../../../../assets/svg/clock-icon.svg';
 import { ReactComponent as BookMarkIcon } from '../../../../assets/svg/bookmark-icon.svg';
@@ -13,24 +15,27 @@ import { ReactComponent as ShareIcon } from '../../../../assets/svg/Send-icon.sv
 import Popup from '../../../Popup/Popup';
 
 import axios from 'axios';
+
 const ControlBar = () => {
   const {
     semesters,
     setSemesters,
     grades,
     setGrades,
-    calculateGPA,
     defaultGrades,
+    handleCopyResults,
+    copiedSemesters,
+    setCopiedSemesters,
     totalGpa,
-    totalPercentage,
-    totalGrade,
-    totalEstimateGrade,
+    resultsPopupIsOpened,
+    setResultsPopupIsOpened,
+    openPopup,
   } = useCalc();
 
   const [copySuccess, setCopySuccess] = React.useState(false);
   const [saveSuccess, setSaveSuccess] = React.useState(false);
   const [history, setHistory] = React.useState([]);
-  const [popupIsOpened, setPopupIsOpened] = React.useState(false);
+  const [historyPopupIsOpened, setHistoryPopupIsOpened] = React.useState(false);
 
   React.useEffect(() => {
     const history = localStorage.getItem('history');
@@ -38,6 +43,17 @@ const ControlBar = () => {
       setHistory(JSON.parse(history));
     }
   }, []);
+
+  const [isfloatOnScroll, setIsFloatOnScroll] = React.useState(false);
+
+  useScrollPosition(
+    ({ currPos }) => {
+      const isShow = currPos.y < 0;
+      console.log({ currPos, isShow });
+      if (isShow !== isfloatOnScroll) setIsFloatOnScroll(isShow);
+    },
+    [isfloatOnScroll]
+  );
 
   const handleCopy = async () => {
     const url = window.location.href;
@@ -117,7 +133,7 @@ const ControlBar = () => {
   };
 
   const handleHistory = () => {
-    setPopupIsOpened(!popupIsOpened);
+    openPopup(setHistoryPopupIsOpened);
   };
 
   const handleReset = () => {
@@ -165,7 +181,7 @@ const ControlBar = () => {
 
   const handleSelect = (item) => {
     setSemesters(item.semesters);
-    setPopupIsOpened(!popupIsOpened);
+    setHistoryPopupIsOpened(!historyPopupIsOpened);
   };
 
   const handleRemove = (index) => {
@@ -186,84 +202,80 @@ const ControlBar = () => {
   // *● GPA ⇒ 3.67*
   // *● Estimate 91.67% | Excellent | A*
 
-  const handleShare = () => {
-    let text = '';
-    semesters.forEach((semester, i) => {
-      if (semester.gpa === null) return;
-      if (i !== 0) {
-        console.log(i !== 0);
-        console.log(i !== semesters.length - 1);
-        text += `\n\n`;
-      }
-
-      text += `*${semester.name || 'Semester ' + (i + 1)}*`;
-      semester.courses.forEach((course, i) => {
-        text += `\n\t- ${course.course || 'Course ' + (i + 1)} ⇒ *${course.grade.name}*`;
-      });
-      text += `\n*GPA* ⇒ *${semester.gpa}*`;
-      text += `\n*Estimate* ⇒ *${semester.estimate.percentage}%* | *${semester.estimate.estimateGrade}* | *${semester.estimate.grade}*`;
-
-      // Todo: add copyright with link of site to end of text
-    });
-
-    if (semesters.length > 1) {
-      text += `\n\n*Total GPA* ⇒ *${totalGpa}*`;
-      text += `\n*Total Estimate* ⇒ *${totalPercentage}%* | *${totalEstimateGrade}* | *${totalGrade}*`;
-    }
-
-    console.log(text);
-    navigator.share(text);
-
-    // navigator.clipboard.writeText(text);
-    // window.open(`https://wa.me/?text=${text}`);
-  };
-
   return (
-    <div className="control-bar">
-      <div className="control-bar-buttons left-side">
-        <ControlButton
-          icon={<PlusIcon />}
-          name={semesters.length !== 20 ? 'New Semester' : 'Max Semesters!'}
-          onClick={semesters.length !== 20 ? handleAddSemester : null}
-        />
-        <ControlButton icon={<ClipboardIcon />} name={copySuccess ? 'Copied!' : 'Copy Link'} onClick={handleCopy} />
-        <ControlButton icon={<BookMarkIcon />} name={saveSuccess ? 'Saved!' : 'Save'} onClick={handleSave} />
-        <ControlButton icon={<ResetIcon />} name="Reset" onClick={handleReset} />
-        <ControlButton icon={<ClockIcon />} name="History" onClick={handleHistory} />
-        <ControlButton icon={<ShareIcon />} name="Share" onClick={handleShare} />
-      </div>
+    <div className={`control-bar ${isfloatOnScroll ? 'float-bar' : ''}`}>
+      <div className="control-bar-container">
+        <div className="control-bar-buttons left-side">
+          <ControlButton
+            icon={<PlusIcon />}
+            name={semesters.length !== 20 ? 'New Semester' : 'Max Semesters!'}
+            onClick={semesters.length !== 20 ? handleAddSemester : null}
+          />
+          <ControlButton icon={<LinkIcon />} name={copySuccess ? 'Copied!' : 'Copy Link'} onClick={handleCopy} />
+          <ControlButton icon={<BookMarkIcon />} name={saveSuccess ? 'Saved!' : 'Save'} onClick={handleSave} />
+          <ControlButton icon={<ResetIcon />} name="Reset" onClick={handleReset} />
+          <ControlButton icon={<ClockIcon />} name="History" onClick={handleHistory} />
+          {totalGpa === null ? null : (
+            <ControlButton icon={<ClipboardIcon />} name="Copy Results" onClick={() => handleCopyResults()} />
+          )}
+        </div>
 
-      <div className="control-bar-buttons right-side">
-        <div className="total-semesters">{semesters.length}</div>
-      </div>
-      <Popup
-        title="History"
-        content={
-          history.length === 0 ? (
-            <div className="not-found-msg">Nothing Saved!</div>
-          ) : (
-            history.map((item, index) => (
-              <div className="popup-item" key={index}>
-                <div className="popup-item-info" onClick={() => handleSelect(item)}>
-                  {item.semesters.length === 1
-                    ? item.semesters.length + ' Semester'
-                    : item.semesters.length + ' Semesters'}
-                </div>
-                <div className="popup-item-left-side">
-                  <div className="popup-item-date" onClick={() => handleSelect(item)}>
-                    {handleDate(item.date)}
+        <div className="control-bar-buttons right-side">
+          <div className="total-semesters">{semesters.length}</div>
+        </div>
+        <Popup
+          title="History"
+          content={
+            history.length === 0 ? (
+              <div className="not-found-msg">Nothing Saved!</div>
+            ) : (
+              history.map((item, index) => (
+                <div className="popup-item" key={index}>
+                  <div className="popup-item-info" onClick={() => handleSelect(item)}>
+                    {item.semesters.length === 1
+                      ? item.semesters.length + ' Semester'
+                      : item.semesters.length + ' Semesters'}
                   </div>
-                  <div className="popup-item-remove" onClick={() => handleRemove(index)}>
-                    <CloseSquare />
+                  <div className="popup-item-left-side">
+                    <div className="popup-item-date" onClick={() => handleSelect(item)}>
+                      {handleDate(item.date)}
+                    </div>
+                    <div className="popup-item-remove" onClick={() => handleRemove(index)}>
+                      <CloseSquare />
+                    </div>
                   </div>
                 </div>
+              ))
+            )
+          }
+          isOpened={historyPopupIsOpened}
+          setIsOpened={setHistoryPopupIsOpened}
+        />
+
+        <Popup
+          title="Results"
+          content={
+            copiedSemesters === null ? (
+              <div className="not-found-msg">Nothing copied!</div>
+            ) : (
+              <pre className="result-text">{copiedSemesters}</pre>
+            )
+          }
+          buttons={
+            <>
+              <div
+                className="popup-button"
+                onClick={() => {
+                  navigator.clipboard.writeText(copiedSemesters);
+                }}>
+                <ClipboardIcon />
               </div>
-            ))
-          )
-        }
-        isOpened={popupIsOpened}
-        setIsOpened={setPopupIsOpened}
-      />
+            </>
+          }
+          isOpened={resultsPopupIsOpened}
+          setIsOpened={setResultsPopupIsOpened}
+        />
+      </div>
     </div>
   );
 };
