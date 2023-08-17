@@ -1,0 +1,163 @@
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition-1);
+    // display: none;
+    transform: scale(0.9);
+    opacity: 0;
+    visibility: hidden;
+
+    // transition: var(--transition-3);
+    .popup-inner {
+        // background-color: var(--color-2);
+        // background-color: var(--color-1);
+        background-color: transparent;
+        border: 1px solid var(--color-3-20);
+        border-radius: var(--border-radius);
+        min-width: 300px;
+        backdrop-filter: blur(15px);
+        max-height: calc(100vh - 300px);
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+        overflow-y: auto;
+        z-index: 99999999;
+
+        .popup-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: var(--space-1) var(--space-1);
+            border-bottom: 1px solid var(--color-3-20);
+
+            .popup-buttons {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: var(--space-25);
+                padding-right: var(--space-1);
+
+                .popup-button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0 var(--space-50);
+                    color: var(--color-3-60);
+                    cursor: pointer;
+
+                    svg {
+                        width: auto;
+                        display: flex;
+                        transition: var(--transition-1);
+                        fill: var(--color-3-60);
+                    }
+
+                    &:hover > svg {
+                        fill: var(--color-3);
+                    }
+                }
+
+                .active-button {
+                    color: var(--color-3);
+
+                    svg {
+                        fill: var(--color-3);
+                    }
+                }
+            }
+        }
+
+        .popup-title,
+        .title-btn {
+            font-size: var(--font-size-2);
+            font-weight: var(--font-weight-1);
+            color: var(--color-3);
+            padding-left: var(--space-1);
+        }
+
+        .title-btn {
+            color: var(--color-3-60);
+            cursor: pointer;
+            transition: var(--transition-1);
+            padding: 0 var(--space-1);
+
+            &:hover {
+                color: var(--color-3);
+            }
+        }
+
+        .popup-content {
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-50) var(--space-1);
+
+            .not-found-msg {
+                padding: var(--space-75) var(--space-1);
+                font-size: var(--font-size-0);
+                color: var(--color-3);
+            }
+        }
+
+        .popup-item {
+            display: flex;
+            color: var(--color-3-50);
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-7);
+            padding: var(--space-75) var(--space-1);
+            cursor: pointer;
+            transition: var(--transition-1);
+            border-bottom: 1px solid var(--color-3-20);
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            &:hover {
+                color: var(--color-3);
+            }
+
+            .popup-item-left-side {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: var(--space-1);
+
+                .popup-item-remove {
+                    padding: 0 var(--space-50);
+                    color: var(--color-50);
+                    cursor: pointer;
+
+                    svg {
+                        display: flex;
+                        transition: var(--transition-1);
+                        fill: var(--color-3-50);
+                    }
+
+                    &:hover > svg {
+                        fill: var(--color-3);
+                    }
+                }
+            }
+        }
+
+        .result-text {
+            font-size: var(--font-size-0);
+            padding: var(--space-75) var(--space-1);
+            color: var(--color-3);
+            margin: 0;
+        }
+    }
+}
+
+.popup-opened {
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+}

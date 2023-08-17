@@ -1,0 +1,202 @@
+:root {
+    --page-width: 1000px;
+    --header-height: 72px;
+    // Dark theme
+    --color-1: #1a1e22;
+    --color-2: #272d33;
+    --color-3: #d8d2cc;
+    --color-3-60: rgba(216, 210, 204, 0.6);
+    --color-3-50: rgba(216, 210, 204, 0.5);
+    --color-3-20: rgba(216, 210, 204, 0.2);
+    --color-3-10: rgba(216, 210, 204, 0.1);
+    // light theme
+    // --color-1: #fafafc;
+    // --color-2: #eaeaed;
+    // --color-3: rgb(59, 60, 69);
+    // --color-3-60: rgba(59, 60, 69, 0.6);
+    // --color-3-50: rgba(59, 60, 69, 0.5);
+    // --color-3-20: rgba(59, 60, 69, 0.2);
+    // --color-3-10: rgba(59, 60, 69, 0.1);
+    --font-family: "Inter", sans-serif;
+    font-size: 16px;
+    --font-size-0: 1rem;
+    --font-size-1: 1.2rem;
+    --font-size-2: 1.4rem;
+    --font-size-3: 1.6rem;
+    --font-size-4: 1.8rem;
+    --font-size-5: 2rem;
+    --font-size-6: 2.2rem;
+    --font-size-7: 2.4rem;
+    --font-size-8: 2.6rem;
+    --font-size-9: 2.8rem;
+    --font-size-10: 3rem;
+    --font-weight-1: 300;
+    --font-weight-2: 400;
+    --font-weight-3: 500;
+    --font-weight-4: 600;
+    --space-25: 0.25rem;
+    --space-50: 0.5rem;
+    --space-75: 0.75rem;
+    --space-1: 1rem;
+    --space-2: 2rem;
+    --space-3: 3rem;
+    --space-4: 4rem;
+    --space-5: 5rem;
+    --space-6: 6rem;
+    --space-7: 7rem;
+    --space-8: 8rem;
+    --space-9: 9rem;
+    --space-10: 10rem;
+    --border-radius: 10px;
+    --transition-1: all 0.1s ease-in;
+    --transition-2: all 0.2s ease-in;
+    --transition-3: all 0.3s ease-in;
+}
+
+:root {
+    --color-1: #1a1e22;
+    --color-2: #272d33;
+    --color-3: #d8d2cc;
+    --color-3-60: rgba(216, 210, 204, 0.6);
+    --color-3-50: rgba(216, 210, 204, 0.5);
+    --color-3-40: rgba(216, 210, 204, 0.4);
+    --color-3-30: rgba(216, 210, 204, 0.3);
+    --color-3-20: rgba(216, 210, 204, 0.2);
+    --color-3-10: rgba(216, 210, 204, 0.1);
+}
+
+html[class="light"] {
+    // light theme
+    --color-1: #fafafc;
+    --color-2: #eaeaed;
+    --color-3: #373740;
+    --color-3-60: #37374099;
+    --color-3-50: #37374080;
+    --color-3-20: #37374033;
+    --color-3-10: #3737401a;
+
+    --font-weight-0: 100;
+    --font-weight-1: 200;
+    --font-weight-2: 300;
+    --font-weight-3: 400;
+    --font-weight-4: 500;
+    --font-weight-5: 600;
+}
+
+body,
+html {
+    background-color: var(--color-1);
+    padding: 0;
+    margin: 0;
+    color: #d8d2cc;
+    scroll-padding-top: var(--header-height);
+    font-size: var(--font-size-0);
+    transition: var(--transition-3);
+}
+
+.with-popup {
+    overflow-y: hidden;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+// Remove Arrows/Spinners from Number Inputs
+//---------------------------------------------------
+
+/* Chrome, Safari, Edge, Opera */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* scroll bar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+
+    /* border-radius: var(--border-radius-1); */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-3-20);
+    border: none;
+    border-radius: var(--border-radius);
+
+    /* border-radius: var(--border-radius-1); */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-3-50);
+}
+
+@media only screen and (max-width: 600px) {
+    :root {
+        --page-width: 100%;
+        font-size: 15px;
+    }
+}
+
+#app {
+    position: relative;
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 var(--space-1);
+}
+
+.center-content-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    max-width: var(--page-width);
+    margin-top: calc(67px);
+    margin-bottom: calc(67px);
+    height: calc(90vh - 67px * 2);
+}
+
+.mobile {
+    display: none !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .mobile {
+        display: flex !important;
+    }
+    :root {
+        --page-width: 100%;
+        font-size: 15px;
+        // padding: 15px;
+    }
+}

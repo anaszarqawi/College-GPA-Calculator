@@ -1,6 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "College GPA Calculator",
+  "name": "College GPA Calculator",
+  "description": "Calculate your college GPA effortlessly with the College GPA Calculator website. Our user-friendly interface makes it easy to input your course details and obtain accurate semester and cumulative GPAs. Take charge of your academic success by tracking your progress, setting goals, and making informed decisions. Start calculating your GPA today and unlock the power of data-driven academic planning with the College GPA Calculator.",
+  "version": "3.0",
+  "author": "anaszarqawi_",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +23,5 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#1a1e22"
 }
