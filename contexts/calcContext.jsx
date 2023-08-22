@@ -301,8 +301,9 @@ export default function CalcProvider({ children }) {
           }
         }
         semester.gpa = (+semesterPoints / +semesterHours).toFixed(2);
-        semester.estimate.percentage = (((+semesterPoints / +semesterHours) * 100) / 4).toFixed(2);
-        semester.estimate.grade = getGradeLetter(semester.gpa);
+        const percentage = (((+semesterPoints / +semesterHours) * 100) / 4).toFixed(2);
+        semester.estimate.percentage = percentage;
+        semester.estimate.grade = getGradeLetter(percentage);
         semester.estimate.estimateGrade = getEstimateGrade(semester.gpa);
       }
 
@@ -311,8 +312,9 @@ export default function CalcProvider({ children }) {
 
       setTotalGpa((+totalPoints / +totalHours).toFixed(2));
       const totalGpa_ = (+totalPoints / +totalHours).toFixed(2);
-      setTotalPercentage((((+totalPoints / +totalHours) * 100) / 4).toFixed(2));
-      setTotalGrade(getGradeLetter(totalGpa_));
+      const totalPercentage = (((+totalPoints / +totalHours) * 100) / 4).toFixed(2);
+      setTotalPercentage(totalPercentage);
+      setTotalGrade(getGradeLetter(totalPercentage));
       setTotalEstimateGrade(getEstimateGrade(totalGpa_));
     }
   };
@@ -322,28 +324,28 @@ export default function CalcProvider({ children }) {
     return gradeObj.name;
   };
 
-  const getGradeLetter = (grade) => {
-    if (grade < 1.6) return 'F';
-    else if (grade < 2.0) return 'D';
-    else if (grade < 2.2) return 'D+';
-    else if (grade < 2.4) return 'C-';
-    else if (grade < 2.6) return 'C';
-    else if (grade < 2.8) return 'C+';
-    else if (grade < 3.0) return 'B-';
-    else if (grade < 3.2) return 'B';
-    else if (grade < 3.4) return 'B+';
-    else if (grade < 3.6) return 'A-';
-    else if (grade < 3.8) return 'A';
-    else if (grade <= 4.0) return 'A+';
+  const getGradeLetter = (percentage) => {
+    if (percentage >= 95) return 'A+';
+    else if (percentage >= 90) return 'A';
+    else if (percentage >= 85) return 'A-';
+    else if (percentage >= 82) return 'B+';
+    else if (percentage >= 79) return 'B';
+    else if (percentage >= 75) return 'B-';
+    else if (percentage >= 72) return 'C+';
+    else if (percentage >= 69) return 'C';
+    else if (percentage >= 65) return 'C-';
+    else if (percentage >= 60) return 'D+';
+    else if (percentage >= 50) return 'D';
+    else return 'F';
   };
 
-  const getEstimateGrade = (grade) => {
-    if (grade < 1.6) return 'Very Weak';
-    else if (grade < 2.0) return 'Weak';
-    else if (grade < 2.4) return 'Sufficient';
-    else if (grade < 3.0) return 'Good';
-    else if (grade < 3.6) return 'Very Good';
-    else if (grade <= 4.0) return 'Excellent';
+  const getEstimateGrade = (gpa) => {
+    if (gpa >= 3.6) return 'Excellent';
+    else if (gpa >= 3) return 'Very Good';
+    else if (gpa >= 2.4) return 'Good';
+    else if (gpa >= 2) return 'Sufficient';
+    else if (gpa >= 1.6) return 'Weak';
+    else return 'Very Weak';
   };
 
   const resetGrades = () => {
